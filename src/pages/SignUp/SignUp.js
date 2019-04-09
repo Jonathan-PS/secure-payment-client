@@ -3,14 +3,20 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 class SignUp extends Component {
   state = {
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     redirectToReferrer: false
   };
 
-  /* Checks whether email and password are typed in at all */
+  /* Checks that required fields are filled */
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return (
+      this.state.email.length > 0 &&
+      this.state.password.length > 0 &&
+      this.state.first_name.length > 0
+    );
   }
 
   /* Handles user inputs into the fields of email and password. */
@@ -60,6 +66,24 @@ class SignUp extends Component {
         <hr />
         <div className="Login">
           <form onSubmit={this.handleSubmit}>
+            <FormGroup controlId="first_name" bsSize="large">
+              First Name
+              <FormControl
+                autoFocus
+                type="first_name"
+                value={this.state.first_name}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="last_name" bsSize="large">
+              Last Name
+              <FormControl
+                autoFocus
+                type="last_name"
+                value={this.state.last_name}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
             <FormGroup controlId="email" bsSize="large">
               Set Email
               <FormControl

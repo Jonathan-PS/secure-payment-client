@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import "./Login.css";
+import "./AddAddressForm.css";
 
-class Login extends Component {
+class AddressForm extends Component {
   state = {
-    email: "",
-    password: ""
+    street_name: "",
+    house_number: "",
+    housing_code: "",
+    city: "",
+    postal_code: null,
+    country: ""
   };
 
   /* Checks whether email and password are typed in at all */
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return (
+      this.state.street_name.length > 0 &&
+      this.state.house_number.length > 0 &&
+      this.state.city.length > 0 &&
+      this.state.postal_code.length > 0 &&
+      this.state.country.length > 0
+    );
   }
 
   /* Handles user inputs into the fields of email and password. */
@@ -20,12 +30,12 @@ class Login extends Component {
     });
   };
 
-  /* Handles what happens when the user pushes "Login"  */
+  /* Handles what happens when the user pushes "Add Address"  */
   /* NOT FINISHED */
   handleSubmit = async event => {
     event.preventDefault(); // Stops the page from reloading
 
-    alert("Attempted to login with: " + this.state.email);
+    alert("Attempted to add address : " + this.state.street_name);
 
     /* NOT DONE - authenticate user with the database */
     /*try {
@@ -66,25 +76,57 @@ class Login extends Component {
     return (
       <div>
         <br />
-        <h4>Login</h4>
+        <h4>Add Home Address</h4>
         <hr />
         <div className="Login">
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="email" bsSize="large">
-              Email
+            <FormGroup controlId="street_name" bsSize="large">
+              Street Name *
               <FormControl
                 autoFocus
-                type="email"
-                value={this.state.email}
+                type="street_name"
+                value={this.state.street_name}
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
-              Password
+            <FormGroup controlId="house_number" bsSize="large">
+              House Number *
               <FormControl
-                value={this.state.password}
+                value={this.state.house_number}
                 onChange={this.handleChange}
-                type="password"
+                type="house_number"
+              />
+            </FormGroup>
+            <FormGroup controlId="housing_code" bsSize="large">
+              Housing Code
+              <FormControl
+                value={this.state.housing_code}
+                onChange={this.handleChange}
+                type="housing_code"
+              />
+            </FormGroup>
+            <FormGroup controlId="postal_code" bsSize="large">
+              Postal Code *
+              <FormControl
+                value={this.state.postal_code}
+                onChange={this.handleChange}
+                type="postal_code"
+              />
+            </FormGroup>
+            <FormGroup controlId="city" bsSize="large">
+              City *
+              <FormControl
+                value={this.state.city}
+                onChange={this.handleChange}
+                type="city"
+              />
+            </FormGroup>
+            <FormGroup controlId="country" bsSize="large">
+              Country *
+              <FormControl
+                value={this.state.country}
+                onChange={this.handleChange}
+                type="country"
               />
             </FormGroup>
             <Button
@@ -93,7 +135,7 @@ class Login extends Component {
               disabled={!this.validateForm()}
               type="submit"
             >
-              Login
+              Add Address
             </Button>
           </form>
         </div>
@@ -102,4 +144,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default AddressForm;
