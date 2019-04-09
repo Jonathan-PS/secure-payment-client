@@ -69,12 +69,12 @@ class ProductList extends Component {
     ));
 
     return (
-      <React.Fragment>
+      <div>
         <br />
         <h4>Products</h4>
         <hr />
         <div className="row">{cards}</div>
-      </React.Fragment>
+      </div>
     );
   }
 }
