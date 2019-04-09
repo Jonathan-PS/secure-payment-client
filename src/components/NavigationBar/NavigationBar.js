@@ -26,6 +26,15 @@ const NavigationBar = () => {
             </NavItem>
             <NavItem>
               <NavLink
+                to="/products"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Products
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
                 to="/login"
                 className="nav-link"
                 activeClassName="active"
