@@ -8,6 +8,15 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
+    <!-- UDM build (exports a global ReactStripeElements object) React Stripe elements -->
+    <!--(Commented out because it's installed in node modules!) -->
+    <!--<script src="https://unpkg.com/react-stripe-elements@latest/dist/react-stripe-elements.min.js"></script> -->
+
+    <!-- load Stripe.js in your application -->
+    <!-- Note the 'id' and 'async' attributes:                         -->
+    <!--    ┌────────────┐                                 ┌───┐       -->
+    <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
+
     <title>Secure Payment Client</title>
   </head>
   <body>
