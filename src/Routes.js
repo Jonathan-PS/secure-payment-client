@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound/NotFound";
 //import Product from "./pages/Product/Product";
 import ProductList from "./pages/ProductList/ProductList";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
 
 export default () => (
   <Switch>
@@ -17,8 +18,11 @@ export default () => (
     <Route exact path="/signup" component={SignUp} />
     <Route exact path="/products" component={ProductList} />
     <Route exact path="/dashboard" component={Dashboard} />
-    {/* NOT IMPLEMENTED A PRODUCT INFO PAGE YET
+    
+     {/* NOT IMPLEMENTED A PRODUCT INFO PAGE YET
     <Route exact path="/products/:id" component={Product} />*/}
+    
+    <Route exact path="/stripepayment" component={StripePaymentPage}/>
     <Route component={NotFound} />
   </Switch>
 );
