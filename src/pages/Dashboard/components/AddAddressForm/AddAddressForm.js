@@ -83,6 +83,7 @@ class AddressForm extends Component {
             <FormGroup controlId="street_name" bsSize="large">
               Street Name *
               <FormControl
+                placeholder="Street Name (e.g. Karl Johans gate)"
                 autoFocus
                 type="street_name"
                 value={this.state.street_name}
@@ -92,14 +93,16 @@ class AddressForm extends Component {
             <FormGroup controlId="house_number" bsSize="large">
               House Number *
               <FormControl
+                placeholder="House Number (e.g. 3A)"
                 value={this.state.house_number}
                 onChange={this.handleChange}
                 type="house_number"
               />
             </FormGroup>
             <FormGroup controlId="housing_code" bsSize="large">
-              Housing Code
+              Housing Code (optional)
               <FormControl
+                placeholder="Housing Code (e.g. H0301)"
                 value={this.state.housing_code}
                 onChange={this.handleChange}
                 type="housing_code"
@@ -108,6 +111,7 @@ class AddressForm extends Component {
             <FormGroup controlId="postal_code" bsSize="large">
               Postal Code *
               <FormControl
+                placeholder="Postal Code"
                 value={this.state.postal_code}
                 onChange={this.handleChange}
                 type="postal_code"
@@ -116,6 +120,7 @@ class AddressForm extends Component {
             <FormGroup controlId="city" bsSize="large">
               City *
               <FormControl
+                placeholder="City"
                 value={this.state.city}
                 onChange={this.handleChange}
                 type="city"
@@ -124,6 +129,7 @@ class AddressForm extends Component {
             <FormGroup controlId="country" bsSize="large">
               Country *
               <FormControl
+                placeholder="Country"
                 value={this.state.country}
                 onChange={this.handleChange}
                 type="country"
