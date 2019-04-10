@@ -12,11 +12,6 @@ class Dashboard extends Component {
         <h4>Dashboard</h4>
         <hr />
 
-        {/* NOT IMPLEMENTED
-        <div>
-          <SideBar pageWrapId={"page-wrap"} outerContainerId={"Dashboard"} />
-        </div> */}
-
         <Tabs>
           <div label="Profile">
             <h5 align="center">Profile Dashboard Home</h5>
