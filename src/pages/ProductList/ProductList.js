@@ -9,43 +9,43 @@ class ProductList extends Component {
 
   componentDidMount() {
     /* Hardcoded products */
-    this.setState({
+    /*this.setState({
       allProducts: [
         {
-          product_id: "23",
-          product_name: "Vans Custom Sneaker",
+          productId: "23",
+          productName: "Vans Custom Sneaker",
           description: "Colorful, white sole",
-          price_each: 699,
+          priceEach: 699,
           quantity: 3,
-          image_url: "https://i.imgur.com/3XTEQVN.jpg"
+          imageUrl: "https://i.imgur.com/3XTEQVN.jpg"
         },
         {
-          product_id: "23",
-          product_name: "Vans Custom Sneaker",
+          productId: "23",
+          productName: "Vans Custom Sneaker",
           description: "Colorful, white sole",
-          price_each: 699,
+          priceEach: 699,
           quantity: 3,
-          image_url: "https://i.imgur.com/3XTEQVN.jpg"
+          imageUrl: "https://i.imgur.com/3XTEQVN.jpg"
         },
         {
-          product_id: "23",
-          product_name: "Vans Custom Sneaker",
+          productId: "23",
+          productName: "Vans Custom Sneaker",
           description: "Colorful, white sole",
-          price_each: 699,
+          priceEach: 699,
           quantity: 3,
-          image_url: "https://i.imgur.com/3XTEQVN.jpg"
+          imageUrl: "https://i.imgur.com/3XTEQVN.jpg"
         },
         {
-          product_id: "23",
-          product_name: "Vans Custom Sneaker",
+          productId: "23",
+          productName: "Vans Custom Sneaker",
           description: "Colorful, white sole",
-          price_each: 699,
+          priceEach: 699,
           quantity: 3,
-          image_url: "https://i.imgur.com/3XTEQVN.jpg"
+          imageUrl: "https://i.imgur.com/3XTEQVN.jpg"
         }
       ]
-    });
-    /*fetch("https://api.spacexdata.com/v3/launches")
+    });*/
+    fetch("https://secure-payment-api.herokuapp.com/products")
       .then(resp => resp.json())
       .then(data => {
         console.log(data);
@@ -53,17 +53,17 @@ class ProductList extends Component {
           allProducts: data
         });
       })
-      .catch(err => {}); }*/
+      .catch(err => {});
   }
 
   render() {
     const cards = this.state.allProducts.map(product => (
       <ProductListCard
-        key={product.product_id}
-        product_name={product.product_name}
+        key={product.productId}
+        productName={product.productName}
         description={product.description}
-        image_url={product.image_url}
-        price_each={product.price_each}
+        imageUrl={product.imageUrl}
+        priceEach={product.priceEach}
         quantity={product.quantity}
       />
     ));
