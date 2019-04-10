@@ -22,7 +22,7 @@ const stripeBtn = () => {
   };
   return (
     <StripeCheckout
-      label="Go to payment" //Component button text
+      label="Pay with Card" //Component button text
       name="Pay with Stripe!" //Modal Header
       description="Payment description."
       panelLabel="Pay" //Submit button in modal

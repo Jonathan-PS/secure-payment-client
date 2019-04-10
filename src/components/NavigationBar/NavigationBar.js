@@ -59,7 +59,17 @@ const NavigationBar = () => {
               >
                 SignUp
               </NavLink>
-            </NavItem>{" "}
+            </NavItem>
+            <NavItem>
+              <NavLink
+                to="/stripePayment"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Stripe
+              </NavLink>
+            </NavItem>
+            {" "}
             {/*
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
