@@ -1,15 +1,16 @@
 import React, { Component } from "react";
+import "./NotFoundPage";
 
-class Home extends Component {
+class NotFoundPage extends Component {
   render() {
     return (
       <div>
         <br />
-        <h4>Home</h4>
+        <h4>404 : Page Not Found</h4>
         <hr />
       </div>
     );
   }
 }
 
-export default Home;
+export default NotFoundPage;

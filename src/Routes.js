@@ -2,34 +2,34 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 /* Pages */
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import SignUp from "./pages/SignUp/SignUp";
-import NotFound from "./pages/NotFound/NotFound";
-import ProductList from "./pages/ProductList/ProductList";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import HomePage from "./pages/HomePage/HomePage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import ProductListPage from "./pages/ProductListPage/ProductListPage";
+import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
 
 export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/signup" component={SignUpPage} />
         <Route
           exact
           path="/products"
           render={() => (
-            <ProductList
+            <ProductListPage
               triggerAddCartProduct={this.props.triggerAddCartProduct}
             />
           )}
         />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/dashboard" component={DashboardPage} />
 
         <Route exact path="/stripepayment" component={StripePaymentPage} />
-        <Route component={NotFound} />
+        <Route component={NotFoundPage} />
       </Switch>
     );
   }

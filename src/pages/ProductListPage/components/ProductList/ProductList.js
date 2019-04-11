@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./components/ProductListCard";
-import ProductListCard from "./components/ProductListCard";
+import "./ProductList.css";
+import ProductListCard from "../ProductListCard/ProductListCard";
 
 class ProductList extends Component {
   state = {
@@ -35,9 +35,6 @@ class ProductList extends Component {
 
     return (
       <div>
-        <br />
-        <h4>Products</h4>
-        <hr />
         <div className="row">{cards}</div>
       </div>
     );
