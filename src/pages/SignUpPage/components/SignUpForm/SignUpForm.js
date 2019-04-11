@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import "./SignUpForm.css";
 
-class SignUp extends Component {
+class SignUpForm extends Component {
   state = {
     first_name: "",
     last_name: "",
@@ -61,9 +62,6 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <br />
-        <h4>Sign Up</h4>
-        <hr />
         <div className="Login">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="first_name" bsSize="large">
@@ -116,4 +114,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default SignUpForm;

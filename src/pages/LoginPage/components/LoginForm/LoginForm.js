@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import "./Login.css";
+import "./LoginForm.css";
 
-class Login extends Component {
+class LoginForm extends Component {
   state = {
     email: "",
     password: ""
@@ -65,9 +65,6 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <br />
-        <h4>Login</h4>
-        <hr />
         <div className="Login">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="email" bsSize="large">
@@ -102,4 +99,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default LoginForm;
