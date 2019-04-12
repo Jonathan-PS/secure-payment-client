@@ -9,6 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ProductListPage from "./pages/ProductListPage/ProductListPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
+import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 
 export default class Routes extends Component {
   render() {
@@ -17,6 +18,8 @@ export default class Routes extends Component {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/signup" component={SignUpPage} />
+        <Route exact path="/dashboard" component={DashboardPage} />
+        <Route exact path="/stripepayment" component={StripePaymentPage} />
         <Route
           exact
           path="/products"
@@ -26,9 +29,12 @@ export default class Routes extends Component {
             />
           )}
         />
-        <Route exact path="/dashboard" component={DashboardPage} />
+        <Route
+          exact
+          path="/checkout"
+          render={() => <CheckoutPage cartProducts={this.props.cartProducts} />}
+        />
 
-        <Route exact path="/stripepayment" component={StripePaymentPage} />
         <Route component={NotFoundPage} />
       </Switch>
     );
