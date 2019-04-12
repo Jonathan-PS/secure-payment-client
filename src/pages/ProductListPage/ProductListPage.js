@@ -9,7 +9,7 @@ class ProductListPage extends Component {
         <br />
         <h4>Products</h4>
         <hr />
-        <ProductList />
+        <ProductList triggerAddCartProduct={this.props.triggerAddCartProduct} />
       </div>
     );
   }

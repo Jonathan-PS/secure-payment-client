@@ -3,14 +3,17 @@ import "./ProductListCard.css";
 
 class ProductListCard extends Component {
   addToCart = event => {
-    this.props.triggerAddCartProduct(this.props.productId);
-    alert(
+    this.props.triggerAddCartProduct(this.props);
+    //store.set("cart", this.props);
+    //alert("session size " + store.get("cart").size);
+
+    /*alert(
       "Added product: \n'" +
         this.props.productName +
         "'\n with id= " +
         this.props.productId +
         " to Cart."
-    );
+    );*/
   };
 
   render() {
