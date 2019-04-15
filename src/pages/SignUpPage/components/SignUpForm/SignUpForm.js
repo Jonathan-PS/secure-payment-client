@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./SignUpForm.css";
+import axios from 'axios';
 
 class SignUpForm extends Component {
   state = {
@@ -16,7 +17,8 @@ class SignUpForm extends Component {
     return (
       this.state.email.length > 0 &&
       this.state.password.length > 0 &&
-      this.state.first_name.length > 0
+      this.state.first_name.length > 0 &&
+      this.state.last_name.length > 0
     );
   }
 
@@ -31,15 +33,17 @@ class SignUpForm extends Component {
 
   handleSubmit = event => {
     alert("You tried to sign up with " + this.state.email);
-    /*
-    try {
+
+    /**try {
       // get our form data out of state
-      const { email, password } = this.state;
+      const { email, password, first_name, last_name } = this.state;
 
       axios
-        .post("https://restaurants-reviews-api.herokuapp.com/user/create/", {
+        .put("localhost:9090/users/create", {
           email,
-          password
+          password,
+          first_name,
+          last_name
         })
         .then(result => {
           //access the results here....
@@ -48,7 +52,6 @@ class SignUpForm extends Component {
             email: "",
             redirectToReferrer: true
           };
-
           window.location = "/login";
         })
         .catch(err => {
