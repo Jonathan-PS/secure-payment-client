@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
 
+import ActiveOrder from "./../ActiveOrder/ActiveOrder";
 import AddAddressForm from "./../AddAddressForm/AddAddressForm";
+import Address from "./../Address/Address";
+import Order from "./../Order/Order";
+import ProfileInfo from "./../ProfileInfo/ProfileInfo";
 import Tabs from "../../../../components/Tabs/Tabs";
 
 class Dashboard extends Component {
@@ -13,16 +17,25 @@ class Dashboard extends Component {
             {/* new tab */}
             <h5 align="center">Profile Dashboard Home</h5>
             <br />
-            Profile Information here
+            <ProfileInfo />
             <br />
-            Active order here
+            <ActiveOrder />
           </div>
-          <div label="Orders">Order History for this user here</div>
-          {/* new tab */}
+          <div label="Orders">
+            <Order />
+          </div>
+            {/* new tab */}
+
           <div label="Address">
             {/* new tab */}
-            Addresses
-            <AddAddressForm />
+            <div class="splitInTwo">
+              <div class="leftColumn">
+                <AddAddressForm />
+              </div>
+              <div class="rightColumn">
+                <Address />
+              </div>
+            </div>
           </div>
           <div label="Profile Settings">
             {/* new tab */}

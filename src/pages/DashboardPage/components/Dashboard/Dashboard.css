@@ -1,0 +1,13 @@
+.splitInTwo {
+  width: 90%;
+}
+
+.leftColumn {
+  float:left;
+  width: 30%;
+}
+
+.rightColumn {
+  float: right;
+  width: 60%;
+}
