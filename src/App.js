@@ -13,24 +13,39 @@ import CartButton from "./components/CartButton/CartButton";
 class App extends Component {
   state = {
     cartProducts: [] /* Saves products by their productId */
-    //myCart: []
   };
 
+  constructor(props) {
+    super(props);
+    this.addCartProduct = this.addCartProduct.bind(this);
+  }
+
+  // Adds a product to the cart
   addCartProduct = event => {
-    this.setState({
-      cartProducts: this.state.cartProducts.concat([event])
-    }); /*
-    this.setState({
-      myCart: [sessionStorage.getItem("cart")]
-    });*/
+    // First check if product already exist:
+    var index = -1;
+    for (var i = 0; i < this.state.cartProducts.length; i++) {
+      if (this.state.cartProducts[i].productId == event.productId) {
+        index = i;
+      }
+    }
+    // Either put product in cart,
+    if (index < 0) {
+      this.setState({
+        cartProducts: this.state.cartProducts.concat([event])
+      });
+    } else {
+      // or increment the number of selected products
+      var newSelectedQuantity = {
+        ...this.state.cartProducts
+      };
+      newSelectedQuantity[index].selectedQuantity =
+        this.state.cartProducts[index].selectedQuantity + 1;
+      this.setState(newSelectedQuantity); //
+    }
   };
 
   render() {
-    /*if (sessionStorage.getItem("cart") == "") {
-      sessionStorage.clear("cart");
-      sessionStorage.setItem("cart", []);
-    }*/
-
     return (
       <div id="App">
         <NavigationBar />

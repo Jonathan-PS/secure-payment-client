@@ -28,6 +28,7 @@ class ProductList extends Component {
         description={product.description}
         imageUrl={product.imageUrl}
         priceEach={product.priceEach}
+        selectedQuantity={1}
         quantity={product.quantity}
         triggerAddCartProduct={this.props.triggerAddCartProduct}
       />

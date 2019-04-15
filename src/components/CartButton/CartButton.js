@@ -14,7 +14,8 @@ const CartButton = props => {
 
         {props.cartProducts.map(product => (
           <li key={product}>
-            id: {product.productId} name: {product.productName}
+            id: {product.productId} name: {product.productName} quantity:
+            {product.selectedQuantity}
           </li>
         ))}
       </div>
