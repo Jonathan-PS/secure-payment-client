@@ -3,17 +3,21 @@ import "./ProductListCard.css";
 
 class ProductListCard extends Component {
   addToCart = event => {
-    this.props.triggerAddCartProduct(this.props);
-    //store.set("cart", this.props);
-    //alert("session size " + store.get("cart").size);
+    //if (product["selectedQuantity"] == 0) {
+    //product["selectedQuantity"] = product["selectedQuantity"] + 1;
 
-    /*alert(
-      "Added product: \n'" +
-        this.props.productName +
-        "'\n with id= " +
-        this.props.productId +
-        " to Cart."
-    );*/
+    this.props.triggerAddCartProduct({
+      productId: this.props.productId,
+      productName: this.props.productName,
+      description: this.props.description,
+      imageUrl: this.props.imageUrl,
+      priceEach: this.props.priceEach,
+      quantity: this.props.quantity,
+      selectedQuantity: this.props.selectedQuantity
+    });
+    //} else {
+    //this.props.updateSelectedQuantity(this.props.productId);
+    //}
   };
 
   render() {

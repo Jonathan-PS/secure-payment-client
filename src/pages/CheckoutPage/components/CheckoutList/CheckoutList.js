@@ -3,31 +3,19 @@ import "./CheckoutList.css";
 
 class CheckoutList extends Component {
   state = {
-    cartProducts: []
+    totalPrice: 0
   };
 
   componentDidMount() {
+    var sum = 0;
+    for (var i = 0; i < this.props.cartProducts.length; i++) {
+      sum +=
+        this.props.cartProducts[i].priceEach *
+        this.props.cartProducts[i].selectedQuantity;
+    }
+
     this.setState({
-      cartProducts: [
-        {
-          productId: 1,
-          productName: "fancy socks",
-          description: "A pair of really fancy socks",
-          imageUrl:
-            "https://cdn.shopify.com/s/files/1/0002/4179/5099/products/Phintastic_hero_copy_7_2048x.png?v=1526476988",
-          priceEach: 99.0,
-          selectedQuantity: 1
-        },
-        {
-          productId: 1,
-          productName: "fancy socks",
-          description: "A pair of really fancy socks",
-          imageUrl:
-            "https://cdn.shopify.com/s/files/1/0002/4179/5099/products/Phintastic_hero_copy_7_2048x.png?v=1526476988",
-          priceEach: 99.0,
-          selectedQuantity: 2
-        }
-      ]
+      totalPrice: sum
     });
   }
 
@@ -42,7 +30,9 @@ class CheckoutList extends Component {
         <td>{product.productId}</td>
         <td>{product.productName}</td>
         {<td>{product.selectedQuantity}</td>}
-        <td>{product.priceEach}</td>
+        <td>
+          {product.selectedQuantity} x {product.priceEach}
+        </td>
       </tr>
     ));
 
@@ -55,11 +45,12 @@ class CheckoutList extends Component {
               <th scope="col">Id</th>
               <th scope="col">Name</th>
               {<th scope="col">Quantity</th>}
-              <th scope="col">priceEach</th>
+              <th scope="col">price</th>
             </tr>
           </thead>
           <tbody>{products}</tbody>
         </table>
+        totalPrice : {this.state.totalPrice}
       </div>
     );
   }
