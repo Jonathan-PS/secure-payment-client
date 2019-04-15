@@ -34,7 +34,7 @@ class SignUpForm extends Component {
   handleSubmit = event => {
     alert("You tried to sign up with " + this.state.email);
 
-    /**try {
+    /* try {
       // get our form data out of state
       const { email, password, first_name, last_name } = this.state;
 

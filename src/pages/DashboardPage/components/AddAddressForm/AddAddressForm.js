@@ -75,9 +75,6 @@ class AddressForm extends Component {
   render() {
     return (
       <div>
-        <br />
-        <h4>Add Home Address</h4>
-        <hr />
         <div className="Login">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="street_name" bsSize="large">
