@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { render } from 'react-dom';
-import { StripeProvider } from 'react-stripe-elements';
+import { Elements, StripeProvider } from 'react-stripe-elements';
 
 import StripeBtn from '../../components/StripeBtn/StripeBtn'
+import StripeCheckoutForm from "../../components/StripeCheckoutForm/StripeCheckoutForm";
+import StripeCards from "../../components/StripeCards/StripeCards";
 
 
 class StripePaymentPage extends Component {
@@ -10,8 +12,26 @@ class StripePaymentPage extends Component {
         return (
             <div>
                 <h1>Stripe Payment Page</h1>
-                <p>Stripe Checkout - ReactJS</p>
+
+                {/* Stripe Button */}
+                <h3>"Stripe Btn"</h3>
                 <StripeBtn />
+                <br /><br /><br />
+
+                {/* Stripe Cards */}
+                <h3>"StripeCards"</h3>
+                <StripeCards></StripeCards>
+                <br /><br /><br />
+
+                {/*Stripe Checkout Form */}
+                <StripeProvider apiKey="pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4">
+                    <div className="stripeCheckoutForm">
+                        <h3>"Stripe Checkout Form"</h3>
+                        <Elements>
+                            <StripeCheckoutForm />
+                        </Elements>
+                    </div>
+                </StripeProvider>
             </div>
 
         );
