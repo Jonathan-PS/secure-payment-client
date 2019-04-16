@@ -49,14 +49,8 @@ class App extends Component {
     return (
       <div id="App">
         <NavigationBar />
-        <br />
-
-        <CartButton cartProducts={this.state.cartProducts} />
-
-        <Routes
-          cartProducts={this.state.cartProducts}
-          triggerAddCartProduct={this.addCartProduct}
-        />
+        <CartButton cartProducts={this.state.cartProducts}/>
+        <Routes cartProducts={this.state.cartProducts} triggerAddCartProduct={this.addCartProduct}/>
       </div>
     );
   }

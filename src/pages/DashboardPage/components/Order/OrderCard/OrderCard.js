@@ -4,9 +4,9 @@ import "./OrderCard.css";
 class OrderCard extends Component {
   render() {
     return (
-      <div className="col-xs-12 col-sm-6 col-md-4" align="left">
+      <div className="col-xs-12 col-sm-6 col-md-4">
         <br/><br/>
-        <div className="card">
+        <div className="card" id="border">
           <div className="card-body">
             <h4 className="card-title"></h4>
             <ul>

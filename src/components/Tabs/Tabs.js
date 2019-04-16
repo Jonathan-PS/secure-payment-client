@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import Tab from './Tab';
 
 class Tabs extends Component {
@@ -10,7 +9,6 @@ class Tabs extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       activeTab: this.props.children[0].props.label,
     };
@@ -38,12 +36,7 @@ class Tabs extends Component {
             const { label } = child.props;
 
             return (
-              <Tab
-                activeTab={activeTab}
-                key={label}
-                label={label}
-                onClick={onClickTabItem}
-              />
+              <Tab activeTab={activeTab} key={label} label={label} onClick={onClickTabItem} />
             );
           })}
         </ol>

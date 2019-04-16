@@ -4,10 +4,10 @@ import "./ActiveOrderCard.css";
 class ActiveOrderCard extends Component {
   render() {
     return (
-      <div className="col-xs-12 col-sm-6 col-md-4" align="right">
-        <div className="card">
+      <div className="col-xs-12 col-sm-6 col-md-12">
+        <div className="card" id="border">
           <div className="card-body">
-            <h4 className="card-title">Active order</h4>
+            <h4 className="card-title"></h4>
             <ul>
               <li><b>Order id: </b>{this.props.userOrderId}</li>
               <li><b>User id: </b>{this.props.registeredUserId}</li>

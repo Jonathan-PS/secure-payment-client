@@ -36,7 +36,7 @@ class ActiveOrder extends Component {
 
     return (
       <div>
-        <div className="row">{cards}</div>
+        <div className="row" id="margins">{cards}</div>
       </div>
     );
   }
