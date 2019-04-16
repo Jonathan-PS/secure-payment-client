@@ -4,11 +4,12 @@ import ActiveOrderCard from "./ActiveOrderCard/ActiveOrderCard";
 
 class ActiveOrder extends Component {
   state = {
-    allOrders: []
+    allOrders: [],
+    registeredUserId: 7 {/* THIS IS WRONG ---*/}
   };
 
   componentDidMount() {
-    fetch("http://localhost:9090/orders")
+    fetch("http://localhost:9090/orders" + this.state.registeredUserId) {/* THIS IS WRONG ---*/}
     .then(resp => resp.json())
     .then(data => {
       console.log(data);
