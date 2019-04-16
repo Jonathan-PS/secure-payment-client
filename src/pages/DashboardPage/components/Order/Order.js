@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Order.css";
+import "./../../../../App.css";
 import OrderCard from "./OrderCard/OrderCard";
 
 class Order extends Component {
@@ -35,7 +36,7 @@ class Order extends Component {
     ));
 
     return (
-      <div>
+      <div id="generalStyle">
         <div className="row" id="margins">{cards}</div>
       </div>
     );

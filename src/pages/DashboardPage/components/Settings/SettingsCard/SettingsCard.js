@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./SettingsCard.css";
+import "./../../../../../App.css";
 
 class Settings extends Component {
   render() {
     return (
-      <div className="col-xs-12 col-sm-6 col-md-12" align="left">
+      <div className="col-xs-12 col-sm-6 col-md-12" align="left" id="generalStyle">
       <div className="card" id="liststyling">
         <div className="card-body">
           <h4 className="card-title">Settings</h4>

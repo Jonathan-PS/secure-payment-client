@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ProductList from "./components/ProductList/ProductList";
 import "./ProductListPage.css";
+import "./../../App.css";
 
 class ProductListPage extends Component {
   render() {
     return (
-      <div>
+      <div id="generalStyle">
         <br />
         <h4>Products</h4>
         <hr />

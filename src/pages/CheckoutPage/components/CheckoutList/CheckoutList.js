@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./CheckoutList.css";
+import "./../../../../App.css";
 
 class CheckoutList extends Component {
   state = {
@@ -37,7 +38,7 @@ class CheckoutList extends Component {
     ));
 
     return (
-      <div className="container">
+      <div className="container" id="generalStyle">
         <table className="table table-striped">
           <thead>
             <tr>

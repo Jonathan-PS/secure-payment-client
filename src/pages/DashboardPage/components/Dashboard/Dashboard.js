@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
+import "./../../../../App.css";
 
 import ActiveOrder from "./../ActiveOrder/ActiveOrder";
 import AddAddressForm from "./../AddAddressForm/AddAddressForm";
@@ -12,7 +13,7 @@ import Tabs from "../../../../components/Tabs/Tabs";
 class Dashboard extends Component {
   render() {
     return (
-      <div id="dashboard">
+      <div id="generalStyle">
         <Tabs>
           <div label="Profile">
             <h5>Profile Dashboard Home</h5>

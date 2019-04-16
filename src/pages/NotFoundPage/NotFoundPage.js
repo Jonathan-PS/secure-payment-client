@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./NotFoundPage";
+import "./../../App.css";
 
 class NotFoundPage extends Component {
   render() {
     return (
-      <div>
+      <div id="generalStyle">
         <br />
         <h4>404 : Page Not Found</h4>
         <hr />

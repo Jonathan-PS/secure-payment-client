@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./AddAddressForm.css";
+import "./../../../../App.css";
 
 class AddressForm extends Component {
   state = {
@@ -75,7 +76,7 @@ class AddressForm extends Component {
   render() {
     return (
       <div>
-        <div className="Login">
+        <div className="Login" id="generalStyle">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="street_name" bsSize="large">
               Street Name *
@@ -101,7 +102,7 @@ class AddressForm extends Component {
               Country *
               <FormControl placeholder="Country" value={this.state.country} onChange={this.handleChange} type="country" />
             </FormGroup>
-            <Button block bsSize="large" disabled={!this.validateForm()} type="submit">
+            <Button block bsSize="large" disabled={!this.validateForm()} type="submit" variant="dark">
               Add Address
             </Button>
           </form>

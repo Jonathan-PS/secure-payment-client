@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./ProductList.css";
+import "./../../../../App.css";
 import ProductListCard from "../ProductListCard/ProductListCard";
 
 class ProductList extends Component {
@@ -35,7 +36,7 @@ class ProductList extends Component {
     ));
 
     return (
-      <div>
+      <div id="generalStyle">
         <div className="row">{cards}</div>
       </div>
     );

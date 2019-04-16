@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./OrderCard.css";
+import "./../../../../../App.css";
 
 class OrderCard extends Component {
   render() {
@@ -7,7 +8,7 @@ class OrderCard extends Component {
       <div className="col-xs-12 col-sm-6 col-md-4">
         <br/><br/>
         <div className="card" id="border">
-          <div className="card-body">
+          <div className="card-body" id="generalStyle">
             <h4 className="card-title"></h4>
             <ul>
               <li><b>Order id: </b>{this.props.userOrderId}</li>

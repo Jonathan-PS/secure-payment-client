@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./ProductListCard.css";
+import "./../../../../App.css";
 
 class ProductListCard extends Component {
   addToCart = event => {
@@ -22,7 +23,7 @@ class ProductListCard extends Component {
 
   render() {
     return (
-      <div className="col-xs-12 col-sm-6 col-md-4" align="center">
+      <div className="col-xs-12 col-sm-6 col-md-4" align="center" id="generalStyle">
         <div className="card">
           <img src={this.props.imageUrl} alt="Product Image" width="200" />
           <div className="card-body">

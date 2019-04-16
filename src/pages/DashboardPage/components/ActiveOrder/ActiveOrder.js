@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./ActiveOrder.css";
+import "./../../../../App.css";
 import ActiveOrderCard from "./ActiveOrderCard/ActiveOrderCard";
 
 class ActiveOrder extends Component {
@@ -35,7 +36,7 @@ class ActiveOrder extends Component {
     ));
 
     return (
-      <div>
+      <div id="generalStyle">
         <div className="row" id="margins">{cards}</div>
       </div>
     );

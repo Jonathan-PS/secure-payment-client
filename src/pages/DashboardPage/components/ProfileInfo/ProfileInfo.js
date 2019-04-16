@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import "./ProfileInfo.css";
+import "./../../../../App.css";
 import ProfileInfoCard from "./ProfileInfoCard/ProfileInfoCard";
 
 class ProfileInfo extends Component {
   state = {
-    allUsers: []
+    allUsers: [],
+    registeredUserId: 7
   };
 
   componentDidMount() {
-    fetch("http://localhost:9090/users")
+    fetch("http://localhost:9090/users/" + this.state.registeredUserId)
     .then(resp => resp.json())
     .then(data => {
       console.log(data);
       this.setState({
-        allUsers: data
+        allUsers: this.state.allUsers.concat(data)
       });
     })
     .catch(err => {});
@@ -22,7 +24,7 @@ class ProfileInfo extends Component {
   render() {
     const cards = this.state.allUsers.map(users => (
       <ProfileInfoCard
-        key={users.registeredUserId}
+        registeredUserId={users.registeredUserId}
         firstName={users.firstName}
         lastName={users.lastName}
         email={users.email}
@@ -35,7 +37,7 @@ class ProfileInfo extends Component {
     ));
 
     return (
-      <div>
+      <div id="generalStyle">
         <div className="row" id="margins">{cards}</div>
       </div>
     );

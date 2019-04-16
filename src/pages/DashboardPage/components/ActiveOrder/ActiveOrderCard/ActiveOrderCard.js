@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./ActiveOrderCard.css";
+import "./../../../../../App.css";
 
 class ActiveOrderCard extends Component {
   render() {
     return (
       <div className="col-xs-12 col-sm-6 col-md-12">
         <div className="card" id="border">
-          <div className="card-body">
+          <div className="card-body" id="generalStyle">
             <h4 className="card-title"></h4>
             <ul>
               <li><b>Order id: </b>{this.props.userOrderId}</li>

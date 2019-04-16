@@ -6,7 +6,7 @@ const CartButton = props => {
     <div>
       <div className="container">
         <NavLink to="/checkout" className="nav-link" activeClassName="active">
-          <button type="button" className="btn btn-outline-success">
+          <button type="button" class="btn btn-outline-dark">
             <i className="fas fa-shopping-cart" />
             <b> ( {props.cartProducts.length} )</b>
           </button>
