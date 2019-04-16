@@ -6,7 +6,7 @@ class ProfileInfoCard extends Component {
   render() {
     return (
       <div className="col-xs-12 col-sm-6 col-md-12" align="left">
-        <div className="card" id="liststyling">
+        <div className="card" id="border">
           <div className="card-body" id="generalStyle">
             <h4 className="card-title"></h4>
             <ul>

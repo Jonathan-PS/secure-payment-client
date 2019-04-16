@@ -53,7 +53,7 @@ class Settings extends Component {
               New Password
               <FormControl value={this.state.password} onChange={this.handleChange} type="password"/>
             </FormGroup>
-            <Button block bsSize="large" disabled={!this.validateForm()} type="submit">
+            <Button block bsSize="large" disabled={!this.validateForm()} type="submit" variant="dark">
               Confirm
             </Button>
           </form>

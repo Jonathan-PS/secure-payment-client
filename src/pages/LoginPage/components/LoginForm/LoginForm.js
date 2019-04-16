@@ -89,7 +89,7 @@ class LoginForm extends Component {
               block
               bsSize="large"
               disabled={!this.validateForm()}
-              type="submit"
+              type="submit" variant="dark"
             >
               Login
             </Button>

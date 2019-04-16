@@ -102,7 +102,7 @@ class AddressForm extends Component {
               Country *
               <FormControl placeholder="Country" value={this.state.country} onChange={this.handleChange} type="country" />
             </FormGroup>
-            <Button block bsSize="large" disabled={!this.validateForm()} type="submit">
+            <Button block bsSize="large" disabled={!this.validateForm()} type="submit" variant="dark">
               Add Address
             </Button>
           </form>

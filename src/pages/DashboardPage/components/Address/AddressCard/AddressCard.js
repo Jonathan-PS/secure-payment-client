@@ -7,7 +7,7 @@ class AddressCard extends Component {
     return (
       <div className="col-xs-12 col-sm-6 col-md-12" align="left">
         <br/><br/>
-        <div className="card" id="liststyling">
+        <div className="card">
           <div className="card-body" id="generalStyle">
             <h4 className="card-title">REGISTERED ADDRESS</h4>
             <ul>
