@@ -6,42 +6,40 @@ import AddAddressForm from "./../AddAddressForm/AddAddressForm";
 import Address from "./../Address/Address";
 import Order from "./../Order/Order";
 import ProfileInfo from "./../ProfileInfo/ProfileInfo";
+import Settings from "./../Settings/Settings"
 import Tabs from "../../../../components/Tabs/Tabs";
 
 class Dashboard extends Component {
   render() {
     return (
-      <div id="Dashboard">
+      <div id="dashboard">
         <Tabs>
           <div label="Profile">
-            {/* new tab */}
-            <h5 align="center">Profile Dashboard Home</h5>
-            <br />
-            <ProfileInfo />
-            <br />
-            <ActiveOrder />
+            <h5>Profile Dashboard Home</h5>
+            <div class="splitInTwo">
+              <div class="profileLeftColumn">
+                <ProfileInfo />
+              </div>
+              <div class="profileRightColumn">
+                <ActiveOrder />
+              </div>
+            </div>
           </div>
-          <div label="Orders">
+          <div label="Orders History">
             <Order />
           </div>
-            {/* new tab */}
-
           <div label="Address">
-            {/* new tab */}
             <div class="splitInTwo">
-              <div class="leftColumn">
+              <div class="addressLeftColumn">
                 <AddAddressForm />
               </div>
-              <div class="rightColumn">
+              <div class="addressRightColumn">
                 <Address />
               </div>
             </div>
           </div>
-          <div label="Profile Settings">
-            {/* new tab */}
-            Profile Settings
-            <br />
-            Add address, change active_address, change password, etc...
+          <div label="Settings">
+            <Settings />
           </div>
         </Tabs>
       </div>

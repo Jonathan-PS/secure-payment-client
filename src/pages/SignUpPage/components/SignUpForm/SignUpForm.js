@@ -69,45 +69,21 @@ class SignUpForm extends Component {
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="first_name" bsSize="large">
               First Name
-              <FormControl
-                autoFocus
-                type="first_name"
-                value={this.state.first_name}
-                onChange={this.handleChange}
-              />
+              <FormControl autoFocus type="first_name" value={this.state.first_name} onChange={this.handleChange}/>
             </FormGroup>
             <FormGroup controlId="last_name" bsSize="large">
               Last Name
-              <FormControl
-                autoFocus
-                type="last_name"
-                value={this.state.last_name}
-                onChange={this.handleChange}
-              />
+              <FormControl autoFocus type="last_name" value={this.state.last_name} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup controlId="email" bsSize="large">
               Set Email
-              <FormControl
-                autoFocus
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
+              <FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange}/>
             </FormGroup>
             <FormGroup controlId="password" bsSize="large">
               Set Password
-              <FormControl
-                value={this.state.password}
-                onChange={this.handleChange}
-                type="password"
-              />
+              <FormControl value={this.state.password} onChange={this.handleChange} type="password"/>
             </FormGroup>
-            <Button
-              block
-              bsSize="large"
-              disabled={!this.validateForm()}
-              type="submit"
-            >
+            <Button block bsSize="large" disabled={!this.validateForm()} type="submit">
               Sign Up
             </Button>
           </form>
