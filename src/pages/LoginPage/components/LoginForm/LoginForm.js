@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./LoginForm.css";
+import "./../../../../App.css";
 
 class LoginForm extends Component {
   state = {
@@ -65,7 +66,7 @@ class LoginForm extends Component {
   render() {
     return (
       <div>
-        <div className="Login">
+        <div className="Login" id="generalStyle">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="email" bsSize="large">
               Email

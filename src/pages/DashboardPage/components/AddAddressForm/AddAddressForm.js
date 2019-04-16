@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./AddAddressForm.css";
+import "./../../../../App.css";
 
 class AddressForm extends Component {
   state = {
@@ -75,7 +76,7 @@ class AddressForm extends Component {
   render() {
     return (
       <div>
-        <div className="Login">
+        <div className="Login" id="generalStyle">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="street_name" bsSize="large">
               Street Name *

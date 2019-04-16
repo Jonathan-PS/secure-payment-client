@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import "./NavigationBar.css";
+import "./../../App.css";
 import Bootstrap from "bootstrap/dist/css/bootstrap.css";
 
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button, NavItem } from "react-bootstrap";
@@ -9,8 +10,8 @@ import { NavLink } from "react-router-dom";
 
 const NavigationBar = () => {
   return (
-    <div>
-      <Navbar bg="light" expand="lg">
+    <div id="generalStyle">
+      <Navbar color="faded" light>
         <Navbar.Brand href="/">Secure Payment Client</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

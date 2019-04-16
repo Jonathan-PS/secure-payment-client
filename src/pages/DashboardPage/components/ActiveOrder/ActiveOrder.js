@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import "./ActiveOrder.css";
+import "./../../../../App.css";
 import ActiveOrderCard from "./ActiveOrderCard/ActiveOrderCard";
 
 class ActiveOrder extends Component {
   state = {
-    allOrders: [],
-    registeredUserId: 7 {/* THIS IS WRONG ---*/}
+    allOrders: []
   };
 
   componentDidMount() {
-    fetch("http://localhost:9090/orders" + this.state.registeredUserId) {/* THIS IS WRONG ---*/}
+    fetch("http://localhost:9090/orders")
     .then(resp => resp.json())
     .then(data => {
       console.log(data);
@@ -36,7 +36,7 @@ class ActiveOrder extends Component {
     ));
 
     return (
-      <div>
+      <div id="generalStyle">
         <div className="row" id="margins">{cards}</div>
       </div>
     );

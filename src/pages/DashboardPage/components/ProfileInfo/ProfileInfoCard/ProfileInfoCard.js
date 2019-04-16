@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./ProfileInfoCard.css";
+import "./../../../../../App.css";
 
 class ProfileInfoCard extends Component {
   render() {
     return (
       <div className="col-xs-12 col-sm-6 col-md-12" align="left">
         <div className="card" id="liststyling">
-          <div className="card-body">
+          <div className="card-body" id="generalStyle">
             <h4 className="card-title"></h4>
             <ul>
               <li><b>Name:</b> {this.props.firstName} {this.props.lastName}</li>

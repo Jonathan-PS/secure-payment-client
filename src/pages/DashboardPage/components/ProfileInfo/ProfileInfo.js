@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./ProfileInfo.css";
+import "./../../../../App.css";
 import ProfileInfoCard from "./ProfileInfoCard/ProfileInfoCard";
 
 class ProfileInfo extends Component {
@@ -36,7 +37,7 @@ class ProfileInfo extends Component {
     ));
 
     return (
-      <div>
+      <div id="generalStyle">
         <div className="row" id="margins">{cards}</div>
       </div>
     );

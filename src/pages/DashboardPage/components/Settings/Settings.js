@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Settings.css";
+import "./../../../../App.css";
 import SettingsCard from "./SettingsCard/SettingsCard";
 
 class Settings extends Component {
@@ -41,7 +42,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <div>
+      <div id="generalStyle">
         <div className="Login">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="email" bsSize="large">

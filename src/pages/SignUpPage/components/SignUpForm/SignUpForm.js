@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./SignUpForm.css";
+import "./../../../../App.css";
 import axios from 'axios';
 
 class SignUpForm extends Component {
@@ -65,7 +66,7 @@ class SignUpForm extends Component {
   render() {
     return (
       <div>
-        <div className="Login">
+        <div className="Login" id="generalStyle">
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="first_name" bsSize="large">
               First Name
