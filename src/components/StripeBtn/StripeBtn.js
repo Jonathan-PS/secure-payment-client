@@ -8,14 +8,15 @@ import qs from 'query-string-object'
 //const stripe = Stripe('pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4');
 const APIpayment = "https://secure-payment-api.herokuapp.com/stripe/charge"
 
-const stripeBtn = () => {
+const stripeBtn = (props) => {
     const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
 
+
     const onToken = token => {
-        
+
         const body = {
             amount: 10000,
-            currency: "nok", 
+            currency: "nok",
             token: token.id
         };
 
@@ -39,6 +40,7 @@ const stripeBtn = () => {
         });
         */
 
+        
         axios
             .post(APIpayment, body)
             //.post(APIpayment)
@@ -49,13 +51,18 @@ const stripeBtn = () => {
                     "\nData billing details (name): " + data.billing_details.name +
                     "\nData amount: " + data.amount +
                     "\nData currency: " + data.currency +
+                    "\nData CardID: " + data.source.id +
+                    "\nData cvc check: " + data.source.cvc_check +
+                    "\nData STATUS: " + data.status +
+
                     "\nData receipt url: " + data.receipt_url +
-                    "\nToken CardID: " + data.source.id +
+                    
                     "\nBody: " + JSON.stringify(body) 
                 );
             })
             .catch(error => {
-                console.log("Payment Error: ", error +"\nBody:"+ JSON.stringify(body) );
+                console.log("Payment Error: ", error + "\nMessage: " + error.message +
+                            "\nBody:"+ JSON.stringify(body) );
                 alert("Payment Error: " + error +
                     "\nToken ID: " + token.id +
                     "\nBody amount: " + body.amount +
@@ -64,6 +71,49 @@ const stripeBtn = () => {
                     "\nBody: " + JSON.stringify(body) 
                 );
             });
+        /*    
+        axios({
+            method: 'post',
+            url: APIpayment,
+            data: {
+                amount: 10000,
+                currency: "nok",
+                token: token.id
+            },
+            //validateStatus: (status) => {
+            //    return true; // I'm always returning true, you may want to do it depending on the status received
+            //},
+        })
+        //.then(resp => resp.json())
+        .then(response => {
+            console.log("\nData:" + JSON.stringify(response));
+            alert("Payment Success: " +
+                "\nData:" + JSON.stringify(response)
+                //"\nData billing details (name): " + data.billing_details.name +
+                //"\nData amount: " + response.amount +
+                //"\nData currency: " + response.currency +
+                //"\nData CardID: " + response.source.id +
+                //"\nData cvc check: " + response.source.cvc_check +
+                //"\nData STATUS: " + response.status +
+
+                //"\nData receipt url: " + response.receipt_url +
+
+                //"\nBody: " + JSON.stringify(body) 
+            );
+        }).catch(error => {
+            console.log("Payment Error: ", error + "\nMessage: " + error.message +
+                "\nBody:" + JSON.stringify(body));
+            alert("Payment Error: " + error +
+                "\nToken ID: " + token.id +
+                "\nBody amount: " + body.amount +
+                "\nBody currency: " + body.currency +
+                "\nBody email: " + body.email +
+                "\nBody: " + JSON.stringify(body)
+            );
+
+        });
+        */
+
     };
     return (
         <StripeCheckout
@@ -71,7 +121,7 @@ const stripeBtn = () => {
             name="Pay with Stripe!" // the pop-in header title
             description="Payment description." // the pop-in header subtitle
             panelLabel="Pay" //Submit button in modal
-            amount={999.00} //Amount in cents $9.99
+            amount={999} //Amount in cents $9.99
             currency="NOK"
             token={onToken}
             stripeKey={publishableKey}
