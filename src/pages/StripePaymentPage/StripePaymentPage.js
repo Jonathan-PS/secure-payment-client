@@ -5,7 +5,7 @@ import { Elements, StripeProvider } from 'react-stripe-elements';
 import StripeBtn from '../../components/StripeBtn/StripeBtn'
 import StripeCheckoutForm from "../../components/StripeCheckoutForm/StripeCheckoutForm";
 import StripeCards from "../../components/StripeCards/StripeCards";
-
+import StripeShop from "../../components/StripeShop/StripeShop";
 
 class StripePaymentPage extends Component {
     render() {
@@ -29,9 +29,17 @@ class StripePaymentPage extends Component {
                         <h3>"Stripe Checkout Form"</h3>
                         <Elements>
                             <StripeCheckoutForm />
+                            
+                        </Elements>
+                        <Elements>
+                            
+                            <StripeShop />
                         </Elements>
                     </div>
                 </StripeProvider>
+
+               
+
             </div>
 
         );
