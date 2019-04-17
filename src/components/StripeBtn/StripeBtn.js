@@ -6,7 +6,7 @@ import axios from "axios";
 import qs from 'query-string-object'
 
 //const stripe = Stripe('pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4');
-const APIpayment = "https://secure-payment-api.herokuapp.com/stripe/payment"
+const APIpayment = "https://secure-payment-api.herokuapp.com/stripe/charge"
 
 const stripeBtn = () => {
     const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
@@ -14,10 +14,9 @@ const stripeBtn = () => {
     const onToken = token => {
         
         const body = {
-            token: "token",
-            email: "ola@nordmann.com",
-            amount: 999.00,
-            currency: "NOK"            
+            amount: 10000,
+            currency: "nok", 
+            token: token.id
         };
 
         /*
@@ -42,19 +41,21 @@ const stripeBtn = () => {
 
         axios
             .post(APIpayment, body)
-            .then(response => {
-                console.log(response);
-                alert("Payment Success (response): " + response +
-                    "\nToken ID: " + token.id +
-                    "\nBody amount: " + body.amount +
-                    "\nBody currency: " + body.currency +
-                    "\nBody email: " + body.email +
-                    "\nToken CardID: " + token.card.id +
+            //.post(APIpayment)
+            .then(resp => resp.json())
+            .then(data => {
+                console.log("\nBody:"+ JSON.stringify(body) );
+                alert("Payment Success: " +
+                    "\nData billing details (name): " + data.billing_details.name +
+                    "\nData amount: " + data.amount +
+                    "\nData currency: " + data.currency +
+                    "\nData receipt url: " + data.receipt_url +
+                    "\nToken CardID: " + data.source.id +
                     "\nBody: " + JSON.stringify(body) 
                 );
             })
             .catch(error => {
-                console.log("Payment Error: ", error);
+                console.log("Payment Error: ", error +"\nBody:"+ JSON.stringify(body) );
                 alert("Payment Error: " + error +
                     "\nToken ID: " + token.id +
                     "\nBody amount: " + body.amount +
