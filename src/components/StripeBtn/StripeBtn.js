@@ -3,16 +3,21 @@
 import React, { Fragment } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import qs from 'query-string-object'
 
+//const stripe = Stripe('pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4');
+const APIpayment = "https://secure-payment-api.herokuapp.com/stripe/payment"
 
 const stripeBtn = () => {
     const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
 
     const onToken = token => {
+        
         const body = {
-            amount: 999,
-            currency: "NOK",
-            token: token
+            token: "token",
+            email: "ola@nordmann.com",
+            amount: 999.00,
+            currency: "NOK"            
         };
 
         /*
@@ -36,14 +41,27 @@ const stripeBtn = () => {
         */
 
         axios
-            .post("http://localhost:8000/payment", body)
+            .post(APIpayment, body)
             .then(response => {
                 console.log(response);
-                alert("Payment Success (response):\n" + response + "\nToken ID: " + token.id);
+                alert("Payment Success (response): " + response +
+                    "\nToken ID: " + token.id +
+                    "\nBody amount: " + body.amount +
+                    "\nBody currency: " + body.currency +
+                    "\nBody email: " + body.email +
+                    "\nToken CardID: " + token.card.id +
+                    "\nBody: " + JSON.stringify(body) 
+                );
             })
             .catch(error => {
                 console.log("Payment Error: ", error);
-                alert("Payment Error:\n" + error + "\nToken ID: " + token.id);
+                alert("Payment Error: " + error +
+                    "\nToken ID: " + token.id +
+                    "\nBody amount: " + body.amount +
+                    "\nBody currency: " + body.currency +
+                    "\nBody email: " + body.email +
+                    "\nBody: " + JSON.stringify(body) 
+                );
             });
     };
     return (
@@ -52,7 +70,7 @@ const stripeBtn = () => {
             name="Pay with Stripe!" // the pop-in header title
             description="Payment description." // the pop-in header subtitle
             panelLabel="Pay" //Submit button in modal
-            amount={999} //Amount in cents $9.99
+            amount={999.00} //Amount in cents $9.99
             currency="NOK"
             token={onToken}
             stripeKey={publishableKey}
