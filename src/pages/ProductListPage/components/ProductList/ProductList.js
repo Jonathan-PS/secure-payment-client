@@ -30,7 +30,7 @@ class ProductList extends Component {
         imageUrl={product.imageUrl}
         priceEach={product.priceEach}
         selectedQuantity={1}
-        quantity={product.quantity}
+        stock={product.stock}
         triggerAddCartProduct={this.props.triggerAddCartProduct}
       />
     ));

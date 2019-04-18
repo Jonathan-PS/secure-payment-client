@@ -19,7 +19,7 @@ import { NavLink } from "react-router-dom";
 const NavigationBar = () => {
   return (
     <div id="generalStyle">
-      <Navbar color="dark">
+      <Navbar variant="light" bg="light" fixed="top">
         <Navbar.Brand href="/">Secure Payment Client</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -110,7 +110,7 @@ const NavigationBar = () => {
           </Form>*/}
         </Navbar.Collapse>
       </Navbar>
-    </div>
+      </div>
   );
 };
 
