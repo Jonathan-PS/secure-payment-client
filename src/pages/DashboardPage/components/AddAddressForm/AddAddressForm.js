@@ -9,7 +9,7 @@ class AddressForm extends Component {
     house_number: "",
     housing_code: "",
     city: "",
-    postal_code: null,
+    postal_code: "",
     country: ""
   };
 
@@ -78,31 +78,31 @@ class AddressForm extends Component {
       <div>
         <div className="Login" id="generalStyle">
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="street_name" bsSize="large">
+            <FormGroup controlId="street_name">
               Street Name *
               <FormControl placeholder="Street Name (e.g. Karl Johans gate)" autoFocus type="street_name" value={this.state.street_name} onChange={this.handleChange} />
             </FormGroup>
-            <FormGroup controlId="house_number" bsSize="large">
+            <FormGroup controlId="house_number">
               House Number *
               <FormControl placeholder="House Number (e.g. 3A)" value={this.state.house_number} onChange={this.handleChange} type="house_number" />
             </FormGroup>
-            <FormGroup controlId="housing_code" bsSize="large">
+            <FormGroup controlId="housing_code">
               Housing Code (optional)
               <FormControl placeholder="Housing Code (e.g. H0301)" value={this.state.housing_code} onChange={this.handleChange} type="housing_code" />
             </FormGroup>
-            <FormGroup controlId="postal_code" bsSize="large">
+            <FormGroup controlId="postal_code">
               Postal Code *
               <FormControl placeholder="Postal Code" value={this.state.postal_code} onChange={this.handleChange} type="postal_code" />
             </FormGroup>
-            <FormGroup controlId="city" bsSize="large">
+            <FormGroup controlId="city">
               City *
               <FormControl placeholder="City" value={this.state.city} onChange={this.handleChange} type="city" />
             </FormGroup>
-            <FormGroup controlId="country" bsSize="large">
+            <FormGroup controlId="country">
               Country *
               <FormControl placeholder="Country" value={this.state.country} onChange={this.handleChange} type="country" />
             </FormGroup>
-            <Button block bsSize="large" disabled={!this.validateForm()} type="submit" variant="dark">
+            <Button block  disabled={!this.validateForm()} type="submit" variant="dark">
               Add Address
             </Button>
           </form>

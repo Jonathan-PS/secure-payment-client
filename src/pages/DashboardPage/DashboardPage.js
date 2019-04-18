@@ -13,7 +13,11 @@ class DashboardPage extends Component {
         <br />
         <h4>Dashboard</h4>
         <hr />
-        <Dashboard />
+        {sessionStorage.getItem("user_id") > 0 ? (
+          <Dashboard />
+        ) : (
+          (window.location = "/")
+        )}
       </div>
     );
   }

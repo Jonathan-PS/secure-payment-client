@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./LoginForm.css";
 import "./../../../../App.css";
+import axios from "axios";
 
 class LoginForm extends Component {
   state = {
@@ -22,45 +23,36 @@ class LoginForm extends Component {
   };
 
   /* Handles what happens when the user pushes "Login"  */
-  /* NOT FINISHED */
   handleSubmit = async event => {
     event.preventDefault(); // Stops the page from reloading
-
-    alert("Attempted to login with: " + this.state.email);
-
-    /* NOT DONE - authenticate user with the database */
-    /*try {
+    try {
       const user_query = {
-        username_email: this.state.email,
+        email: this.state.email,
         password: this.state.password
       };
+      axios
+        .post(
+          "https://secure-payment-api.herokuapp.com/users/login",
+          user_query
+        )
+        .then(response => {
+          if (response.data < 1) {
+            alert("login failed");
+            window.location = "/login";
+          } else {
+            sessionStorage.setItem("user_id", response.data);
+            alert("user_id: " + response.data);
 
-      await fetch("http://restaurants-reviews-api.herokuapp.com/login", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(user_query)
-      })
-        .then(resp => resp.json())
-        .then(data => {
-          //console.log(data)
-          sessionStorage.setItem("username", data[0].username);
-          sessionStorage.setItem("user_id", data[0].user_id);
-          sessionStorage.setItem("email", data[0].email);
-          sessionStorage.setItem("role", data[0].role);
-          window.location.reload();
+            alert(sessionStorage.getItem("user_id"));
+            window.location = "/dashboard";
+          }
+        })
+        .catch(error => {
+          alert("In catch - " + error);
         });
-
-      if (sessionStorage.getItem("username") != null) {
-        window.location = "/dashboard";
-      } else {
-        alert("login failed");
-        window.location = "/login";
-      }
     } catch (e) {
       alert("Login failed - Wrong Email or password");
-    }*/
+    }
   };
 
   render() {
@@ -68,7 +60,7 @@ class LoginForm extends Component {
       <div>
         <div className="Login" id="generalStyle">
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="email" bsSize="large">
+            <FormGroup controlId="email">
               Email
               <FormControl
                 autoFocus
@@ -77,7 +69,7 @@ class LoginForm extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
+            <FormGroup controlId="password">
               Password
               <FormControl
                 value={this.state.password}
@@ -87,9 +79,9 @@ class LoginForm extends Component {
             </FormGroup>
             <Button
               block
-              bsSize="large"
               disabled={!this.validateForm()}
-              type="submit" variant="dark"
+              type="submit"
+              variant="dark"
             >
               Login
             </Button>

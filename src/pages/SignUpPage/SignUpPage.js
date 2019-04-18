@@ -10,7 +10,11 @@ class SignUpPage extends Component {
         <br />
         <h4>Sign Up</h4>
         <hr />
-        <SignUpForm />
+        {sessionStorage.getItem("user_id") < 1 ? (
+          <SignUpForm />
+        ) : (
+          (window.location = "/")
+        )}
       </div>
     );
   }

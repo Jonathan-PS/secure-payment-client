@@ -9,7 +9,7 @@ class Order extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:9090/orders")
+    fetch("https://secure-payment-api.herokuapp.com/orders/users/" + sessionStorage.getItem("user_id"))
     .then(resp => resp.json())
     .then(data => {
       console.log(data);
@@ -23,6 +23,7 @@ class Order extends Component {
   render() {
     const cards = this.state.allOrders.map(orders => (
       <OrderCard
+      key={orders.userOrderId}
       userOrderId={orders.userOrderId}
       registeredUserId={orders.registeredUserId}
       shippingName={orders.shippingName}

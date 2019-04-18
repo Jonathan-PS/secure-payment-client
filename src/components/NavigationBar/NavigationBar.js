@@ -1,53 +1,94 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import "./NavigationBar.css";
 import "./../../App.css";
 import Bootstrap from "bootstrap/dist/css/bootstrap.css";
 
-
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button, NavItem } from "react-bootstrap";
+import {
+  Nav,
+  Navbar,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button,
+  NavItem
+} from "react-bootstrap";
 
 import { NavLink } from "react-router-dom";
 
 const NavigationBar = () => {
   return (
     <div id="generalStyle">
-      <Navbar color="dark" light>
+      <Navbar color="dark">
         <Navbar.Brand href="/">Secure Payment Client</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto" >
+          <Nav className="mr-auto">
             <NavItem>
               <NavLink to="/" className="nav-link" activeClassName="active">
                 Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/products" className="nav-link" activeClassName="active">
+              <NavLink
+                to="/products"
+                className="nav-link"
+                activeClassName="active"
+              >
                 Products
               </NavLink>
             </NavItem>
+            {sessionStorage.getItem("user_id") > 0 ? (
+              <NavItem>
+                <NavLink
+                  to="/dashboard"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  Dashboard
+                </NavLink>
+              </NavItem>
+            ) : (
+              <NavItem>
+                <NavLink
+                  to="/login"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  Login
+                </NavLink>
+              </NavItem>
+            )}
+            {sessionStorage.getItem("user_id") > 0 ? (
+              <NavItem>
+                <NavLink
+                  to="/logout"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  Logout
+                </NavLink>
+              </NavItem>
+            ) : (
+              <NavItem>
+                <NavLink
+                  to="/signup"
+                  className="nav-link"
+                  activeClassName="active"
+                >
+                  SignUp
+                </NavLink>
+              </NavItem>
+            )}
             <NavItem>
-              <NavLink to="/dashboard" className="nav-link" activeClassName="active">
-                Dashboard
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/login" className="nav-link" activeClassName="active">
-                Login
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/signup" className="nav-link" activeClassName="active">
-                SignUp
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/stripePayment" className="nav-link" activeClassName="active">
+              <NavLink
+                to="/stripePayment"
+                className="nav-link"
+                activeClassName="active"
+              >
                 Stripe
               </NavLink>
-            </NavItem>
-            {" "}
+            </NavItem>{" "}
             {/*
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>

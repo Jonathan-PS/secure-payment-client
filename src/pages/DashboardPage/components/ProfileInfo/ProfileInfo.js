@@ -5,12 +5,11 @@ import ProfileInfoCard from "./ProfileInfoCard/ProfileInfoCard";
 
 class ProfileInfo extends Component {
   state = {
-    allUsers: [],
-    registeredUserId: 7
-  };
+    allUsers: []
+    };
 
   componentDidMount() {
-    fetch("http://localhost:9090/users/" + this.state.registeredUserId)
+    fetch("https://secure-payment-api.herokuapp.com/users/" + sessionStorage.getItem("user_id"))
     .then(resp => resp.json())
     .then(data => {
       console.log(data);
@@ -24,6 +23,7 @@ class ProfileInfo extends Component {
   render() {
     const cards = this.state.allUsers.map(users => (
       <ProfileInfoCard
+        key={users.registeredUserId}
         registeredUserId={users.registeredUserId}
         firstName={users.firstName}
         lastName={users.lastName}

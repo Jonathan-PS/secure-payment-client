@@ -45,15 +45,15 @@ class Settings extends Component {
       <div id="generalStyle">
         <div className="Login">
           <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="email" bsSize="large">
+            <FormGroup controlId="email">
               Email
               <FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange}/>
             </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
+            <FormGroup controlId="password">
               New Password
               <FormControl value={this.state.password} onChange={this.handleChange} type="password"/>
             </FormGroup>
-            <Button block bsSize="large" disabled={!this.validateForm()} type="submit" variant="dark">
+            <Button block disabled={!this.validateForm()} type="submit" variant="dark">
               Confirm
             </Button>
           </form>
