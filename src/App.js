@@ -47,7 +47,7 @@ class App extends Component {
 
   render() {
     return (
-      <div id="App">
+      <div id="margins">
         <NavigationBar />
         <CartButton cartProducts={this.state.cartProducts}/>
         <Routes cartProducts={this.state.cartProducts} triggerAddCartProduct={this.addCartProduct}/>

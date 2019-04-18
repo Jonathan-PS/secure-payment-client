@@ -14,12 +14,9 @@ class ProductListCard extends Component {
       description: this.props.description,
       imageUrl: this.props.imageUrl,
       priceEach: this.props.priceEach,
-      quantity: this.props.quantity,
+      stock: this.props.stock,
       selectedQuantity: this.props.selectedQuantity
     });
-    //} else {
-    //this.props.updateSelectedQuantity(this.props.productId);
-    //}
   };
 
   render() {
@@ -31,12 +28,8 @@ class ProductListCard extends Component {
             <h4 className="card-title">{this.props.productName}</h4>
             <p>Description: {this.props.description}</p>
             <p>Price: {this.props.priceEach} NOK</p>
-            <p>Stock: {this.props.quantity}</p>
-            <button
-              onClick={this.addToCart}
-              type="button"
-              className="btn btn-success"
-            >
+            <p>Stock: {this.props.stock}</p>
+            <button onClick={this.addToCart} type="button" className="btn btn-success">
               Add to Cart
             </button>
           </div>
