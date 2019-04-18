@@ -9,7 +9,7 @@ class Address extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:9090/addresses")
+    fetch("https://secure-payment-api.herokuapp.com/addresses/users/" + sessionStorage.getItem("user_id"))
     .then(resp => resp.json())
     .then(data => {
       console.log(data);
@@ -23,6 +23,7 @@ class Address extends Component {
   render() {
     const cards = this.state.allAddresses.map(addresses => (
       <AddressCard
+        key={addresses.addressId}
         streetName={addresses.streetName}
         streetNumber={addresses.streetNumber}
         housingCode={addresses.housingCode}
@@ -31,7 +32,7 @@ class Address extends Component {
         country={addresses.country}
         addressId={addresses.addressId}
         registeredUserId={addresses.registeredUserId}
-        isActive={addresses.isActive}
+        isActive={addresses.active}
       />
     ));
 

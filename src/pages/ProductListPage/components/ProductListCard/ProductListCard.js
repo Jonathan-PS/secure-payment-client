@@ -8,6 +8,7 @@ class ProductListCard extends Component {
     //product["selectedQuantity"] = product["selectedQuantity"] + 1;
 
     this.props.triggerAddCartProduct({
+      key: this.props.productId,
       productId: this.props.productId,
       productName: this.props.productName,
       description: this.props.description,

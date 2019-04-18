@@ -35,6 +35,7 @@ class SignUpForm extends Component {
     axios.put('https://secure-payment-api.herokuapp.com/users/create', registerUser)
       .then(response => {
         console.log(response)
+        window.location = "/login";
       })
       .catch(error => {
         console.log(error.response)
@@ -45,28 +46,28 @@ class SignUpForm extends Component {
     return (
       <div className="Login" id="generalStyle">
         <form onSubmit={this.onSubmit}>
-          <FormGroup controlId="firstName" bsSize="large">
+          <FormGroup controlId="firstName">
             First Name
             <FormControl autoFocus name="firstName" type="firstName" onChange={this.onChange}
               defaultValue={this.state.registerUser.firstName} required="required"/>
           </FormGroup>
-          <FormGroup controlId="lastName" bsSize="large">
+          <FormGroup controlId="lastName">
             Last Name
             <FormControl autoFocus name="lastName" type="lastName" onChange={this.onChange}
               defaultValue={this.state.registerUser.lastName} required="required"/>
           </FormGroup>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email">
             Email
             <FormControl autoFocus name="email" type="email" onChange={this.onChange}
               defaultValue={this.state.registerUser.email} required="required"/>
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password">
             Password
             <FormControl autoFocus name="password" type="password" onChange={this.onChange}
               defaultValue={this.state.registerUser.password} required="required"/>
           </FormGroup>
 
-          <Button block bsSize="large" type="submit" variant="dark">
+          <Button block type="submit" variant="dark">
             Sign Up
           </Button>
         </form>
