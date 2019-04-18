@@ -6,14 +6,14 @@ const CartButton = props => {
     <div>
       <div className="container">
         <NavLink to="/checkout" activeClassName="active">
-          <button type="button" class="btn btn-outline-dark">
+          <button type="button" className="btn btn-outline-dark">
             <i className="fas fa-shopping-cart" />
             <b> ( {props.cartProducts.length} )</b>
           </button>
         </NavLink>
 
         {props.cartProducts.map(product => (
-          <li key={product}>
+          <li key={product.productId}>
             id: {product.productId} name: {product.productName} quantity:
             {product.selectedQuantity}
           </li>

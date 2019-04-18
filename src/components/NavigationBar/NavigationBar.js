@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 const NavigationBar = () => {
   return (
     <div id="generalStyle">
-      <Navbar color="dark" light>
+      <Navbar color="dark">
         <Navbar.Brand href="/">Secure Payment Client</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

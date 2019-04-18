@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Dashboard.css";
 import "./../../../../App.css";
 
-import ActiveOrder from "./../ActiveOrder/ActiveOrder";
 import AddAddressForm from "./../AddAddressForm/AddAddressForm";
 import Address from "./../Address/Address";
 import Order from "./../Order/Order";
@@ -17,24 +16,17 @@ class Dashboard extends Component {
         <Tabs>
           <div label="Profile">
             <h5>Profile Dashboard Home</h5>
-            <div class="splitInTwo">
-              <div class="profileLeftColumn">
-                <ProfileInfo />
-              </div>
-              <div class="profileRightColumn">
-                <ActiveOrder />
-              </div>
-            </div>
+            <ProfileInfo />
           </div>
           <div label="Orders History">
             <Order />
           </div>
           <div label="Address">
-            <div class="splitInTwo">
-              <div class="addressLeftColumn">
+            <div className="splitInTwo">
+              <div className="addressLeftColumn">
                 <AddAddressForm />
               </div>
-              <div class="addressRightColumn">
+              <div className="addressRightColumn">
                 <Address />
               </div>
             </div>
