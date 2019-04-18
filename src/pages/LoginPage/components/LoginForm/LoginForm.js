@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./LoginForm.css";
 import "./../../../../App.css";
-import axios from 'axios';
+import axios from "axios";
 
 class LoginForm extends Component {
   state = {
@@ -39,13 +39,13 @@ class LoginForm extends Component {
             window.location = "/login";
           } else {
             sessionStorage.setItem("user_id", response.data);
-            alert("user_id: " + response.data )
+            alert("user_id: " + response.data);
             alert(sessionStorage.getItem("user_id"));
             window.location = "/dashboard";
-          };
+          }
         })
         .catch(error => {
-          alert("In catch - " + error)
+          alert("In catch - " + error);
         });
     } catch (e) {
       alert("Login failed - Wrong Email or password");

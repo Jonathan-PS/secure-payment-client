@@ -52,6 +52,7 @@ class CheckoutList extends Component {
           <tbody>{products}</tbody>
         </table>
         totalPrice : {this.state.totalPrice}
+        {/* Create Order Button - to create order page */}
       </div>
     );
   }

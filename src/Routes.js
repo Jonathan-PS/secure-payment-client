@@ -9,6 +9,9 @@ import ProductListPage from "./pages/ProductListPage/ProductListPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
+import OrderFailPage from "./pages/OrderFailPage/OrderFailPage";
+import LogoutPage from "./pages/LogoutPage/LogoutPage";
 
 export default class Routes extends Component {
   render() {
@@ -16,9 +19,12 @@ export default class Routes extends Component {
       <Switch>
         <Route exact path="/" component={ProductListPage} />
         <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/logout" component={LogoutPage} />
         <Route exact path="/signup" component={SignUpPage} />
         <Route exact path="/dashboard" component={DashboardPage} />
         <Route exact path="/stripepayment" component={StripePaymentPage} />
+        <Route exact path="/order/success" component={OrderSuccessPage} />
+        <Route exact path="/order/fail" component={OrderFailPage} />
         <Route
           exact
           path="/products"

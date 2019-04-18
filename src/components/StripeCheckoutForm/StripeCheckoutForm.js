@@ -15,10 +15,10 @@ class StripeCheckoutForm extends Component {
       };
     
       componentDidMount() {
-        fetch("https://secure-payment-api.herokuapp.com/payment")
+        fetch("https://secure-payment-api.herokuapp.com/stripe")
           .then(resp => resp.json())
           .then(data => {
-            console.log(data);
+            //console.log(data);
             this.setState({
               allProducts: data
             });
