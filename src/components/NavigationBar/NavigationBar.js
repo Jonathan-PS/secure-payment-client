@@ -23,6 +23,7 @@ const NavigationBar = props => {
         <NavLink to="/products" className="nav-link" activeClassName="active">
           <Navbar.Brand>Secure Payment Client</Navbar.Brand>
         </NavLink>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -111,7 +112,7 @@ const NavigationBar = props => {
           </Form>*/}
         </Navbar.Collapse>
       </Navbar>
-    </div>
+      </div>
   );
 };
 

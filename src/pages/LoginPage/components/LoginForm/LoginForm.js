@@ -25,16 +25,14 @@ class LoginForm extends Component {
   /* Handles what happens when the user pushes "Login"  */
   handleSubmit = async event => {
     event.preventDefault(); // Stops the page from reloading
+
     try {
       const user_query = {
         email: this.state.email,
         password: this.state.password
       };
-      axios
-        .post(
-          "https://secure-payment-api.herokuapp.com/users/login",
-          user_query
-        )
+
+      axios.post('https://secure-payment-api.herokuapp.com/users/login', user_query)
         .then(response => {
           if (response.data < 1) {
             alert("login failed");
@@ -42,7 +40,6 @@ class LoginForm extends Component {
           } else {
             sessionStorage.setItem("user_id", response.data);
             alert("user_id: " + response.data);
-
             alert(sessionStorage.getItem("user_id"));
             window.location = "/dashboard";
           }
@@ -62,27 +59,14 @@ class LoginForm extends Component {
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="email">
               Email
-              <FormControl
-                autoFocus
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
+              <FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange} />
             </FormGroup>
             <FormGroup controlId="password">
               Password
-              <FormControl
-                value={this.state.password}
-                onChange={this.handleChange}
-                type="password"
+              <FormControl value={this.state.password} onChange={this.handleChange} type="password"
               />
             </FormGroup>
-            <Button
-              block
-              disabled={!this.validateForm()}
-              type="submit"
-              variant="dark"
-            >
+            <Button block disabled={!this.validateForm()} type="submit" variant="dark">
               Login
             </Button>
           </form>
