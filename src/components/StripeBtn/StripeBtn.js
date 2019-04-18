@@ -40,35 +40,37 @@ const stripeBtn = (props) => {
         });
         */
 
-        
+
         axios
             .post(APIpayment, body)
             //.post(APIpayment)
             .then(resp => resp.json())
             .then(data => {
-                console.log("\nBody:"+ JSON.stringify(body) );
+                console.log("\nBody:" + JSON.stringify(body));
                 alert("Payment Success: " +
-                    "\nData billing details (name): " + data.billing_details.name +
+                    //"\nData billing details (name): " + data.billing_details.name +
                     "\nData amount: " + data.amount +
                     "\nData currency: " + data.currency +
-                    "\nData CardID: " + data.source.id +
-                    "\nData cvc check: " + data.source.cvc_check +
+                    //"\nData CardID: " + data.source.id +
+                    //"\nData cvc check: " + data.source.cvc_check +
                     "\nData STATUS: " + data.status +
-
                     "\nData receipt url: " + data.receipt_url +
-                    
-                    "\nBody: " + JSON.stringify(body) 
+
+                    "\nData object: " + JSON.stringify(data)
                 );
             })
             .catch(error => {
                 console.log("Payment Error: ", error + "\nMessage: " + error.message +
-                            "\nBody:"+ JSON.stringify(body) );
+                    "\nBody:" + JSON.stringify(body));
                 alert("Payment Error: " + error +
-                    "\nToken ID: " + token.id +
+                    "\nToken ID: " + token.id + // can be used to create a charge or can be attached to a customer
+                    "\nToken card ID: " + token.card.id +
+                    "\nToken email: " + token.email + //contains the email address entered by the user
                     "\nBody amount: " + body.amount +
                     "\nBody currency: " + body.currency +
-                    "\nBody email: " + body.email +
-                    "\nBody: " + JSON.stringify(body) 
+                    //"\nBody email: " + body.email +
+                    "\nBody: " + JSON.stringify(body) +
+                    "\nToken object: " + JSON.stringify(token)
                 );
             });
         /*    
