@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 /* Pages */
-import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
@@ -16,7 +15,6 @@ export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/logout" component={LogoutPage} />
         <Route exact path="/signup" component={SignUpPage} />

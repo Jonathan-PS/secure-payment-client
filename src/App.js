@@ -8,7 +8,6 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 /* Routes */
 import Routes from "./Routes";
 import ProductList from "./pages/ProductListPage/components/ProductList/ProductList";
-import CartButton from "./components/CartButton/CartButton";
 
 class App extends Component {
   state = {
@@ -48,9 +47,11 @@ class App extends Component {
   render() {
     return (
       <div id="App">
-        <NavigationBar />
-        <CartButton cartProducts={this.state.cartProducts}/>
-        <Routes cartProducts={this.state.cartProducts} triggerAddCartProduct={this.addCartProduct}/>
+        <NavigationBar cartProducts={this.state.cartProducts} />
+        <Routes
+          cartProducts={this.state.cartProducts}
+          triggerAddCartProduct={this.addCartProduct}
+        />
       </div>
     );
   }

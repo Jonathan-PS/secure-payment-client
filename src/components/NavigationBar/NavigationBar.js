@@ -3,7 +3,7 @@ import axios from "axios";
 import "./NavigationBar.css";
 import "./../../App.css";
 import Bootstrap from "bootstrap/dist/css/bootstrap.css";
-
+import CartButton from "./../CartButton/CartButton";
 import {
   Nav,
   Navbar,
@@ -16,19 +16,16 @@ import {
 
 import { NavLink } from "react-router-dom";
 
-const NavigationBar = () => {
+const NavigationBar = props => {
   return (
     <div id="generalStyle">
       <Navbar color="dark">
-        <Navbar.Brand href="/">Secure Payment Client</Navbar.Brand>
+        <NavLink to="/products" className="nav-link" activeClassName="active">
+          <Navbar.Brand>Secure Payment Client</Navbar.Brand>
+        </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <NavItem>
-              <NavLink to="/" className="nav-link" activeClassName="active">
-                Home
-              </NavLink>
-            </NavItem>
             <NavItem>
               <NavLink
                 to="/products"
@@ -88,7 +85,11 @@ const NavigationBar = () => {
               >
                 Stripe
               </NavLink>
-            </NavItem>{" "}
+            </NavItem>
+            <NavItem>
+              <CartButton cartProducts={props.cartProducts} />
+            </NavItem>
+
             {/*
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
