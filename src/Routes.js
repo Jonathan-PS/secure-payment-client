@@ -24,13 +24,19 @@ export default class Routes extends Component {
         <Route exact path="/stripepayment" component={StripePaymentPage} />
         <Route exact path="/order/success" component={OrderSuccessPage} />
         <Route exact path="/order/fail" component={OrderFailPage} />
-        <Route exact path="/products" render={() => (
-          <ProductListPage triggerAddCartProduct={this.props.triggerAddCartProduct} />
-        )}
+        <Route
+          exact
+          path="/products"
+          render={() => (
+            <ProductListPage
+              triggerAddCartProduct={this.props.triggerAddCartProduct}
+            />
+          )}
         />
-        <Route exact path="/checkout" render={() => 
-          <CheckoutPage cartProducts={this.props.cartProducts} />
-        }
+        <Route
+          exact
+          path="/checkout"
+          render={() => <CheckoutPage cartProducts={this.props.cartProducts} />}
         />
 
         <Route component={NotFoundPage} />
