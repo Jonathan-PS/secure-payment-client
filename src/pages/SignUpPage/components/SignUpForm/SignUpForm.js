@@ -8,72 +8,68 @@ class SignUpForm extends Component {
   constructor() {
     super();
     this.state = {
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      redirectToReferrer: false
+      registerUser: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+      }
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  validateForm() {
-    return (
-      this.state.email.length > 0 &&
-      this.state.password.length > 0 &&
-      this.state.first_name.length > 0 &&
-      this.state.last_name.length > 0
-    );
+  onChange(e) {
+    const user = this.state.registerUser;
+    user[e.target.name] = e.target.value;
+    this.setState({registerUser: user});
+    console.log(this.state.registerUser)
   }
 
-  onChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  };
+  onSubmit(e) {
+    e.preventDefault();
+    const {registerUser} = this.state;
+    console.log('Submit');
+    console.log(registerUser);
 
-  onSubmit = async (e) => {
-    e.preventDefault(); // Stops the page from reloading
-
-    const { first_name, last_name, email, password } = this.state;
-
-    axios.put('http://localhost:9090/users/create', { first_name, last_name, email, password })
-      .then((result) => {
-        this.setState = {
-          first_name: '',
-          last_name: '',
-          email: '',
-          password: '',
-        };
-    })
+    axios.put('https://secure-payment-api.herokuapp.com/users/create', registerUser)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error.response)
+      });
   }
 
   render() {
-    const { first_name, last_name, email, password } = this.state;
     return (
-      <div>
-        <div className="Login" id="generalStyle">
-          <form onSubmit={this.onChange}>
-            <FormGroup controlId="first_name" bsSize="large">
-              First Name
-              <FormControl autoFocus type="text" value={first_name} onChange={this.onChange}/>
-            </FormGroup>
-            <FormGroup controlId="last_name" bsSize="large">
-              Last Name
-              <FormControl autoFocus type="text" value={last_name} onChange={this.onChange} />
-            </FormGroup>
-            <FormGroup controlId="email" bsSize="large">
-              Set Email
-              <FormControl autoFocus type="text" value={email} onChange={this.onChange}/>
-            </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
-              Set Password
-              <FormControl type="password" value={password} onChange={this.onChange} />
-            </FormGroup>
-            <Button block bsSize="large" disabled={!this.validateForm()} type="submit" variant="dark">
-              Sign Up
-            </Button>
-          </form>
-        </div>
+      <div className="Login" id="generalStyle">
+        <form onSubmit={this.onSubmit}>
+          <FormGroup controlId="firstName" bsSize="large">
+            First Name
+            <FormControl autoFocus name="firstName" type="firstName" onChange={this.onChange}
+              defaultValue={this.state.registerUser.firstName} required="required"/>
+          </FormGroup>
+          <FormGroup controlId="lastName" bsSize="large">
+            Last Name
+            <FormControl autoFocus name="lastName" type="lastName" onChange={this.onChange}
+              defaultValue={this.state.registerUser.lastName} required="required"/>
+          </FormGroup>
+          <FormGroup controlId="email" bsSize="large">
+            Email
+            <FormControl autoFocus name="email" type="email" onChange={this.onChange}
+              defaultValue={this.state.registerUser.email} required="required"/>
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            Password
+            <FormControl autoFocus name="password" type="password" onChange={this.onChange}
+              defaultValue={this.state.registerUser.password} required="required"/>
+          </FormGroup>
+
+          <Button block bsSize="large" type="submit" variant="dark">
+            Sign Up
+          </Button>
+        </form>
       </div>
     );
   }
