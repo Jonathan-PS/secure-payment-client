@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./LoginForm.css";
 import "./../../../../App.css";
-import axios from 'axios';
+import axios from "axios";
 
 class LoginForm extends Component {
   state = {
@@ -23,37 +23,33 @@ class LoginForm extends Component {
   };
 
   /* Handles what happens when the user pushes "Login"  */
-  /* NOT FINISHED */
   handleSubmit = async event => {
     event.preventDefault(); // Stops the page from reloading
-
-    //alert("Attempted to login with: " + this.state.email);
-
-    /* NOT DONE - authenticate user with the database */
     try {
       const user_query = {
         email: this.state.email,
         password: this.state.password
       };
-
-
-      axios.post('https://secure-payment-api.herokuapp.com/users/login', user_query)
+      axios
+        .post(
+          "https://secure-payment-api.herokuapp.com/users/login",
+          user_query
+        )
         .then(response => {
           if (response.data < 1) {
             alert("login failed");
             window.location = "/login";
           } else {
             sessionStorage.setItem("user_id", response.data);
-            alert("user_id: " + response.data )
+            alert("user_id: " + response.data);
 
             alert(sessionStorage.getItem("user_id"));
             window.location = "/dashboard";
-          };
+          }
         })
         .catch(error => {
-          alert("In catch - " + error)
+          alert("In catch - " + error);
         });
-
     } catch (e) {
       alert("Login failed - Wrong Email or password");
     }
@@ -84,7 +80,8 @@ class LoginForm extends Component {
             <Button
               block
               disabled={!this.validateForm()}
-              type="submit" variant="dark"
+              type="submit"
+              variant="dark"
             >
               Login
             </Button>

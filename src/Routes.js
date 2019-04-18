@@ -10,6 +10,7 @@ import ProductListPage from "./pages/ProductListPage/ProductListPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import LogoutPage from "./pages/LogoutPage/LogoutPage";
 
 export default class Routes extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class Routes extends Component {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/logout" component={LogoutPage} />
         <Route exact path="/signup" component={SignUpPage} />
         <Route exact path="/dashboard" component={DashboardPage} />
         <Route exact path="/stripepayment" component={StripePaymentPage} />
