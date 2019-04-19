@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import "./NotFoundPage";
+import "./OrderPage";
 import "./../../App.css";
 
-class NotFoundPage extends Component {
+class OrderPage extends Component {
   render() {
     return (
       <div id="generalStyle">
-        <h4>404 : Page Not Found</h4>
+        <h4>Order creation and review</h4>
         <hr />
+        Proceed to payment
       </div>
     );
   }
 }
 
-export default NotFoundPage;
+export default OrderPage;

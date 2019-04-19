@@ -20,7 +20,13 @@ import { NavLink } from "react-router-dom";
 const NavigationBar = props => {
   return (
     <div id="generalStyle">
-      <Navbar collapseOnSelect expand="lg" variant="light" bg="light" fixed="top">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        variant="light"
+        bg="light"
+        fixed="top"
+      >
         <NavLink to="/products" className="nav-link" activeClassName="active">
           <Navbar.Brand>Secure Payment Client</Navbar.Brand>
         </NavLink>
@@ -79,7 +85,15 @@ const NavigationBar = props => {
                 </NavLink>
               </NavItem>
             )}
-
+            <NavItem>
+              <NavLink
+                to="/order"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Order
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink
                 to="/stripePayment"
@@ -90,8 +104,7 @@ const NavigationBar = props => {
               </NavLink>
             </NavItem>
           </Nav>
-          <Nav>
-          </Nav>
+          <Nav />
           <Nav>
             <NavItem>
               <CartButton cartProducts={props.cartProducts} />
@@ -99,7 +112,7 @@ const NavigationBar = props => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      </div>
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ import AddAddressForm from "./../AddAddressForm/AddAddressForm";
 import Address from "./../Address/Address";
 import Order from "./../Order/Order";
 import ProfileInfo from "./../ProfileInfo/ProfileInfo";
-import Settings from "./../Settings/Settings"
+import Settings from "./../Settings/Settings";
 import Tabs from "../../../../components/Tabs/Tabs";
 
 class Dashboard extends Component {

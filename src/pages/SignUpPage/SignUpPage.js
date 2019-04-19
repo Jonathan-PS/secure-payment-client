@@ -7,7 +7,6 @@ class SignUpPage extends Component {
   render() {
     return (
       <div id="generalStyle">
-        <br />
         <h4>Sign Up</h4>
         <hr />
         {sessionStorage.getItem("user_id") < 1 ? (

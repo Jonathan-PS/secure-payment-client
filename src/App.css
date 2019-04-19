@@ -18,6 +18,9 @@
   margin-right: 10%;
 }
 
+body {
+  padding-top: 80px;
+}
 
 ul {
   list-style: none;

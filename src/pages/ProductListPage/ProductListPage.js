@@ -7,7 +7,6 @@ class ProductListPage extends Component {
   render() {
     return (
       <div id="generalStyle">
-        <br />
         <h4>Products</h4>
         <hr />
         <ProductList triggerAddCartProduct={this.props.triggerAddCartProduct} />
