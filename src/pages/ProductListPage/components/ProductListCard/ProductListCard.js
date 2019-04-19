@@ -21,15 +21,23 @@ class ProductListCard extends Component {
 
   render() {
     return (
-      <div className="col-xs-12 col-sm-6 col-md-4" align="center" id="generalStyle">
+      <div
+        className="col-xs-12 col-sm-6 col-md-3"
+        align="center"
+        id="generalStyle"
+      >
         <div className="card">
-          <img src={this.props.imageUrl} alt="Product Image" width="200" />
+          <img src={this.props.imageUrl} alt="Product Image" width="100" />
           <div className="card-body">
             <h4 className="card-title">{this.props.productName}</h4>
             <p>Description: {this.props.description}</p>
             <p>Price: {this.props.priceEach} NOK</p>
             <p>Stock: {this.props.stock}</p>
-            <button onClick={this.addToCart} type="button" className="btn btn-success">
+            <button
+              onClick={this.addToCart}
+              type="button"
+              className="btn btn-success"
+            >
               Add to Cart
             </button>
           </div>

@@ -21,13 +21,14 @@ class App extends Component {
 
   // Adds a product to the cart
   addCartProduct = event => {
-    // First check if product already exist:
-    var index = -1;
-    for (var i = 0; i < this.state.cartProducts.length; i++) {
+    // 1. First check if product already exist:
+    let index = -1;
+    for (let i = 0; i < this.state.cartProducts.length; i++) {
       if (this.state.cartProducts[i].productId == event.productId) {
         index = i;
       }
     }
+
     // Either put product in cart,
     if (index < 0) {
       this.setState({
@@ -35,23 +36,28 @@ class App extends Component {
       });
     } else {
       // or increment the number of selected products
-      var newSelectedQuantity = {
+      let newSelectedQuantity = {
         ...this.state.cartProducts
       };
       newSelectedQuantity[index].selectedQuantity =
         this.state.cartProducts[index].selectedQuantity + 1;
-      this.setState(newSelectedQuantity); //
+      this.setState(newSelectedQuantity);
     }
   };
 
   render() {
     return (
       <div id="margins">
-        <NavigationBar cartProducts={this.state.cartProducts} />
-        <Routes
-          cartProducts={this.state.cartProducts}
-          triggerAddCartProduct={this.addCartProduct}
-        />
+        <div id="navigationBar">
+          <NavigationBar cartProducts={this.state.cartProducts} />
+        </div>
+
+        <div id="body">
+          <Routes
+            cartProducts={this.state.cartProducts}
+            triggerAddCartProduct={this.addCartProduct}
+          />
+        </div>
       </div>
     );
   }
