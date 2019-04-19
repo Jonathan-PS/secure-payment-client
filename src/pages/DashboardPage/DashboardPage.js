@@ -10,7 +10,6 @@ class DashboardPage extends Component {
   render() {
     return (
       <div id="generalStyle">
-        <br />
         <h4>Dashboard</h4>
         <hr />
         {sessionStorage.getItem("user_id") > 0 ? (
