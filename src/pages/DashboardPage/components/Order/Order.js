@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './OrderPage';
 import OrderList from './OrderList/OrderList';
 
-class OrderPage extends Component {
+class Order extends Component {
   render() {
     return (
       <div id="generalStyle">
@@ -15,4 +14,4 @@ class OrderPage extends Component {
   }
 }
 
-export default OrderPage;
+export default Order;
