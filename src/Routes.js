@@ -8,7 +8,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ProductListPage from "./pages/ProductListPage/ProductListPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
-import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import CartPage from "./pages/CartPage/CartPage";
 import OrderPage from "./pages/OrderPage/OrderPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
 import OrderFailPage from "./pages/OrderFailPage/OrderFailPage";
@@ -38,8 +38,8 @@ export default class Routes extends Component {
         />
         <Route
           exact
-          path="/checkout"
-          render={() => <CheckoutPage cartProducts={this.props.cartProducts} />}
+          path="/cart"
+          render={() => <CartPage cartProducts={this.props.cartProducts} />}
         />
 
         <Route component={NotFoundPage} />
