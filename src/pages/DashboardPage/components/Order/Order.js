@@ -1,47 +1,18 @@
-import React, { Component } from "react";
-import "./Order.css";
-import "./../../../../App.css";
-import OrderCard from "./OrderCard/OrderCard";
+import React, { Component } from 'react';
+import './OrderPage';
+import OrderList from './OrderList/OrderList';
 
-class Order extends Component {
-  state = {
-    allOrders: []
-  };
-
-  componentDidMount() {
-    fetch("https://secure-payment-api.herokuapp.com/orders/users/" + sessionStorage.getItem("user_id"))
-    .then(resp => resp.json())
-    .then(data => {
-      console.log(data);
-      this.setState({
-        allOrders: data
-      });
-    })
-    .catch(err => {});
-  }
-
+class OrderPage extends Component {
   render() {
-    const cards = this.state.allOrders.map(orders => (
-      <OrderCard
-      key={orders.userOrderId}
-      userOrderId={orders.userOrderId}
-      registeredUserId={orders.registeredUserId}
-      shippingName={orders.shippingName}
-      shippingAddress={orders.shippingAddress}
-      shippingEmail={orders.shippingEmail}
-      createdAt={orders.createdAt}
-      updatedAt={orders.updatedAt}
-      status={orders.status}
-      isActive={orders.isActive}
-      />
-    ));
-
     return (
       <div id="generalStyle">
-        <div className="row" id="margins">{cards}</div>
+        <br />
+        <h4>Orders</h4>
+        <hr />
+        <OrderList allOrders={this.props.allOrders} />
       </div>
     );
   }
 }
 
-export default Order;
+export default OrderPage;
