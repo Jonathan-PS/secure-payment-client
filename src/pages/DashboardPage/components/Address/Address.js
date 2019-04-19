@@ -5,7 +5,7 @@ class Address extends Component {
   render() {
     return (
       <div id="generalStyle">
-        <AddressList allAddresses={this.props.allAddresses} />
+        <AddressList allAddresses={this.props.allAddresses} triggerSetAddressesFunction={this.props.triggerSetAddressesFunction}/>
       </div>
     );
   }
