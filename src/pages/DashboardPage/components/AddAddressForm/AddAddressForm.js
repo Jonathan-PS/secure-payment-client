@@ -40,12 +40,15 @@ class AddressForm extends Component {
     .put('https://secure-payment-api.herokuapp.com/addresses/create', addAddress)
     .then(response => {
       console.log(response);
-      this.addAddress();
-      window.location.reload(); {/* WHERE CAN WE PUT THIS TO REFRESH THE PAGE WHEN ADDRESS IS ADDED ????*/}
+      //this.addAddress();
+      this.props.triggerGetAddresses(); {/* WHERE CAN WE PUT THIS TO REFRESH THE PAGE WHEN ADDRESS IS ADDED ????*/}
     })
     .catch(error => {
       console.log(error.response);
     });
+
+
+
   }
 
   render() {

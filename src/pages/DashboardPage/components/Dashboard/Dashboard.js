@@ -11,6 +11,21 @@ import Settings from "./../Settings/Settings";
 import Tabs from "../../../../components/Tabs/Tabs";
 
 class Dashboard extends Component {
+  state = {
+    getAddresses: null /* Saves products by their productId */
+  };
+
+  constructor(props) {
+    super(props)
+    this.setAddressesFunction = this.setAddressesFunction.bind(this)
+  }
+
+  setAddressesFunction(getAddresses){
+    this.setState({
+      getAddresses: getAddresses
+    });
+  }
+
   render() {
     return (
       <div>
@@ -25,8 +40,8 @@ class Dashboard extends Component {
           <div label="Address">
             <Container>
               <Row>
-                <Col sm={12} md={4} lg={4}><AddAddressForm /></Col>
-                <Col sm={12} md={8} lg={8}><Address /></Col>
+                <Col sm={12} md={4} lg={4}><AddAddressForm triggerGetAddresses={this.state.getAddresses} /></Col>
+                <Col sm={12} md={8} lg={8}><Address triggerSetAddressesFunction={this.setAddressesFunction}/></Col>
               </Row>
             </Container>
           </div>

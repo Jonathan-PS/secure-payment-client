@@ -1,25 +1,38 @@
 import React, { Component} from 'react';
 import { Button } from "react-bootstrap";
 import './AddressList.css';
-import "./../../../../../App.css";
 
 class AddressList extends Component {
   state = {
     allAddresses: []
   };
 
-  componentDidMount() {
-    fetch("https://secure-payment-api.herokuapp.com/addresses/users/" + sessionStorage.getItem("user_id"))
-    .then(resp => resp.json())
-    .then(data => {
-      console.log(data);
-
-      this.setState({
-        allAddresses: data
-      });
-    })
-    .catch(err => {});
+  constructor(props) {
+    super(props);
+    this.getAddresses = this.getAddresses.bind(this);
   }
+
+  // Adds a product to the cart
+  getAddresses = event => {
+
+
+    fetch("https://secure-payment-api.herokuapp.com/addresses/users/" + sessionStorage.getItem("user_id"))
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data);
+
+        this.setState({
+          allAddresses: data
+        });
+      })
+      .catch(err => {});
+  }
+
+  componentDidMount() {
+    this.getAddresses();
+    this.props.triggerSetAddressesFunction(this.getAddresses);
+  }
+
 
 
   render() {
