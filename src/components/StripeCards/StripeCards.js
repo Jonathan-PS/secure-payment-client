@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { Button } from 'react-bootstrap';
 import { withRouter } from 'react-router';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom' 
 
 const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
 
