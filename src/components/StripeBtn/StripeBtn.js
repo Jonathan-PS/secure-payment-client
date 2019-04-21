@@ -50,7 +50,7 @@ const stripeBtn = (props) => {
 
 
         axios
-            .post("https://secure-payment-api.herokuapp.com/stripe/charge", body)
+            .put("https://secure-payment-api.herokuapp.com/stripe/charge", body)
             //.post(APIpayment)
             //.then(resp => resp.json())
             .then(data => {
