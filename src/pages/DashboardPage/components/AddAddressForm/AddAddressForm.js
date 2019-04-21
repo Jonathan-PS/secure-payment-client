@@ -2,107 +2,132 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./AddAddressForm.css";
 import "./../../../../App.css";
+import axios from 'axios';
 
 class AddressForm extends Component {
-  state = {
-    street_name: "",
-    house_number: "",
-    housing_code: "",
-    city: "",
-    postal_code: "",
-    country: ""
-  };
-
-  /* Checks whether email and password are typed in at all */
-  validateForm() {
-    return (
-      this.state.street_name.length > 0 &&
-      this.state.house_number.length > 0 &&
-      this.state.city.length > 0 &&
-      this.state.postal_code.length > 0 &&
-      this.state.country.length > 0
-    );
+  constructor() {
+    super();
+    this.state = {
+      addAddress: {
+        streetName: "",
+        streetNumber: "",
+        housingCode: "",
+        city: "",
+        postalCode: "",
+        country: "",
+        registeredUserId: sessionStorage.getItem("user_id"),
+        isCurrent: true
+      }
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  /* Handles user inputs into the fields of email and password. */
-  handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
+  onChange(e) {
+    const address = this.state.addAddress;
+    address[e.target.name] = e.target.value;
+    this.setState({ addAddress : address });
+    console.log(this.state.addAddress);
+  }
+
+  async onSubmit(e) {
+    e.preventDefault();
+    const { addAddress } = this.state;
+    console.log("Submit");
+    console.log(addAddress);
+
+    await axios
+    .put('https://secure-payment-api.herokuapp.com/addresses/create', addAddress)
+    .then(response => {
+      console.log(response);
+      //this.addAddress();
+      this.props.triggerGetAddresses(); {/* WHERE CAN WE PUT THIS TO REFRESH THE PAGE WHEN ADDRESS IS ADDED ????*/}
+    })
+    .catch(error => {
+      console.log(error.response);
     });
-  };
 
-  /* Handles what happens when the user pushes "Add Address"  */
-  /* NOT FINISHED */
-  handleSubmit = async event => {
-    event.preventDefault(); // Stops the page from reloading
 
-    alert("Attempted to add address : " + this.state.street_name);
 
-    /* NOT DONE - authenticate user with the database */
-    /*try {
-      const user_query = {
-        username_email: this.state.email,
-        password: this.state.password
-      };
-
-      await fetch("http://restaurants-reviews-api.herokuapp.com/login", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(user_query)
-      })
-        .then(resp => resp.json())
-        .then(data => {
-          //console.log(data)
-          sessionStorage.setItem("username", data[0].username);
-          sessionStorage.setItem("user_id", data[0].user_id);
-          sessionStorage.setItem("email", data[0].email);
-          sessionStorage.setItem("role", data[0].role);
-          window.location.reload();
-        });
-
-      if (sessionStorage.getItem("username") != null) {
-        window.location = "/dashboard";
-      } else {
-        alert("login failed");
-        window.location = "/login";
-      }
-    } catch (e) {
-      alert("Login failed - Wrong Email or password");
-    }*/
-  };
+  }
 
   render() {
     return (
       <div>
         <div className="Login" id="generalStyle">
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup controlId="street_name">
+          <form onSubmit={this.onSubmit}>
+            <FormGroup controlId="streetName">
               Street Name *
-              <FormControl placeholder="Street Name (e.g. Karl Johans gate)" autoFocus type="street_name" value={this.state.street_name} onChange={this.handleChange} />
+              <FormControl
+                autoFocus
+                name="streetName"
+                type="streetName"
+                placeholder="Street Name (e.g. Karl Johans gate)"
+                onChange={this.onChange}
+                defaultValue={this.state.addAddress.streetName}
+                required="required"
+              />
             </FormGroup>
-            <FormGroup controlId="house_number">
-              House Number *
-              <FormControl placeholder="House Number (e.g. 3A)" value={this.state.house_number} onChange={this.handleChange} type="house_number" />
+            <FormGroup controlId="streetNumber">
+              Street Number *
+              <FormControl
+                autoFocus
+                name="streetNumber"
+                type="streetNumber"
+                placeholder="Street number (e.g. 666)"
+                onChange={this.onChange}
+                defaultValue={this.state.addAddress.streetNumber}
+                required="required"
+              />
             </FormGroup>
-            <FormGroup controlId="housing_code">
-              Housing Code (optional)
-              <FormControl placeholder="Housing Code (e.g. H0301)" value={this.state.housing_code} onChange={this.handleChange} type="housing_code" />
+            <FormGroup controlId="housingCode">
+              Housing Code
+              <FormControl
+                autoFocus
+                name="housingCode"
+                type="housingCode"
+                placeholder="Housing Code (e.g. H0301)"
+                onChange={this.onChange}
+                defaultValue={this.state.addAddress.housingCode}
+              />
             </FormGroup>
-            <FormGroup controlId="postal_code">
+            <FormGroup controlId="postalCode">
               Postal Code *
-              <FormControl placeholder="Postal Code" value={this.state.postal_code} onChange={this.handleChange} type="postal_code" />
+              <FormControl
+                autoFocus
+                name="postalCode"
+                type="postalCode"
+                placeholder="Postal Code (e.g. 3050)"
+                onChange={this.onChange}
+                defaultValue={this.state.addAddress.postalCode}
+                required="required"
+              />
             </FormGroup>
             <FormGroup controlId="city">
               City *
-              <FormControl placeholder="City" value={this.state.city} onChange={this.handleChange} type="city" />
+              <FormControl
+                autoFocus
+                name="city"
+                type="city"
+                placeholder="City (e.g. Melbourne)"
+                onChange={this.onChange}
+                defaultValue={this.state.addAddress.city}
+                required="required"
+              />
             </FormGroup>
             <FormGroup controlId="country">
-              Country *
-              <FormControl placeholder="Country" value={this.state.country} onChange={this.handleChange} type="country" />
+              City *
+              <FormControl
+                autoFocus
+                name="country"
+                type="country"
+                placeholder="Country (e.g. The Domican Republic)"
+                onChange={this.onChange}
+                defaultValue={this.state.addAddress.country}
+                required="required"
+              />
             </FormGroup>
-            <Button block  disabled={!this.validateForm()} type="submit" variant="dark">
+            <Button block type="submit" variant="dark">
               Add Address
             </Button>
           </form>

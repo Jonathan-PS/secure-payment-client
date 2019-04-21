@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import { render } from 'react-dom';
-import { Elements, StripeProvider } from 'react-stripe-elements';
+import { render } from "react-dom";
+import { Elements, StripeProvider } from "react-stripe-elements";
 
-import StripeBtn from '../../components/StripeBtn/StripeBtn'
+import StripeBtn from "../../components/StripeBtn/StripeBtn";
 import StripeCheckoutForm from "../../components/StripeCheckoutForm/StripeCheckoutForm";
 import StripeCards from "../../components/StripeCards/StripeCards";
 import StripeShop from "../../components/StripeShop/StripeShop";
 
 class StripePaymentPage extends Component {
+
     render() {
         return (
             <div>
                 <h1>Stripe Payment Page</h1>
 
-                
                 <br /><br /><br />
                 {/* Stripe Cards */}
                 <h3>"StripeCards, use this!"</h3>
@@ -40,8 +40,6 @@ class StripePaymentPage extends Component {
                     </div>
                 </StripeProvider>
 
-               
-
             </div>
 
         );
@@ -49,4 +47,3 @@ class StripePaymentPage extends Component {
 }
 
 export default StripePaymentPage;
-

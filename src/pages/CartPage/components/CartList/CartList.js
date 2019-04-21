@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./CheckoutList.css";
+import "./CartList.css";
 import "./../../../../App.css";
 
-class CheckoutList extends Component {
+class CartList extends Component {
   state = {
     totalPrice: 0
   };
@@ -16,7 +16,7 @@ class CheckoutList extends Component {
     }
 
     this.setState({
-      totalPrice: sum
+      totalPrice: Math.round(sum)
     });
   }
 
@@ -51,11 +51,11 @@ class CheckoutList extends Component {
           </thead>
           <tbody>{products}</tbody>
         </table>
-        totalPrice : {this.state.totalPrice}
+        totalPriceasd : {this.state.totalPrice},-
         {/* Create Order Button - to create order page */}
       </div>
     );
   }
 }
 
-export default CheckoutList;
+export default CartList;

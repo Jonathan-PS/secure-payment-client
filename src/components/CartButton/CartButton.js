@@ -21,7 +21,7 @@ class CartButton extends Component {
 
   render() {
     return (
-      <NavLink to="/checkout" activeClassName="active">
+      <NavLink to="/cart" activeClassName="active">
         <button type="button" className="btn btn-outline-dark">
           <i className="fas fa-shopping-cart" />
           <b> ( {this.quantitySum()} )</b>

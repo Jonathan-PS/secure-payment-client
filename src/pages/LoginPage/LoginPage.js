@@ -7,7 +7,6 @@ class LoginPage extends Component {
   render() {
     return (
       <div id="generalStyle">
-        <br />
         <h4>Login</h4>
         <hr />
         {sessionStorage.getItem("user_id") < 1 ? (

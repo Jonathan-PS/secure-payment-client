@@ -5,6 +5,7 @@ import "./../../App.css";
 import Bootstrap from "bootstrap/dist/css/bootstrap.css";
 import CartButton from "./../CartButton/CartButton";
 import {
+  Col,
   Nav,
   Navbar,
   NavDropdown,
@@ -19,7 +20,13 @@ import { NavLink } from "react-router-dom";
 const NavigationBar = props => {
   return (
     <div id="generalStyle">
-      <Navbar color="dark">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        variant="light"
+        bg="light"
+        fixed="top"
+      >
         <NavLink to="/products" className="nav-link" activeClassName="active">
           <Navbar.Brand>Secure Payment Client</Navbar.Brand>
         </NavLink>
@@ -80,6 +87,15 @@ const NavigationBar = props => {
             )}
             <NavItem>
               <NavLink
+                to="/order"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Order
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
                 to="/stripePayment"
                 className="nav-link"
                 activeClassName="active"
@@ -87,32 +103,16 @@ const NavigationBar = props => {
                 Stripe
               </NavLink>
             </NavItem>
+          </Nav>
+          <Nav />
+          <Nav>
             <NavItem>
               <CartButton cartProducts={props.cartProducts} />
             </NavItem>
-
-            {/*
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="/action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          */}
           </Nav>
-          {/* --search --
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-          </Form>*/}
         </Navbar.Collapse>
       </Navbar>
-      </div>
+    </div>
   );
 };
 

@@ -39,8 +39,7 @@ class LoginForm extends Component {
             window.location = "/login";
           } else {
             sessionStorage.setItem("user_id", response.data);
-            alert("user_id: " + response.data);
-            alert(sessionStorage.getItem("user_id"));
+            alert("Logged in with user_id: " + sessionStorage.getItem("user_id"));
             window.location = "/dashboard";
           }
         })
