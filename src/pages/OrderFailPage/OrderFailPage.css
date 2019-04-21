@@ -1,0 +1,10 @@
+.symbol {
+    color: red;
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+.statusText {
+    color: red;
+    font-weight: bolder;
+}

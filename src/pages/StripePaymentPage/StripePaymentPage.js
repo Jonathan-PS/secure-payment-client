@@ -13,14 +13,16 @@ class StripePaymentPage extends Component {
             <div>
                 <h1>Stripe Payment Page</h1>
 
+                
+                <br /><br /><br />
+                {/* Stripe Cards */}
+                <h3>"StripeCards, use this!"</h3>
+                <StripeCards></StripeCards>
+                <br /><br /><br />
+
                 {/* Stripe Button */}
                 <h3>"Stripe Btn"</h3>
                 <StripeBtn />
-                <br /><br /><br />
-
-                {/* Stripe Cards */}
-                <h3>"StripeCards"</h3>
-                <StripeCards></StripeCards>
                 <br /><br /><br />
 
                 {/*Stripe Checkout Form */}
