@@ -32,14 +32,22 @@ class LoginForm extends Component {
         password: this.state.password
       };
 
-      axios.post('https://secure-payment-api.herokuapp.com/users/login', user_query)
+      axios
+        .post(
+          "https://secure-payment-api.herokuapp.com/users/login",
+          user_query
+        )
         .then(response => {
           if (response.data < 1) {
             alert("login failed");
             window.location = "/login";
           } else {
             sessionStorage.setItem("user_id", response.data);
-            alert("Logged in with user_id: " + sessionStorage.getItem("user_id"));
+            //sessionStorage.setItem("session_id", response.session_id);
+
+            alert(
+              "Logged in with user_id: " + sessionStorage.getItem("user_id")
+            );
             window.location = "/dashboard";
           }
         })
@@ -58,14 +66,27 @@ class LoginForm extends Component {
           <form onSubmit={this.handleSubmit}>
             <FormGroup controlId="email">
               Email
-              <FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange} />
+              <FormControl
+                autoFocus
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
             </FormGroup>
             <FormGroup controlId="password">
               Password
-              <FormControl value={this.state.password} onChange={this.handleChange} type="password"
+              <FormControl
+                value={this.state.password}
+                onChange={this.handleChange}
+                type="password"
               />
             </FormGroup>
-            <Button block disabled={!this.validateForm()} type="submit" variant="dark">
+            <Button
+              block
+              disabled={!this.validateForm()}
+              type="submit"
+              variant="dark"
+            >
               Login
             </Button>
           </form>

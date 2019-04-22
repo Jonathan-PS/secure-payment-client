@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./OrderPage.css";
+import AccordionList from "./components/AccordionList/AccordionList";
 
 class OrderPage extends Component {
   render() {
@@ -7,8 +8,12 @@ class OrderPage extends Component {
       <div id="generalStyle">
         <h4>Creation and review</h4>
         <hr />
-        <h2>List: </h2>
-        <ul>Current Items In Order</ul>
+        <h2>Show list: </h2>
+        <AccordionList />
+        <ul>
+          <li>Total Price</li>
+          <li>Current Items In Order</li>
+        </ul>
         <h2>Select: Shipping Name</h2>
         <ul>
           <li>firstName</li>
