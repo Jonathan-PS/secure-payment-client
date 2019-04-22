@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./CartPage";
-import "./../../App.css";
-import CartList from "./components/CartList/CartList";
+import ProductListCart from "./components/ProductListCart/ProductListCart";
+import { Button } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 class CartPage extends Component {
   render() {
@@ -9,7 +10,15 @@ class CartPage extends Component {
       <div id="generalStyle">
         <h4>Cart</h4>
         <hr />
-        <CartList cartProducts={this.props.cartProducts} />
+        <ProductListCart cartProducts={this.props.cartProducts} />
+
+        <div align="center">
+          {this.props.cartProducts.length > 0 ? (
+            <NavLink to="/checkout" activeClassName="active">
+              <Button variant="primary">Proceed to Checkout</Button>
+            </NavLink>
+          ) : null}
+        </div>
       </div>
     );
   }

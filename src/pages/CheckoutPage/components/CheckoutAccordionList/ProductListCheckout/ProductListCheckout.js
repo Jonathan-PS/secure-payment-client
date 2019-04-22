@@ -1,25 +1,7 @@
 import React, { Component } from "react";
-import "./CartList.css";
-import "./../../../../App.css";
+import "./ProductListCheckout.css";
 
-class CartList extends Component {
-  state = {
-    totalPrice: 0
-  };
-
-  componentDidMount() {
-    var sum = 0;
-    for (var i = 0; i < this.props.cartProducts.length; i++) {
-      sum +=
-        this.props.cartProducts[i].priceEach *
-        this.props.cartProducts[i].selectedQuantity;
-    }
-
-    this.setState({
-      totalPrice: Math.round(sum)
-    });
-  }
-
+class ProductListCheckout extends Component {
   render() {
     let listKey = 1;
 
@@ -51,11 +33,9 @@ class CartList extends Component {
           </thead>
           <tbody>{products}</tbody>
         </table>
-        totalPriceasd : {this.state.totalPrice},-
-        {/* Create Order Button - to create order page */}
       </div>
     );
   }
 }
 
-export default CartList;
+export default ProductListCheckout;

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
 import "./../../../../App.css";
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from "react-bootstrap";
 
-import AddAddressForm from "./../AddAddressForm/AddAddressForm";
-import Address from "./../Address/Address";
+import AddAddressForm from "../AddAddressForm/AddAddressForm";
+import Address from "../Address/Address";
+
 import Order from "./../Order/Order";
 import ProfileInfo from "./../ProfileInfo/ProfileInfo";
 import Settings from "./../Settings/Settings";
@@ -16,11 +17,11 @@ class Dashboard extends Component {
   };
 
   constructor(props) {
-    super(props)
-    this.setAddressesFunction = this.setAddressesFunction.bind(this)
+    super(props);
+    this.setAddressesFunction = this.setAddressesFunction.bind(this);
   }
 
-  setAddressesFunction(getAddresses){
+  setAddressesFunction(getAddresses) {
     this.setState({
       getAddresses: getAddresses
     });
@@ -40,8 +41,16 @@ class Dashboard extends Component {
           <div label="Address">
             <Container>
               <Row>
-                <Col sm={12} md={4} lg={4}><AddAddressForm triggerGetAddresses={this.state.getAddresses} /></Col>
-                <Col sm={12} md={8} lg={8}><Address triggerSetAddressesFunction={this.setAddressesFunction}/></Col>
+                <Col sm={12} md={4} lg={4}>
+                  <AddAddressForm
+                    triggerGetAddresses={this.state.getAddresses}
+                  />
+                </Col>
+                <Col sm={12} md={8} lg={8}>
+                  <Address
+                    triggerSetAddressesFunction={this.setAddressesFunction}
+                  />
+                </Col>
               </Row>
             </Container>
           </div>

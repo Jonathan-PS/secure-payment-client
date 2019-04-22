@@ -1,9 +1,8 @@
 import React from "react";
 import axios from "axios";
 import "./NavigationBar.css";
-import "./../../App.css";
 import Bootstrap from "bootstrap/dist/css/bootstrap.css";
-import CartButton from "./../CartButton/CartButton";
+import CartButton from "./CartButton/CartButton";
 import {
   Col,
   Nav,
@@ -87,11 +86,11 @@ const NavigationBar = props => {
             )}
             <NavItem>
               <NavLink
-                to="/order"
+                to="/checkout"
                 className="nav-link"
                 activeClassName="active"
               >
-                Order
+                Checkout
               </NavLink>
             </NavItem>
             <NavItem>

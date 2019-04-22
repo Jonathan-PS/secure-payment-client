@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./DashboardPage.css";
 import "./../../App.css";
 
-import AddAddressForm from "./components/AddAddressForm/AddAddressForm";
 import Tabs from "../../components/Tabs/Tabs";
 import Dashboard from "./components/Dashboard/Dashboard";
 
