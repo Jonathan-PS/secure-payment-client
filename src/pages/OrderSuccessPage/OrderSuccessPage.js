@@ -14,14 +14,14 @@ class OrderSuccessPage extends Component {
             /* get from Stripe and Database */
             allDetails: [],      // to save all transactions from /stripe
             successDetails: [],   // to save LAST transaction from /stripe
-            
+
             /* Variables from Stripe Payment & database */
             userOrderId: null,
             tokenID: null,
 
             /* To check if variables are sent from Stripe Checkout */
             cantLoad: false,
-            
+
             /* Internal Errors */
             hasError: false,
             componentError: null,
@@ -80,9 +80,9 @@ class OrderSuccessPage extends Component {
     /* Error boundary class. Works similar to JavaScript’s catch {} but for components. 
      * Triggered if the render() function throws an error */
     componentDidCatch(componentError, componentErrorInfo) {
-        this.setState({ 
+        this.setState({
             componentError: componentError,
-            componentErrorInfo: componentErrorInfo 
+            componentErrorInfo: componentErrorInfo
         });
         /* You can also log the error to an error reporting service */
         //logErrorToMyService(error, info);
@@ -98,13 +98,13 @@ class OrderSuccessPage extends Component {
     }
 
     render() {
-        
+
         /*  Checks for errors */
-        if ((this.state.successDetails).length == 0) { 
+        if ((this.state.successDetails).length == 0) {
             /* shows this fallback UI if successDetails is empty */
             console.log("No success data")
             return (<div><h3></h3></div>);
-            
+
         } else if (this.state.cantLoad == true) {
             /* if variables from Stripe Checkout Payment are not received */
             console.log("Variables from Stripe Checkout Payment are not received")
@@ -139,9 +139,12 @@ class OrderSuccessPage extends Component {
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <b>Status</b><br />
-                                <span class="statusText">{this.firstLetterUpperCase(String(successDetails.stripeStatus))}</span><br />
-                                <span class="statusText">{this.firstLetterUpperCase(String(successDetails.outcomeNetworkStatus)).replace(/_/g, ' ')}</span>
+                                <span class="statusText"><span class="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.outcomeType))}</span><br />
+                                <span class="statusText"><span class="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.stripeStatus))}</span><br />
+                                <span class="statusText"><span class="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.outcomeNetworkStatus)).replace(/_/g, ' ')}</span>
+
                             </li>
+
                             <li class="list-group-item">
                                 <b>Amount</b><br />{prettyAmount}
                             </li>
