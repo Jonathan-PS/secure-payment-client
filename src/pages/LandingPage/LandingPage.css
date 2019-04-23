@@ -3,12 +3,7 @@ p, h2 {
     font-weight: bolder;
 }
 
-h1 {
-    color: red;
-    text-align: right;
-    font-weight: bolder;
-    font-style: italic;
-}
+
 
 #carousel {
     height: 40%;
