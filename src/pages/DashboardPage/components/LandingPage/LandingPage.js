@@ -32,29 +32,32 @@ class LandingPage extends React.Component {
                 onSelect={this.onSelect}
             >
                 <Carousel.Item>
+                    <h1>NOW IN STOCK!</h1>
                     <img
                         className="d-block w-100"
                         src="http://sweetclipart.com/multisite/sweetclipart/files/baby_boy_socks_blue.png"
                         alt="Blue Baby Socks"
                     />
                     <Carousel.Caption>
-                        <h3>Blue Baby Socks</h3>
+                        <h2>Blue Baby Socks</h2>
                         <p>Nice pair of blue socks for baby boy</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
+                    <h1>NOW IN STOCK!</h1>
                     <img
                         className="d-block w-100"
                         src="http://sweetclipart.com/multisite/sweetclipart/files/baby_girl_socks_pink.png"
                         alt="Pink Baby Socks"
                     />
-
+   
                     <Carousel.Caption>
-                        <h3>Pink Baby Socks</h3>
+                        <h2>Pink Baby Socks</h2>
                         <p>Nice pair of pink socks for baby girl</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
+                    <h1>NOW IN STOCK!</h1>
                     <img
                         className="d-block w-100"
                         src="http://sweetclipart.com/multisite/sweetclipart/files/baby_socks_yellow.png"
@@ -62,7 +65,7 @@ class LandingPage extends React.Component {
                     />
 
                     <Carousel.Caption>
-                        <h3>Yellow Baby Socks</h3>
+                        <h2>Yellow Baby Socks</h2>
                         <p>Nice pair of yellow socks</p>
                     </Carousel.Caption>
                 </Carousel.Item>
