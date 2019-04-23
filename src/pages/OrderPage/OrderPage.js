@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./OrderReviewPage.css";
+import "./OrderPage.css";
 
-class OrderReviewPage extends Component {
+class OrderPage extends Component {
   render() {
     return (
       <div id="generalStyle">
@@ -16,11 +16,10 @@ class OrderReviewPage extends Component {
           <li>Receipt Email</li>
         </ul>
         <hr />
-        BUTTON : back to cart - BUTTON : Create UserOrder in db and proceed to
-        OrderReviewPage
+        BUTTON : Cancel order - BUTTON : Pay
       </div>
     );
   }
 }
 
-export default OrderReviewPage;
+export default OrderPage;

@@ -118,7 +118,7 @@ class AddressForm extends Component {
               />
             </FormGroup>
             <FormGroup controlId="country">
-              City *
+              Country *
               <FormControl
                 autoFocus
                 name="country"

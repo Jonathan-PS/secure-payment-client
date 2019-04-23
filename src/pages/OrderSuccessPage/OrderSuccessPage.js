@@ -187,4 +187,3 @@ class OrderSuccessPage extends Component {
 }
 
 export default OrderSuccessPage;
-

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import "./ProfileInfoCard.css";
-import "./../../../../../App.css";
+import "./Card.css";
 
-class ProfileInfoCard extends Component {
+class Card extends Component {
   render() {
     return (
       <div className="col-xs-12 col-sm-12 col-md-12" align="left">
@@ -22,4 +21,4 @@ class ProfileInfoCard extends Component {
   }
 }
 
-export default ProfileInfoCard;
+export default Card;
