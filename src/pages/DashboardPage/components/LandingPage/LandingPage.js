@@ -50,7 +50,7 @@ class LandingPage extends React.Component {
                         src="http://sweetclipart.com/multisite/sweetclipart/files/baby_girl_socks_pink.png"
                         alt="Pink Baby Socks"
                     />
-
+   
                     <Carousel.Caption>
                         <h2>Pink Baby Socks</h2>
                         <p>Nice pair of pink socks for baby girl</p>
