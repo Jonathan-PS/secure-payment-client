@@ -26,7 +26,7 @@ export default class Routes extends Component {
         <Route exact path="/signup" component={SignUpPage} />
         <Route exact path="/dashboard" component={DashboardPage} />
         <Route exact path="/stripepayment" component={StripePaymentPage} />
-        <Route exact path="/landingpage" component={LandingPage} />
+        <Route exact path="/" component={LandingPage} />
         <Route
           exact
           path="/checkout"

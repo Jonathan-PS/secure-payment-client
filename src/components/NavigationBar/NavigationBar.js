@@ -26,7 +26,7 @@ const NavigationBar = props => {
         bg="light"
         fixed="top"
       >
-        <NavLink to="/products" className="nav-link" activeClassName="active">
+        <NavLink to="/" className="nav-link" activeClassName="active">
           <Navbar.Brand>Secure Payment Client</Navbar.Brand>
         </NavLink>
 
@@ -102,15 +102,6 @@ const NavigationBar = props => {
                 Stripe
               </NavLink>
             </NavItem>
-          <NavItem>
-            <NavLink
-                to="/landingpage"
-                className="nav-link"
-                activeClassName="active"
-            >
-              Landing Page
-            </NavLink>
-          </NavItem>
           </Nav>
           <Nav />
           <Nav>
