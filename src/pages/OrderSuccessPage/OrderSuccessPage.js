@@ -159,17 +159,27 @@ class OrderSuccessPage extends Component {
                 <b>Status</b>
                 <br />
                 <span class="statusText">
+                  <span class="symbol">✓</span>{" "}
+                  {this.firstLetterUpperCase(
+                    String(successDetails.outcomeType)
+                  )}
+                </span>
+                <br />
+                <span class="statusText">
+                  <span class="symbol">✓</span>{" "}
                   {this.firstLetterUpperCase(
                     String(successDetails.stripeStatus)
                   )}
                 </span>
                 <br />
                 <span class="statusText">
+                  <span class="symbol">✓</span>{" "}
                   {this.firstLetterUpperCase(
                     String(successDetails.outcomeNetworkStatus)
                   ).replace(/_/g, " ")}
                 </span>
               </li>
+
               <li class="list-group-item">
                 <b>Amount</b>
                 <br />

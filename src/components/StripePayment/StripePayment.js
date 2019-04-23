@@ -24,7 +24,7 @@ class StripeCards extends React.Component {
             redirectFail: false,
 
             /* ORDER CONTENT */
-            amount: 2050,
+            amount: 3000,
             currency: String("nok").toLowerCase(),
             orderEmail: "", // When empty, Checkout asks for email. Else, it uses this email!
             userOrderId: 5,
@@ -32,6 +32,7 @@ class StripeCards extends React.Component {
             /* Get back from calling Stripe */
             tokenID: "null",
             tokenEmail: "null",
+            last4: "null",
 
             /* componentDidCatch errors */
             hasError: false,
@@ -53,48 +54,6 @@ class StripeCards extends React.Component {
         this.loadStripe = this.loadStripe.bind(this);
     }
 
-    /* SET REDIRECT SUCCESS PAGE */
-    setSuccessRedirect = () => {
-        this.setState({
-            redirectSuccess: true
-        })
-    }
-
-    /* SET REDIRECT FAIL PAGE */
-    setFailRedirect = () => {
-        this.setState({
-            redirectFail: true
-        })
-    }
-
-    /* REDIRECT TO PAGES IF SET TO TRUE */
-    renderRedirect = () => {
-        if (this.state.redirectSuccess) {
-            return <Redirect to={{
-                pathname: '/order/success',
-                /* sends these to be used in success page */
-                state: {
-                    userOrderId: this.state.userOrderId,
-                    tokenID: this.state.tokenID,
-                }
-            }} />
-        } else if (this.state.redirectFail) {
-            return <Redirect to={{
-                pathname: '/order/fail',
-                /* sends these to be used in fail page */
-                state: {
-                    failError: this.state.failError,
-                    failInfo: this.state.failInfo,
-                    failErrorMessage: this.state.failErrorMessage,
-                    failErrorResponseStatus: this.state.failErrorResponseStatus,
-                    failErrorResponseDataMessage: this.state.failErrorResponseDataMessage,
-                    failErrorRequest: this.state.failErrorRequest,
-                    failErrorConfig: this.state.failErrorConfig,
-                }
-            }} />
-
-        }
-    }
 
     /* LOAD STRIPE SCRIPT CHECKOUT */
     loadStripe(onload) {
@@ -117,44 +76,31 @@ class StripeCards extends React.Component {
         return { hasError: true };
     }
 
-    componentDidCatch(error, info) {
-        /* Display fallback UI */
-        /* Calling setState will be deprecated in a future release
-         * updated is static getDerivedStateFromError(error) */
-        this.setState({
-            hasError: true,
-            hasErrorError: error, // error - The error that was thrown.
-            hasErrorInfo: JSON.stringify(info) // object containing info about which component threw the error.
-        });
-        /* You can also log the error to an error reporting service */
-        //logErrorToMyService(error, info);
-        //logComponentStackToMyService(info.componentStack);
-        console.log("Error: " + error + "\nInfo: " + info)
-    }
 
-    
 
     componentDidMount() {
 
         this.loadStripe(() => {
             this.stripeHandler = window.StripeCheckout.configure({
                 key: publishableKey,
-                image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                //image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
                 locale: 'auto',
                 token: (token) => {
                     this.setState({
                         loading: true,
                         tokenID: token.id,
-                        tokenEmail: token.email
+                        tokenEmail: token.email,
+                        last4: token.card.last4
                     });
                     //console.log("Token ID: " + token.id);
                     axios
                         .put("https://secure-payment-api.herokuapp.com/stripe/charge", {
                             amount: this.state.amount,
                             currency: this.state.currency,
-                            token: token.id,
+                            token: token.id, // token.id
                             receiptEmail: token.email,
-                            userOrderId: this.state.userOrderId
+                            userOrderId: this.state.userOrderId,
+                            last4: this.state.last4
                         })
                         .then(data => {
 
@@ -162,6 +108,7 @@ class StripeCards extends React.Component {
                                 "Payment Success!!" +
                                 "\nData STATUS:" + data.status +
                                 "\n\nToken Email: " + token.email +
+                                "\n\nToken: " + JSON.stringify(token) +
                                 "\n\nData content: " + JSON.stringify(data)
                             );
 
@@ -210,6 +157,7 @@ class StripeCards extends React.Component {
                             //this.setState({ redirectFail: true });
                             this.setFailRedirect()
                         });
+
                 }
             });
 
@@ -219,6 +167,67 @@ class StripeCards extends React.Component {
                 loading: false
             });
         });
+    }
+
+
+    /* SET REDIRECT SUCCESS PAGE */
+    setSuccessRedirect = () => {
+        this.setState({
+            redirectSuccess: true
+        })
+    }
+
+    /* SET REDIRECT FAIL PAGE */
+    setFailRedirect = () => {
+        this.setState({
+            redirectFail: true
+        })
+    }
+
+    /* REDIRECT TO PAGES IF SET TO TRUE */
+    renderRedirect = () => {
+        if (this.state.redirectSuccess) {
+            return <Redirect to={{
+                pathname: '/order/success',
+                /* sends these to be used in success page */
+                state: {
+                    userOrderId: this.state.userOrderId,
+                    tokenID: this.state.tokenID,
+                }
+            }} />
+        } else if (this.state.redirectFail) {
+            return <Redirect to={{
+                pathname: '/order/fail',
+                /* sends these to be used in fail page */
+                state: {
+                    failError: this.state.failError,
+                    failInfo: this.state.failInfo,
+                    failErrorMessage: this.state.failErrorMessage,
+                    failErrorResponseStatus: this.state.failErrorResponseStatus,
+                    failErrorResponseDataMessage: this.state.failErrorResponseDataMessage,
+                    failErrorRequest: this.state.failErrorRequest,
+                    failErrorConfig: this.state.failErrorConfig,
+                }
+            }} />
+
+        }
+    }
+
+
+
+    componentDidCatch(error, info) {
+        /* Display fallback UI */
+        /* Calling setState will be deprecated in a future release
+         * updated is static getDerivedStateFromError(error) */
+        this.setState({
+            hasError: true,
+            hasErrorError: error, // error - The error that was thrown.
+            hasErrorInfo: JSON.stringify(info) // object containing info about which component threw the error.
+        });
+        /* You can also log the error to an error reporting service */
+        //logErrorToMyService(error, info);
+        //logComponentStackToMyService(info.componentStack);
+        console.log("Error: " + error + "\nInfo: " + info)
     }
 
     componentWillUnmount() {
@@ -243,7 +252,7 @@ class StripeCards extends React.Component {
             amount: this.state.amount,
             currency: this.state.currency,
             panelLabel: "", // If custom, uncomment toPayText() and write this: this.toPayText()
-            allowRememberMe: true, 
+            allowRememberMe: true,
             image: "https://stripe.com/img/v3/home/twitter.png" //Pop-in header image
         });
         /* preventDefault(): Event interface's preventDefault() method tells the user agent 
@@ -278,15 +287,15 @@ class StripeCards extends React.Component {
                     /* CHECK IF AMOUNT IS HIGH ENOUGH */
                     (currency == "nok" && amount < 300) ||
                     (currency == "usd" && amount < 50)
-                )   
+                )
                     ? /* IF FALSE */
                     <div><Button variant="primary" disabled>Pay with Card</Button>
-                    <p><small>Amount too low!</small></p>
+                        <p><small>Amount too low!</small></p>
                     </div>
                     : /* IF TRUE */
                     /* Check if still loading... */
                     (loading || stripeLoading)
-                        ? <p>Stripe is Loading...</p> // <Button> Loading ... </Button>
+                        ? <p>Stripe is loading...</p> // <Button> Loading ... </Button>
                         : <Button variant="primary" onClick={this.onStripeUpdate}>Pay with Card</Button>
                 }
 
