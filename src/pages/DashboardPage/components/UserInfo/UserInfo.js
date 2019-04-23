@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import "./ProfileInfo.css";
-import "./../../../../App.css";
-import ProfileInfoCard from "./ProfileInfoCard/ProfileInfoCard";
+import "./UserInfo.css";
+import Card from "./components/Card/Card";
 
-class ProfileInfo extends Component {
+class UserInfo extends Component {
   state = {
     allUsers: []
     };
@@ -22,7 +21,7 @@ class ProfileInfo extends Component {
 
   render() {
     const cards = this.state.allUsers.map(users => (
-      <ProfileInfoCard
+      <Card
         key={users.registeredUserId}
         registeredUserId={users.registeredUserId}
         firstName={users.firstName}
@@ -44,4 +43,4 @@ class ProfileInfo extends Component {
   }
 }
 
-export default ProfileInfo;
+export default UserInfo;
