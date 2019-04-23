@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./ProductListCheckout.css";
+import "./ProductList.css";
 
-class ProductListCheckout extends Component {
+class ProductList extends Component {
   render() {
     let listKey = 1;
 
@@ -38,4 +38,4 @@ class ProductListCheckout extends Component {
   }
 }
 
-export default ProductListCheckout;
+export default ProductList;

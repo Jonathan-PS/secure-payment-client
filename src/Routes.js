@@ -12,9 +12,9 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
 import CartPage from "./pages/CartPage/CartPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
-import OrderReviewPage from "./pages/OrderReviewPage/OrderReviewPage";
 import OrderFailPage from "./pages/OrderFailPage/OrderFailPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import OrderPage from "./pages/OrderPage/OrderPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
 
 export default class Routes extends Component {
@@ -29,15 +29,6 @@ export default class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
         <Route
           exact
-          path="/checkout"
-          render={() => <CheckoutPage cartProducts={this.props.cartProducts} />}
-        />
-
-        <Route exact path="/order/review" component={OrderReviewPage} />
-        <Route exact path="/order/success" component={OrderSuccessPage} />
-        <Route exact path="/order/fail" component={OrderFailPage} />
-        <Route
-          exact
           path="/products"
           render={() => (
             <ProductListPage
@@ -50,6 +41,15 @@ export default class Routes extends Component {
           path="/cart"
           render={() => <CartPage cartProducts={this.props.cartProducts} />}
         />
+        <Route
+          exact
+          path="/checkout"
+          render={() => <CheckoutPage cartProducts={this.props.cartProducts} />}
+        />
+
+        <Route exact path="/order" component={OrderPage} />
+        <Route exact path="/order/success" component={OrderSuccessPage} />
+        <Route exact path="/order/fail" component={OrderFailPage} />
         <Route component={NotFoundPage} />
       </Switch>
     );

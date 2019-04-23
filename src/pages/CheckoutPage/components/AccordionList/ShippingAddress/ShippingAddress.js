@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ShippingAddressList from "./ShippingAddressList/ShippingAddressList";
+import DatabaseList from "./DatabaseList/DatabaseList";
 import { Container, Row, Col } from "react-bootstrap";
-import ShippingAddressForm from "./ShippingAddressForm/ShippingAddressForm";
+import InputForm from "./InputForm/InputForm";
 
 class ShippingAddress extends Component {
   state = {
@@ -26,15 +26,23 @@ class ShippingAddress extends Component {
           <Container>
             <Row>
               <Col sm={12} md={4} lg={4}>
-                <ShippingAddressForm
+                <InputForm
                   triggerGetAddresses={this.state.getAddresses}
+                  triggerSetShippingInformation={
+                    this.props.triggerSetShippingInformation
+                  }
                 />
               </Col>
-              <Col sm={12} md={8} lg={8}>
-                <ShippingAddressList
-                  triggerSetAddressesFunction={this.setAddressesFunction}
-                />
-              </Col>
+              {sessionStorage.getItem("user_id") > 0 ? (
+                <Col sm={12} md={8} lg={8}>
+                  <DatabaseList
+                    triggerSetAddressesFunction={this.setAddressesFunction}
+                    triggerSetShippingInformation={
+                      this.props.triggerSetShippingInformation
+                    }
+                  />
+                </Col>
+              ) : null}
             </Row>
           </Container>
         </div>
