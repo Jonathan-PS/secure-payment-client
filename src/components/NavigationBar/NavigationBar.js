@@ -102,6 +102,15 @@ const NavigationBar = props => {
                 Stripe
               </NavLink>
             </NavItem>
+          <NavItem>
+            <NavLink
+                to="/landingpage"
+                className="nav-link"
+                activeClassName="active"
+            >
+              Landing Page
+            </NavLink>
+          </NavItem>
           </Nav>
           <Nav />
           <Nav>

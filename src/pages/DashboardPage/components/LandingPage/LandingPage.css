@@ -1,0 +1,16 @@
+p, h3 {
+    color: #000000;
+}
+
+#carousel {
+    height: 40%;
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+img {
+    height: 50%;
+}

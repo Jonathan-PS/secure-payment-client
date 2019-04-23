@@ -15,6 +15,7 @@ import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
 import OrderReviewPage from "./pages/OrderReviewPage/OrderReviewPage";
 import OrderFailPage from "./pages/OrderFailPage/OrderFailPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
+import LandingPage from "./pages/DashboardPage/components/LandingPage/LandingPage";
 
 export default class Routes extends Component {
   render() {
@@ -25,6 +26,7 @@ export default class Routes extends Component {
         <Route exact path="/signup" component={SignUpPage} />
         <Route exact path="/dashboard" component={DashboardPage} />
         <Route exact path="/stripepayment" component={StripePaymentPage} />
+        <Route exact path="/landingpage" component={LandingPage} />
         <Route
           exact
           path="/checkout"

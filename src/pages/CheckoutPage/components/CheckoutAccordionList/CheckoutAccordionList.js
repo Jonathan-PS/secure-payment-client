@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./CheckoutAccordionList.css";
 import { Accordion, Button, Card } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
-
 import { NavLink } from "react-router-dom";
 import ProductListCheckout from "./ProductListCheckout/ProductListCheckout";
 import ShippingAddress from "./ShippingAddress/ShippingAddress";
