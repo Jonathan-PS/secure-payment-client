@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./OrderReviewPage.css";
+import "./OrderPage.css";
 
-class OrderReviewPage extends Component {
+class OrderPage extends Component {
   render() {
     return (
       <div id="generalStyle">
@@ -22,4 +22,4 @@ class OrderReviewPage extends Component {
   }
 }
 
-export default OrderReviewPage;
+export default OrderPage;
