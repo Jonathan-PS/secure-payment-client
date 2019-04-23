@@ -42,11 +42,6 @@ class AddressList extends Component {
       listItems = this.state.allAddresses.map(addresses => (
         <tr key={listKey++}>
           <th scope="row" />
-          <td>
-            <input type="radio" name="myGroupName" onChange={this.onChange}>
-              {this.props.myValue}
-            </input>
-          </td>
           <td>{addresses.streetName}</td>
           <td>{addresses.streetNumber}</td>
           <td>{addresses.housingCode}</td>
@@ -64,7 +59,6 @@ class AddressList extends Component {
             <thead>
               <tr>
                 <th scope="col" />
-                <th scope="col">Select</th>
                 <th scope="col">Street</th>
                 <th scope="col">Number</th>
                 <th scope="col">Apt</th>
@@ -76,9 +70,6 @@ class AddressList extends Component {
             <tbody>{listItems}</tbody>
           </table>
         </div>
-        <Button type="submit" variant="dark">
-          Change address
-        </Button>
       </div>
     );
   }
