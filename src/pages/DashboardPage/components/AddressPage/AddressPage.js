@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddressList from './AddressList/AddressList';
+import AddressList from './components/AddressList/AddressList';
 
 class Address extends Component {
   render() {

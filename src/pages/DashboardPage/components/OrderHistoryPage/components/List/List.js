@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
-import './OrderList.css';
+import './List.css';
 import "./../../../../../App.css";
 
-class OrderList extends Component {
+class List extends Component {
   state = {
     allOrders: []
   };
@@ -52,4 +52,4 @@ class OrderList extends Component {
   }
 }
 
-export default OrderList;
+export default List;

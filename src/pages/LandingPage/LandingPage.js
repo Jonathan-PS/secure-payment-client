@@ -33,7 +33,7 @@ class LandingPage extends React.Component {
             >
                 <Carousel.Item>
                     <h1>NOW IN STOCK!</h1>
-                    <img
+                    <img id="test"
                         className="d-block w-100"
                         src="http://sweetclipart.com/multisite/sweetclipart/files/baby_boy_socks_blue.png"
                         alt="Blue Baby Socks"
