@@ -67,6 +67,7 @@ class OrderSuccessPage extends Component {
             .catch(err => {
                 console.log("ERROR: " + err)
             });
+        
     }
 
 
@@ -99,31 +100,36 @@ class OrderSuccessPage extends Component {
 
     render() {
 
+        const { successDetails, userOrderId, tokenID } = this.state;
+
+        // format amount
+        const stringAmount = String(successDetails.amount);
+        const prettyAmount = stringAmount.slice(0, stringAmount.length - 2) + "." +
+            stringAmount.slice(stringAmount.length - 2) + " " + String(successDetails.currency).toUpperCase();
+
+        // format date
+        const date = successDetails.createdAt
+        const formattedDate = (new Date(date)).toUTCString();
+
+
         /*  Checks for errors */
         if ((this.state.successDetails).length == 0) {
-            /* shows this fallback UI if successDetails is empty */
+            // shows this fallback UI if successDetails is empty
             console.log("No success data")
             return (<div><h3></h3></div>);
 
         } else if (this.state.cantLoad == true) {
-            /* if variables from Stripe Checkout Payment are not received */
+            // if variables from Stripe Checkout Payment are not received
             console.log("Variables from Stripe Checkout Payment are not received")
             return (<div><h3></h3></div>);
 
         } else if (this.state.componentError) {
-            /*  shows the fallback UI if there's an error */
+            //  shows the fallback UI if there's an error
             console.log("Component error")
             return (<div><h3>Something went wrong!</h3><p>{this.state.componentError.toString()}</p></div>);
 
         } else {
-            /* If no error, render as normal */
-
-            const { successDetails, userOrderId, tokenID } = this.state;
-
-            /* format amount */
-            const stringAmount = String(successDetails.amount);
-            const prettyAmount = stringAmount.slice(0, stringAmount.length - 2) + "." +
-                stringAmount.slice(stringAmount.length - 2) + " " + String(successDetails.currency).toUpperCase();
+            // If no error, render as normal
 
             return (
 
@@ -144,6 +150,9 @@ class OrderSuccessPage extends Component {
                                 <span class="statusText"><span class="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.outcomeNetworkStatus)).replace(/_/g, ' ')}</span>
 
                             </li>
+                            <li class="list-group-item">
+                                <b>Date & Time</b><br />{formattedDate}
+                            </li>
 
                             <li class="list-group-item">
                                 <b>Amount</b><br />{prettyAmount}
@@ -163,6 +172,7 @@ class OrderSuccessPage extends Component {
                                 <li><b>Success TokenID</b> {tokenID}</li>
                                 <li><b>Paid</b> {String(successDetails.paid)}</li>
                                 <li><b>Risk Level</b> {successDetails.outcomeRiskLevel}</li>
+                                <li><b>Risk Score</b> {successDetails.outcomeRiskScore} (out of 99)</li>
                                 <li><b>Network Status</b> {String(successDetails.outcomeNetworkStatus).replace(/_/g, ' ')}</li>
                                 <br />
                             </div>

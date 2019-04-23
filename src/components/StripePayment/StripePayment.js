@@ -24,10 +24,10 @@ class StripeCards extends React.Component {
             redirectFail: false,
 
             /* ORDER CONTENT */
-            amount: 3000,
-            currency: String("nok").toLowerCase(),
+            amount: 3000,  // this.props.location.state.amount
+            currency: String("nok").toLowerCase(), // this.props.location.state.currency
             orderEmail: "", // When empty, Checkout asks for email. Else, it uses this email!
-            userOrderId: 5,
+            userOrderId: 5,  // this.props.location.state.userOrderId
 
             /* Get back from calling Stripe */
             tokenID: "null",
@@ -93,6 +93,9 @@ class StripeCards extends React.Component {
                         last4: token.card.last4
                     });
                     //console.log("Token ID: " + token.id);
+
+
+                    
                     axios
                         .put("https://secure-payment-api.herokuapp.com/stripe/charge", {
                             amount: this.state.amount,
