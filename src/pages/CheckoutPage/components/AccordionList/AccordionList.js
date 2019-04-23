@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import "./CheckoutAccordionList.css";
+import "./AccordionList.css";
 import { Accordion, Button, Card } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 
 import { NavLink } from "react-router-dom";
-import ProductListCheckout from "./ProductListCheckout/ProductListCheckout";
+import ProductList from "./ProductList/ProductList";
 import ShippingAddress from "./ShippingAddress/ShippingAddress";
 
-class CheckoutAccordionList extends Component {
+class AccordionList extends Component {
   state = {
     totalPrice: 0,
-    shippingName: "",
-    orderEmail: "",
-    shippingAddress: {
+    shippingInformation: {
+      firstName: "",
+      lastName: "",
+      receiptEmail: "",
+      orderEmail: "",
       streetName: "",
       houseNumber: "",
       appartmentNumber: "",
@@ -25,7 +27,7 @@ class CheckoutAccordionList extends Component {
   constructor(props) {
     super(props);
     this.computeTotalPrice = this.computeTotalPrice.bind(this);
-    this.setShippingAddress = this.setShippingAddress.bind(this);
+    this.setShippingInformation = this.setShippingInformation.bind(this);
   }
 
   componentDidMount() {
@@ -49,9 +51,9 @@ class CheckoutAccordionList extends Component {
     });
   }
 
-  setShippingAddress(address) {
+  setShippingInformation(shippingInfo) {
     this.setState({
-      shippingAddress: address
+      shippingInformation: shippingInfo
     });
   }
 
@@ -74,7 +76,7 @@ class CheckoutAccordionList extends Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                <ProductListCheckout cartProducts={this.props.cartProducts} />
+                <ProductList cartProducts={this.props.cartProducts} />
                 <b>Total price in NOK: {this.state.totalPrice},- </b>
               </Card.Body>
             </Accordion.Collapse>
@@ -87,7 +89,7 @@ class CheckoutAccordionList extends Component {
             <Accordion.Collapse eventKey="1">
               <Card.Body>
                 <ShippingAddress
-                  triggerSetShippingAddress={this.setShippingAddress}
+                  triggerSetShippingInformation={this.setShippingInformation}
                 />
               </Card.Body>
             </Accordion.Collapse>
@@ -99,9 +101,43 @@ class CheckoutAccordionList extends Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <div align="center">
-                <NavLink to="/order/review" activeClassName="active">
-                  <Button variant="primary">Create Order</Button>
-                </NavLink>
+                <div id="generalStyle">
+                  <Container>
+                    <Row>
+                      <Col sm={12} md={4} lg={4}>
+                        <b>Shipping Address</b>
+                      </Col>
+                      <Col sm={12} md={8} lg={8}>
+                        <b>Summary</b>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col sm={12} md={4} lg={4}>
+                        <ul className="list-style: none;">
+                          <li>
+                            {this.state.shippingInformation.firstName}{" "}
+                            {this.state.shippingInformation.lastName}
+                          </li>
+                          <li>{this.state.shippingInformation.receiptEmail}</li>
+                          <li>
+                            {this.state.shippingInformation.streetName}{" "}
+                            {this.state.shippingInformation.streetNumber}{" "}
+                            {this.state.shippingInformation.housingCode}
+                          </li>
+                          <li>
+                            {this.state.shippingInformation.postalCode}{" "}
+                            {this.state.shippingInformation.city}{" "}
+                            {this.state.shippingInformation.country}
+                          </li>
+                        </ul>
+                      </Col>
+                      <Col sm={12} md={8} lg={8}>
+                        products
+                      </Col>
+                    </Row>
+                  </Container>
+                </div>
+                <Button variant="primary">Create Order</Button>
                 <br />
               </div>
             </Accordion.Collapse>
@@ -112,4 +148,4 @@ class CheckoutAccordionList extends Component {
   }
 }
 
-export default CheckoutAccordionList;
+export default AccordionList;

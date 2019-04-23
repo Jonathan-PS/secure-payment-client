@@ -16,8 +16,7 @@ class OrderReviewPage extends Component {
           <li>Receipt Email</li>
         </ul>
         <hr />
-        BUTTON : back to cart - BUTTON : Create UserOrder in db and proceed to
-        OrderReviewPage
+        BUTTON : Cancel order - BUTTON : Pay
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./CheckoutPage.css";
-import CheckoutAccordionList from "./components/CheckoutAccordionList/CheckoutAccordionList";
+import AccordionList from "./components/AccordionList/AccordionList";
 
 class CheckoutPage extends Component {
   render() {
@@ -8,7 +8,7 @@ class CheckoutPage extends Component {
       <div id="generalStyle">
         <h4>Creation and review</h4>
         <hr />
-        <CheckoutAccordionList cartProducts={this.props.cartProducts} />
+        <AccordionList cartProducts={this.props.cartProducts} />
         <hr />
       </div>
     );

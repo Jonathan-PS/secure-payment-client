@@ -30,7 +30,6 @@ export default class Routes extends Component {
           path="/checkout"
           render={() => <CheckoutPage cartProducts={this.props.cartProducts} />}
         />
-
         <Route exact path="/order/review" component={OrderReviewPage} />
         <Route exact path="/order/success" component={OrderSuccessPage} />
         <Route exact path="/order/fail" component={OrderFailPage} />
