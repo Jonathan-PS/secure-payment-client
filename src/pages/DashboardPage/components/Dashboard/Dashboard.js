@@ -6,9 +6,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import AddAddressForm from "../AddAddressForm/AddAddressForm";
 import Address from "../Address/Address";
 
-import Order from "./../Order/Order";
-import ProfileInfo from "./../ProfileInfo/ProfileInfo";
-import Settings from "./../Settings/Settings";
+import OrderHistory from "../OrderHistory/OrderHistory";
+import UserInfo from "../UserInfo/UserInfo";
 import Tabs from "../../../../components/Tabs/Tabs";
 
 class Dashboard extends Component {
@@ -33,10 +32,10 @@ class Dashboard extends Component {
                 <Tabs>
                     <div label="Profile">
                         <h5>Profile Dashboard Home</h5>
-                        <ProfileInfo />
+                        <UserInfo />
                     </div>
                     <div label="Orders History">
-                        <Order />
+                        <OrderHistory />
                     </div>
                     <div label="Address">
                         <Container>
@@ -53,9 +52,6 @@ class Dashboard extends Component {
                                 </Col>
                             </Row>
                         </Container>
-                    </div>
-                    <div label="Settings">
-                        <Settings />
                     </div>
                 </Tabs>
             </div>
