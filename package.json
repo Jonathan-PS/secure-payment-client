@@ -19,7 +19,7 @@
     "react-scripts": "2.1.8",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^2.0.3",
-    "stripe": "^6.28.0"
+    "stripe": "^6.30.0"
   },
   "scripts": {
     "start": "react-scripts start",
