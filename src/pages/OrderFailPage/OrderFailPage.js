@@ -49,7 +49,7 @@ class OrderFailPage extends Component {
     */
 
     componentDidMount() {
-        console.log("cDM: "+((this.state.failError) == null))
+        //console.log("cDM: "+((this.state.failError) == null))
         try {
             this.setState({
                 failError: this.props.location.state.failError,
@@ -60,13 +60,13 @@ class OrderFailPage extends Component {
                 failErrorConfig: this.props.location.state.failErrorConfig
             });
             //console.log("cDM in try cantLoad: " + this.state.cantLoad);
-            console.log("cDM after try: "+((this.state.failError) == null))
+            //console.log("cDM after try: "+((this.state.failError) == null))
         }
         catch (error) {
             this.setState({
                 cantLoad: true
             });
-            console.log("cDM after catch: "+((this.state.failError) == null))
+            //console.log("cDM after catch: "+((this.state.failError) == null))
         }
     }
 

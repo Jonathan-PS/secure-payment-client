@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
+//import { render } from "react-dom";
 import { Elements, StripeProvider } from "react-stripe-elements";
 
 import StripeBtn from "../../components/StripeBtn/StripeBtn";
 import StripeCheckoutForm from "../../components/StripeCheckoutForm/StripeCheckoutForm";
-import StripeCards from "../../components/StripeCards/StripeCards";
+import StripePayment from "../../components/StripePayment/StripePayment";
 import StripeShop from "../../components/StripeShop/StripeShop";
 
 class StripePaymentPage extends Component {
@@ -13,12 +13,15 @@ class StripePaymentPage extends Component {
         return (
             <div>
                 <h1>Stripe Payment Page</h1>
+                <h5><strong><i>This page will not be on our Page, only used for testing!</i></strong></h5>
 
                 <br /><br /><br />
                 {/* Stripe Cards */}
-                <h3>"StripeCards, use this!"</h3>
-                <StripeCards></StripeCards>
+                <h3>"StripePayment, use this!"</h3>
+                <StripePayment></StripePayment>
                 <br /><br /><br />
+
+                <h5><i>Don't use the ones under, only displayed to see the different ways of using Stripe's front-end..</i></h5>
 
                 {/* Stripe Button */}
                 <h3>"Stripe Btn"</h3>
