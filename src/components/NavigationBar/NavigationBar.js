@@ -27,7 +27,7 @@ const NavigationBar = props => {
             fixed="top"
         >
           <NavLink to="/" className="nav-link" activeClassName="active">
-            <Navbar.Brand>Secure Payment Client</Navbar.Brand>
+            <Navbar.Brand><h4 className="logoText">Secure Payment Webshop</h4></Navbar.Brand>
           </NavLink>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

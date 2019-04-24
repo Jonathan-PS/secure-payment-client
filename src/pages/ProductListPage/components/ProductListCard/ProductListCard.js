@@ -20,6 +20,9 @@ class ProductListCard extends Component {
   };
 
   render() {
+
+    let priceEachFormatted = parseFloat(Math.round(this.props.priceEach * 100) / 100).toFixed(2).toString().replace(".", ",");
+
     return (
       <div
         className="col-xs-12 col-sm-6 col-md-3"
@@ -28,18 +31,21 @@ class ProductListCard extends Component {
       >
         <div className="card">
           {/* IMAGE */}
+          <br />
           <div className="imageBox">
             <img src={this.props.imageUrl} alt="Product Image" width="100" />
           </div>
           <div className="card-body">
-            {/* TITLE */}
-            <h5 className="card-title">{this.props.productName}</h5>
+            {/* PRODUCT NAME */}
+            <div className="productNameText">
+              <h5 className="card-title">{this.props.productName}</h5>
+            </div>
             {/* DESCRIPTION */}
             <div className="descriptionBox">
               <p><small><i>"{this.props.description}"</i></small></p>
             </div>
             {/* PRICE */}
-            <p className="priceText">{this.props.priceEach} NOK</p>
+            <p className="priceText">{priceEachFormatted} NOK</p>
             {/* IS PRODUCT DIGITAL OR PHYSICAL ? */}
             {(this.props.digital) ?
               <span><small>Digital Product</small></span>
@@ -48,10 +54,17 @@ class ProductListCard extends Component {
             }
             {/* IS PRODUCT IN STOCK ? */}
             {(this.props.stock > 0) ?
-              <span>
-                <p><small>In stock ({this.props.stock})</small></p>
-                <button onClick={this.addToCart} type="button" className="btn btn-success">Add to Cart</button>
-              </span>
+              (this.props.stock > 75) ?
+                <span>
+                  <p><small>In stock (75+)</small></p>
+                  <button onClick={this.addToCart} type="button" className="btn btn-success">Add to Cart</button>
+                </span>
+                :
+                <span>
+                  <p><small>In stock ({this.props.stock})</small></p>
+                  <button onClick={this.addToCart} type="button" className="btn btn-success">Add to Cart</button>
+                </span>
+
               :
               <span>
                 <p><small>Sold out!</small></p>

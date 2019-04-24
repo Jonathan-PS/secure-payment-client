@@ -1,11 +1,24 @@
 .App {
   text-align: center;
+  
+}
+
+/* override bootstrap navbar colors */
+.navbar, .navbar-default {
+  background-image: linear-gradient(to bottom,rgb(230, 230, 230) 0,rgb(230, 230, 230) 100%) !important; /* override background image gradient w/ flat color */
+  border-color: rgb(202, 202, 202);
+  border-width: 1px;
+  border-style: solid;
+  -moz-box-shadow: 0 0 10px #ccc;
+  -webkit-box-shadow: 0 0 10px #ccc;
+  box-shadow: 0 0 10px #ccc;
 }
 
 #generalStyle {
   color: #555555;
   font-family: "Segoe UI";
 }
+
 
 #border {
   border-color: #ffffff;
@@ -15,6 +28,11 @@
 #margins {
   margin-left: 10%;
   margin-right: 10%;
+}
+
+#root {
+  background-color: rgb(255, 255, 255);
+  margin-top: 10px;
 }
 
 body {
