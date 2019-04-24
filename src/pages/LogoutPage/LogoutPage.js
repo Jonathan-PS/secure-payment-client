@@ -17,6 +17,7 @@ const LogoutPage = props => {
         </Modal.Footer>
       </Modal.Dialog>
       ;{sessionStorage.removeItem("user_id")}
+      {sessionStorage.removeItem("email")}
       {(window.location = "/")}
     </div>
   );

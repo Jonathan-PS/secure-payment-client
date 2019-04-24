@@ -14,7 +14,7 @@ class ProductListCard extends Component {
       imageUrl: this.props.imageUrl,
       priceEach: this.props.priceEach,
       stock: this.props.stock,
-      digital: this.props.stock,
+      digital: this.props.digital,
       selectedQuantity: this.props.selectedQuantity
     });
   };
