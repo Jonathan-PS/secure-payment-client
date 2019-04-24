@@ -42,11 +42,9 @@ class LoginForm extends Component {
             window.location = "/login";
           } else {
             sessionStorage.setItem("user_id", response.data);
-            //sessionStorage.setItem("session_id", response.session_id);
+            sessionStorage.setItem("email", this.state.email);
 
-            alert(
-              "Logged in with user_id: " + sessionStorage.getItem("user_id")
-            );
+            //alert("Logged in with user_id: " + sessionStorage.getItem("user_id"));
             window.location = "/dashboard";
           }
         })

@@ -6,31 +6,46 @@ import { Container, Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import ProductList from "./ProductList/ProductList";
 import ShippingAddress from "./ShippingAddress/ShippingAddress";
+import DigitalShippingAddress from "./DigitalShippingAddress/DigitalShippingAddress";
+
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
 class AccordionList extends Component {
-  state = {
-    userOrderId: 0,
-    redirect: false,
-    totalPrice: 0,
-    currency: "nok",
-    shippingInformation: {
-      firstName: "",
-      lastName: "",
-      receiptEmail: "",
-      streetName: "",
-      streetNumber: "",
-      housingCode: "",
-      postalCode: "",
-      city: "",
-      country: ""
-    }
-  };
-
   constructor(props) {
     super(props);
+
+    this.state = {
+      // Upon Order creation, we recieve back the UserOrderId here:
+      userOrderId: 0,
+
+      // After that, redirect is set to true. When component re-renders,
+      // it changes page automatically.
+      redirect: false,
+
+      // calculated in its own function
+      totalPrice: 0,
+      currency: "nok",
+
+      // If all products are digital, then shipping address is simply an email.
+      anyPhysical: false,
+
+      // All required fields for creation of an order
+      shippingInformation: {
+        firstName: "",
+        lastName: "",
+        receiptEmail: "",
+        streetName: "",
+        streetNumber: "",
+        housingCode: "",
+        postalCode: "",
+        city: "",
+        country: ""
+      }
+    };
+
     this.computeTotalPrice = this.computeTotalPrice.bind(this);
+    this.checkAnyPhysical = this.checkAnyPhysical.bind(this);
     this.setShippingInformation = this.setShippingInformation.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.createOrderAndContinue = this.createOrderAndContinue.bind(this);
@@ -40,11 +55,12 @@ class AccordionList extends Component {
   componentDidMount() {
     // 0: Compute total price:
     this.computeTotalPrice();
+    this.checkAnyPhysical();
   }
 
   computeTotalPrice() {
-    var sum = 0;
-    for (var i = 0; i < this.props.cartProducts.length; i++) {
+    let sum = 0;
+    for (let i = 0; i < this.props.cartProducts.length; i++) {
       sum +=
         this.props.cartProducts[i].priceEach *
         this.props.cartProducts[i].selectedQuantity;
@@ -54,6 +70,19 @@ class AccordionList extends Component {
       totalPrice: Math.round(sum)
     });
   }
+
+  checkAnyPhysical() {
+    let physical = false;
+
+    for (let i = 0; i < this.props.cartProducts.length; i++) {
+      physical = physical || !this.props.cartProducts[i].digital;
+    }
+
+    this.setState({
+      anyPhysical: physical
+    });
+  }
+
   setShippingInformation(shippingInfo) {
     this.setState({
       shippingInformation: shippingInfo
@@ -116,7 +145,7 @@ class AccordionList extends Component {
         }
       })
       .catch(error => {
-        alert("In catch - " + error);
+        alert("Create Order : In catch - " + error);
       });
 
     // 2 - Create OrderProduct for every distinct product
@@ -146,7 +175,7 @@ class AccordionList extends Component {
           });
         })
         .catch(error => {
-          alert("In catch - " + error);
+          alert("Add Order Products : In catch - " + error);
         });
     }
   }
@@ -177,6 +206,7 @@ class AccordionList extends Component {
 
     return (
       <div>
+        <b>anyPhysical: {JSON.stringify(this.state.anyPhysical)}</b>
         {/** Back To Cart Button */}
         <div align="center">
           <NavLink to="/cart" activeClassName="active">
@@ -205,9 +235,15 @@ class AccordionList extends Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
               <Card.Body>
-                <ShippingAddress
-                  triggerSetShippingInformation={this.setShippingInformation}
-                />
+                {this.state.anyPhysical ? (
+                  <ShippingAddress
+                    triggerSetShippingInformation={this.setShippingInformation}
+                  />
+                ) : (
+                  <DigitalShippingAddress
+                    triggerSetShippingInformation={this.setShippingInformation}
+                  />
+                )}
               </Card.Body>
             </Accordion.Collapse>
           </Card>
@@ -223,13 +259,7 @@ class AccordionList extends Component {
                     <Row>
                       <Col sm={12} md={4} lg={4}>
                         <b>Shipping Address</b>
-                      </Col>
-                      <Col sm={12} md={8} lg={8}>
-                        <b>Summary</b>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={12} md={4} lg={4}>
+
                         <ul className="list-style: none;">
                           <li>
                             {this.state.shippingInformation.firstName}{" "}
@@ -249,6 +279,8 @@ class AccordionList extends Component {
                         </ul>
                       </Col>
                       <Col sm={12} md={8} lg={8}>
+                        <b>Summary</b>
+
                         {productList}
                         <ul className="list-style: none;">
                           {this.state.totalPrice},- NOK = sum
