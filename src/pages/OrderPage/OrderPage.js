@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import "./OrderPage.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import StripePayment from "../../components/StripePayment/StripePayment";
 
 class OrderPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       /* Variable from Redirection */
-      userOrderId: 1,
+      userOrderId: this.props.location.state.userOrderId,
       /* To check if variables are sent from Stripe Checkout */
       cantLoad: false,
 
@@ -170,6 +171,7 @@ class OrderPage extends Component {
           {orderProducts}
           <hr />
           BUTTON : Cancel order - BUTTON : Pay
+          <StripePayment userOrderId={this.state.userOrderId} />
         </div>
       );
     }
