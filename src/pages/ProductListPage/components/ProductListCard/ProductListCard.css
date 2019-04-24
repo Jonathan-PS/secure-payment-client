@@ -1,7 +1,33 @@
 .card {
   margin-bottom: 25px;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #BFBFBF;
+}
+
+.card:hover {
+  margin-bottom: 25px;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #BFBFBF;
+  background-color: white;
+  box-shadow: 4px 5px 5px #e4e4e4;
 }
 
 .card img {
-  margin: 25px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.imageBox {
+  width: 200px;
+  height: 200px;
+}
+.descriptionBox {
+  width: 100%;
+  height: 50px;
+  overflow:hidden;
+}
+
+.priceText {
+  font-size: 1.5em;
 }
