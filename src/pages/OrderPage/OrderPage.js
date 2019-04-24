@@ -3,6 +3,7 @@ import "./OrderPage.css";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import StripePayment from "../../components/StripePayment/StripePayment";
+import ProductList from "./components/ProductList/ProductList";
 
 class OrderPage extends Component {
   constructor(props) {
@@ -102,9 +103,9 @@ class OrderPage extends Component {
         .get("https://secure-payment-api.herokuapp.com/ORDERPRODUCTS/{THIS.STATE.USERORDERID}")
       */
     } catch (error) {
-      /*this.setState({
+      this.setState({
         cantLoad: true
-      });*/
+      });
     }
   }
 
@@ -162,16 +163,26 @@ class OrderPage extends Component {
             <li>orderEmail: {this.state.userOrderInformation.orderEmail} </li>
             <li>totalPrice: {this.state.userOrderInformation.totalPrice} </li>
             <li>currency: {this.state.userOrderInformation.currency} </li>
-            <li>createdAt: {this.state.userOrderInformation.createdAt} </li>
-            <li>updatedAt: {this.state.userOrderInformation.updatedAt} </li>
+            <li>
+              Created:{" "}
+              {new Date(
+                this.state.userOrderInformation.createdAt
+              ).toUTCString()}
+            </li>
             <li>status: {this.state.userOrderInformation.status} </li>
           </ul>
           <hr />
           <h5>Order Products Information</h5>
-          {orderProducts}
+          <ProductList orderProducts={this.state.orderProducts} />
+          <b>Total Price: {this.state.userOrderInformation.totalPrice},- NOK</b>
           <hr />
-          BUTTON : Cancel order - BUTTON : Pay
-          <StripePayment userOrderId={this.state.userOrderId} />
+          <div align="center">
+            <br />
+            <StripePayment userOrderId={this.state.userOrderId} />
+            BUTTON : Cancel order - BUTTON : Pay
+            <br />
+          </div>
+          <hr />
         </div>
       );
     }

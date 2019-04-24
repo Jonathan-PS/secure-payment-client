@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./ProductList.css";
-import "./../../../../App.css";
 import ProductListCard from "../ProductListCard/ProductListCard";
 
 class ProductList extends Component {
@@ -29,8 +28,9 @@ class ProductList extends Component {
         description={product.description}
         imageUrl={product.imageUrl}
         priceEach={product.priceEach}
-        selectedQuantity={1}
         stock={product.stock}
+        digital={product.digital}
+        selectedQuantity={1}
         triggerAddCartProduct={this.props.triggerAddCartProduct}
       />
     ));

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./ProductListCard.css";
-import "./../../../../App.css";
 
 class ProductListCard extends Component {
   addToCart = event => {
@@ -15,6 +14,7 @@ class ProductListCard extends Component {
       imageUrl: this.props.imageUrl,
       priceEach: this.props.priceEach,
       stock: this.props.stock,
+      digital: this.props.stock,
       selectedQuantity: this.props.selectedQuantity
     });
   };
@@ -33,6 +33,7 @@ class ProductListCard extends Component {
             <p>Description: {this.props.description}</p>
             <p>Price: {this.props.priceEach} NOK</p>
             <p>Stock: {this.props.stock}</p>
+            <p>Digital: {JSON.stringify(this.props.digital)}</p>
             <button
               onClick={this.addToCart}
               type="button"
