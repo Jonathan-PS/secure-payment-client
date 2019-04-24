@@ -15,7 +15,8 @@ class ProductListCart extends Component {
     }
 
     this.setState({
-      totalPrice: Math.round(sum)
+      //totalPrice: Math.round(sum)
+      totalPrice: parseFloat(Math.round(sum * 100) / 100).toFixed(2)
     });
   }
 
@@ -50,7 +51,7 @@ class ProductListCart extends Component {
           </thead>
           <tbody>{products}</tbody>
         </table>
-        Price: {this.state.totalPrice},-
+        Price: {this.state.totalPrice} NOK
       </div>
     );
   }
