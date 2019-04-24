@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Button, Modal } from 'react-bootstrap';
+import React, { components } from "react";
+import { Button, Modal } from "react-bootstrap";
 
 const LogoutPage = props => {
   return (
@@ -12,12 +12,11 @@ const LogoutPage = props => {
         <Modal.Body>
           <p>You are now logged out.</p>
         </Modal.Body>
-
         <Modal.Footer>
           <Button variant="secondary">Close</Button>
         </Modal.Footer>
-      </Modal.Dialog>;
-      {sessionStorage.removeItem("user_id")}
+      </Modal.Dialog>
+      ;{sessionStorage.removeItem("user_id")}
       {(window.location = "/")}
     </div>
   );

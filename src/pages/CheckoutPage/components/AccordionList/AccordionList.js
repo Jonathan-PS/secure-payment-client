@@ -14,6 +14,7 @@ class AccordionList extends Component {
     userOrderId: 0,
     redirect: false,
     totalPrice: 0,
+    currency: "nok",
     shippingInformation: {
       firstName: "",
       lastName: "",
@@ -31,6 +32,7 @@ class AccordionList extends Component {
     super(props);
     this.computeTotalPrice = this.computeTotalPrice.bind(this);
     this.setShippingInformation = this.setShippingInformation.bind(this);
+    this.validateForm = this.validateForm.bind(this);
     this.createOrderAndContinue = this.createOrderAndContinue.bind(this);
     this.redirectToOrderPage = this.redirectToOrderPage.bind(this);
   }
@@ -95,7 +97,9 @@ class AccordionList extends Component {
         this.state.shippingInformation.city +
         ", " +
         this.state.shippingInformation.country,
-      orderEmail: this.state.shippingInformation.receiptEmail
+      orderEmail: this.state.shippingInformation.receiptEmail,
+      currency: this.state.currency,
+      totalPrice: this.state.totalPrice
     };
 
     await axios
@@ -155,9 +159,6 @@ class AccordionList extends Component {
             pathname: "/order",
             // sends these to be used in success page
             state: {
-              email: this.state.shippingInformation.receiptEmail,
-              currency: "nok",
-              amount: this.state.totalPrice,
               userOrderId: this.state.userOrderId
             }
           }}
@@ -264,7 +265,6 @@ class AccordionList extends Component {
                 >
                   Create Order
                 </Button>
-
                 <br />
               </div>
             </Accordion.Collapse>
