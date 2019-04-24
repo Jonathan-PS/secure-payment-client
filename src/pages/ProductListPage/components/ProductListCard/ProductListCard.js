@@ -27,20 +27,37 @@ class ProductListCard extends Component {
         id="generalStyle"
       >
         <div className="card">
-          <img src={this.props.imageUrl} alt="Product Image" width="100" />
+          {/* IMAGE */}
+          <div className="imageBox">
+            <img src={this.props.imageUrl} alt="Product Image" width="100" />
+          </div>
           <div className="card-body">
-            <h4 className="card-title">{this.props.productName}</h4>
-            <p>Description: {this.props.description}</p>
-            <p>Price: {this.props.priceEach} NOK</p>
-            <p>Stock: {this.props.stock}</p>
-            <p>Digital: {JSON.stringify(this.props.digital)}</p>
-            <button
-              onClick={this.addToCart}
-              type="button"
-              className="btn btn-success"
-            >
-              Add to Cart
-            </button>
+            {/* TITLE */}
+            <h5 className="card-title">{this.props.productName}</h5>
+            {/* DESCRIPTION */}
+            <div className="descriptionBox">
+              <p><small><i>"{this.props.description}"</i></small></p>
+            </div>
+            {/* PRICE */}
+            <p className="priceText">{this.props.priceEach} NOK</p>
+            {/* IS PRODUCT DIGITAL OR PHYSICAL ? */}
+            {(this.props.digital) ?
+              <span><small>Digital Product</small></span>
+              :
+              <span><small>Physical Product</small></span>
+            }
+            {/* IS PRODUCT IN STOCK ? */}
+            {(this.props.stock > 0) ?
+              <span>
+                <p><small>In stock ({this.props.stock})</small></p>
+                <button onClick={this.addToCart} type="button" className="btn btn-success">Add to Cart</button>
+              </span>
+              :
+              <span>
+                <p><small>Sold out!</small></p>
+                <button disabled type="button" className="btn btn-secondary">Add to Cart</button>
+              </span>
+            }
           </div>
         </div>
       </div>
