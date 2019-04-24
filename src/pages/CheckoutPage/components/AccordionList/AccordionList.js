@@ -67,7 +67,8 @@ class AccordionList extends Component {
     }
 
     this.setState({
-      totalPrice: Math.round(sum)
+      //totalPrice: Math.round(sum)
+      totalPrice: parseFloat(Math.round(sum * 100) / 100).toFixed(2)
     });
   }
 
@@ -199,7 +200,8 @@ class AccordionList extends Component {
   render() {
     const productList = this.props.cartProducts.map(product => (
       <ul key={product.productId} className="list-style: none;">
-        {Math.round(product.priceEach * product.selectedQuantity)},- NOK ={" "}
+        {/*Math.round(product.priceEach * product.selectedQuantity)*/} 
+        {parseFloat(Math.round((product.priceEach * product.selectedQuantity) * 100) / 100).toFixed(2)} NOK ={" "}NOK ={" "}
         {product.priceEach}x{product.selectedQuantity} {product.productName}
       </ul>
     ));
@@ -219,7 +221,7 @@ class AccordionList extends Component {
           <Card>
             {/* First Card */}
             <Accordion.Toggle as={Card.Header} eventKey="0">
-              Products ( {this.state.totalPrice},- NOK )
+              Products ( {String(this.state.totalPrice).toString().replace(".", ",")} NOK )
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
@@ -283,7 +285,7 @@ class AccordionList extends Component {
 
                         {productList}
                         <ul className="list-style: none;">
-                          {this.state.totalPrice},- NOK = sum
+                          {String(this.state.totalPrice).toString().replace(".", ",")} NOK = sum
                         </ul>
                       </Col>
                     </Row>

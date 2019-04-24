@@ -174,7 +174,7 @@ class OrderPage extends Component {
           <hr />
           <h5>Order Products Information</h5>
           <ProductList orderProducts={this.state.orderProducts} />
-          <b>Total Price: {this.state.userOrderInformation.totalPrice},- NOK</b>
+          <b>Total Price: {this.state.userOrderInformation.totalPrice} NOK</b>
           <hr />
           <div align="center">
             <br />
