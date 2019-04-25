@@ -124,6 +124,12 @@ class OrderPage extends Component {
                 this.state.userOrderInformation.createdAt
               ).toUTCString()}
             </li>
+            <li>
+              Updated:{" "}
+              {new Date(
+                this.state.userOrderInformation.updatedAt
+              ).toUTCString()}
+            </li>
             <li>status: {this.state.userOrderInformation.status} </li>
           </ul>
           <hr />
@@ -133,8 +139,9 @@ class OrderPage extends Component {
           <hr />
           <div align="center">
             <br />
-            <StripePayment userOrderId={this.state.userOrderId} />
-            BUTTON : Cancel order - BUTTON : Pay
+            {this.state.userOrderInformation.status === "in progress" ? (
+              <StripePayment userOrderId={this.state.userOrderId} />
+            ) : null}
             <br />
           </div>
           <hr />
