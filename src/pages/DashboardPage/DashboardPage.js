@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./DashboardPage.css";
-import "./../../App.css";
 
-import Tabs from "../../components/Tabs/Tabs";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 class DashboardPage extends Component {

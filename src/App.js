@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 /* Components */
@@ -7,7 +6,6 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 /* Routes */
 import Routes from "./Routes";
-import ProductList from "./pages/ProductListPage/components/ProductList/ProductList";
 
 class App extends Component {
   state = {
@@ -83,22 +81,6 @@ class App extends Component {
       this.setState({ cartProducts: newProducts });
     }
   }
-
-  // Adds a product to the cart
-  /*addACartProduct(event) {
-    let newProducts = [...this.state.cartProducts]; // make a separate copy of the array
-    let index = newProducts.indexOf(event);
-
-    if (index !== -1) {
-      newProducts[index].selectedQuantity =
-        this.state.cartProducts[index].selectedQuantity + 1;
-      this.setState({ cartProducts: newProducts });
-    } else {
-      this.setState({
-        cartProducts: this.state.cartProducts.concat([event])
-      });
-    }
-  }*/
 
   render() {
     return (
