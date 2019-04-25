@@ -74,7 +74,7 @@ class SignUpForm extends Component {
             alert("login failed");
           } else {
             sessionStorage.setItem("user_id", response.data);
-            sessionStorage.setItem("email", this.state.email);
+            sessionStorage.setItem("email", this.state.registerUser.email);
 
             console.log("user_id: " + response.data);
 

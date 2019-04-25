@@ -1,17 +1,13 @@
-/* Used parts from:
- * - https://stackoverflow.com/questions/41500135/react-js-stripe-checkout-is-not-working
- */
-
 import React, { Component } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 
 // PUBLISHABLE KEY FROM STRIPE
 const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
 
-class StripeCards extends React.Component {
+class StripePayment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -440,10 +436,10 @@ class StripeCards extends React.Component {
         loading || stripeLoading ? (
           // If loading: text
           <div>
-          <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-          </Spinner>
-          {/* <p>Stripe is loading...</p> // <Button> Loading ... </Button> */}
+            <Spinner animation="border" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+            {/* <p>Stripe is loading...</p> // <Button> Loading ... </Button> */}
           </div>
         ) : (
           // If not loading: Show Pay-button
@@ -459,4 +455,4 @@ class StripeCards extends React.Component {
   }
 }
 
-export default StripeCards;
+export default StripePayment;

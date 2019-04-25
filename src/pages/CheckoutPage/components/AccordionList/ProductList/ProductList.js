@@ -9,7 +9,7 @@ class ProductList extends Component {
       <tr key={listKey++}>
         <th scope="row">
           <div className="imageBox">
-            <img src={product.imageUrl} alt="Product Image" width="30" />
+            <img src={product.imageUrl} alt="Product Image" />
           </div>
         </th>
         <td>{product.productId}</td>
