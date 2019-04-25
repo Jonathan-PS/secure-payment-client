@@ -104,7 +104,7 @@ class DigitalShippingAddress extends Component {
                     (this.state.email) ?
                       <div>
                         {/* BUTTON POPOVER (OverLayTrigger) */}
-                        <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                        <OverlayTrigger trigger="click" placement="right" overlay={popover} >
                           <Button block type="submit" variant="dark">
                             Choose
                           </Button>
@@ -117,10 +117,7 @@ class DigitalShippingAddress extends Component {
                           Choose
                         </Button>
                       </div>
-
                   }
-
-
                 </form>
               </Col>
             </Row>

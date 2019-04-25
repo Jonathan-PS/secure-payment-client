@@ -285,7 +285,7 @@ class AccordionList extends Component {
           <Card>
             {/*  Third Card */}
             <Accordion.Toggle as={Card.Header} eventKey="2">
-            <strong> 3 |</strong> Create Your Order
+              <strong> 3 |</strong> Create Your Order
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <div align="center">
@@ -300,7 +300,7 @@ class AccordionList extends Component {
                             {this.state.shippingInformation.firstName}{" "}
                             {this.state.shippingInformation.lastName}
                           </li>
-                          <li>{this.state.shippingInformation.receiptEmail}</li>
+
                           <li>
                             {this.state.shippingInformation.streetName}{" "}
                             {this.state.shippingInformation.streetNumber}{" "}
@@ -312,6 +312,8 @@ class AccordionList extends Component {
                             {this.state.shippingInformation.country}
                           </li>
                         </ul>
+                        <ul><b>Email</b><br/><i>{this.state.shippingInformation.receiptEmail}</i></ul>
+
                       </Col>
                       <Col sm={12} md={8} lg={8}>
                         <ul><b>SUMMARY</b></ul>
