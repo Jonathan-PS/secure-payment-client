@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { Popover, OverlayTrigger } from "react-bootstrap";
 import "./InputForm.css";
 import axios from "axios";
 
@@ -60,7 +61,7 @@ class InputForm extends Component {
             receiptEmail: data.email
           });
         })
-        .catch(err => {});
+        .catch(err => { });
 
       await axios
         .put(
@@ -80,12 +81,26 @@ class InputForm extends Component {
   }
 
   render() {
+
+    const { firstName, lastName, receiptEmail, streetName,
+      streetNumber, housingCode, city, postalCode, country } = this.state
+
+
+    // BUTTON POPOVER
+    const popover = (
+      <Popover id="popover-basic" title="Thank you!">
+        Address added
+      </Popover>
+    );
+
+
     return (
       <div>
-        <div className="Login" id="generalStyle">
+        <div>
           <form onSubmit={this.onSubmit}>
             {localStorage.getItem("user_id") > 0 ? null : (
               <div>
+                <br />
                 <FormGroup controlId="firstName">
                   First Name *
                   <FormControl
@@ -196,9 +211,27 @@ class InputForm extends Component {
                 required="required"
               />
             </FormGroup>
-            <Button block type="submit" variant="dark">
-              Add Address
-            </Button>
+            { /* IF ALL ARE FILLED IN */
+              (firstName, lastName, receiptEmail, streetName,
+                streetNumber, housingCode, city, postalCode, country) ?
+                <div>
+                  {/* BUTTON POPOVER (OverLayTrigger) */}
+                  <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                    <Button block type="submit" variant="dark">
+                      Add Address
+                    </Button>
+                  </OverlayTrigger>
+                </div>
+                :
+                <div>
+                  {/* NON-CLICKABLE BUTTON */}
+                    <Button block type="submit" disabled variant="dark">
+                      Add Address
+                    </Button>
+                </div>
+
+            }
+
           </form>
         </div>
       </div>
