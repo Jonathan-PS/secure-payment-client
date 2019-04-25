@@ -30,20 +30,6 @@ class OrderPage extends Component {
       },
       /* Products that are part of the UserOrder, which are retrieved from the databse upon mount */
       orderProducts: []
-      /*[{
-        orderProductId: "",
-        userOrderId: "",
-        productId: "",
-        quantity: "",
-        priceEach: "",
-        product : {
-          productId: "",
-          productName: "",
-          description: "",
-          imageUrl: "",
-          stock: ""
-        }
-      },]*/
     };
   }
 
@@ -106,7 +92,7 @@ class OrderPage extends Component {
           <h5>Order Information</h5>
             <Container>
               <Row>
-                <Col sm={12} md={4} lg={4}>
+                <Col sm={12} md={12} lg={6}>
                   <ul>
                     <li><br/><b>Shipped to:</b></li>
                     <li>
@@ -119,7 +105,7 @@ class OrderPage extends Component {
                     <li><br/><b>Total price:</b> {this.state.userOrderInformation.totalPrice},- {this.state.userOrderInformation.currency}</li>
                   </ul>
                 </Col>
-                <Col sm={12} md={8} lg={8}>
+                <Col sm={12} md={12} lg={6}>
                   <ul>
                     <li><br/><b>Order ID:</b> {this.state.userOrderInformation.userOrderId} </li>
                     <li>
