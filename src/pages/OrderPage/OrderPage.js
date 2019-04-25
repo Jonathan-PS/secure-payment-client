@@ -4,7 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 import StripePayment from "../../components/StripePayment/StripePayment";
 import ProductList from "./components/ProductList/ProductList";
-import { Col, Row, Container} from "react-bootstrap";
+import { Col, Row, Container } from "react-bootstrap";
 
 class OrderPage extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class OrderPage extends Component {
       axios
         .get(
           "https://secure-payment-api.herokuapp.com/orders/" +
-            this.state.userOrderId
+          this.state.userOrderId
         )
         .then(response => {
           console.log(JSON.stringify(response.data));
@@ -56,7 +56,7 @@ class OrderPage extends Component {
       axios
         .get(
           "https://secure-payment-api.herokuapp.com/orderproducts/orders/" +
-            this.state.userOrderId
+          this.state.userOrderId
         )
         .then(response => {
           console.log(JSON.stringify(response.data));
@@ -74,7 +74,17 @@ class OrderPage extends Component {
     }
   }
 
+  // FORMAT PRICE TO LOOK LIKE THIS: 500,25
+  showPrice = (price) => {
+    const showPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2).toString().replace(".", ",")
+    return showPrice
+  }
+
   render() {
+
+    const { shippingName, shippingAddress, orderEmail, totalPrice, currency,
+      userOrderId, registeredUserId, createdAt, updatedAt, status } = this.state.userOrderInformation;
+
     if (this.state.cantLoad) {
       return (
         <Redirect
@@ -85,58 +95,53 @@ class OrderPage extends Component {
         />
       );
     } else {
+      console.log(
+        "userOrderId: " + userOrderId +
+        "\nregisteredUserId: " + registeredUserId
+      )
+
       return (
         <div>
+
           <h4>Order Review</h4>
           <hr />
           <h5>Order Information</h5>
-            <Container>
-              <Row>
-                <Col sm={12} md={12} lg={6}>
-                  <ul>
-                    <li><br/><b>Shipped to:</b></li>
-                    <li>
-                      {this.state.userOrderInformation.shippingName}
-                    </li>
-                    <li>
-                      {this.state.userOrderInformation.shippingAddress}{" "}
-                    </li>
-                    <li><br/><b>Email:</b> {this.state.userOrderInformation.orderEmail} </li>
-                    <li><br/><b>Total price:</b> {this.state.userOrderInformation.totalPrice},- {this.state.userOrderInformation.currency}</li>
-                  </ul>
-                </Col>
-                <Col sm={12} md={12} lg={6}>
-                  <ul>
-                    <li><br/><b>Order ID:</b> {this.state.userOrderInformation.userOrderId} </li>
-                    <li>
-                      <b>User ID:</b>{" "}
-                      {this.state.userOrderInformation.registeredUserId}
-                    </li>
-                    <li>
-                    <br/><b>Order created:</b>{" "}
-                      {new Date(
-                        this.state.userOrderInformation.createdAt
-                      ).toUTCString()}
-                    </li>
-                    <li>
-                      <b>Last Updated:</b>{" "}
-                      {new Date(
-                        this.state.userOrderInformation.updatedAt
-                      ).toUTCString()}
-                    </li>
-                    <li><br/><b>Order status:</b> {this.state.userOrderInformation.status} </li>
-                  </ul>
-                </Col>
-              </Row>
-            </Container>  
+
+          <Container>
+            <Row>
+              <Col sm={12} md={12} lg={6}>
+                <dl class="row">
+                  <dt class="col-sm-5">Shipping to:</dt>
+                  <dd class="col-sm-10">{shippingName} <br /> {shippingAddress}</dd>
+                  <dt class="col-sm-5 text-truncate">Email:</dt>
+                  <dd class="col-sm-10">{orderEmail}</dd>
+                  <dt class="col-sm-5">Total price:</dt>
+                  <dd class="col-sm-10">{this.showPrice(totalPrice)} {String(currency).toUpperCase()}</dd>
+                </dl>
+              </Col>
+              <Col sm={12} md={12} lg={6}>
+                <dl class="row">
+                  <dt class="col-sm-5">Order created:</dt>
+                  <dd class="col-sm-10">{new Date(createdAt).toUTCString()}</dd>
+                  <dt class="col-sm-5">Last Updated:</dt>
+                  <dd class="col-sm-10">{new Date(updatedAt).toUTCString()}</dd>
+                  <dt class="col-sm-5">Order status:</dt>
+                  <dd class="col-sm-10">{status}</dd>
+                </dl>
+              </Col>
+            </Row>
+          </Container>
+
+
           <hr />
           <h5>Order Products Information</h5>
           <ProductList orderProducts={this.state.orderProducts} />
-          <b>Total Price: {this.state.userOrderInformation.totalPrice},- NOK</b>
+          
           <hr />
           <div align="center">
-            <br />
-            {this.state.userOrderInformation.status === "in progress" ? (
+          <b>Total Price: {this.showPrice(totalPrice)} NOK</b>
+            <br /><br />
+            {status === "in progress" ? (
               <StripePayment userOrderId={this.state.userOrderId} />
             ) : null}
             <br />

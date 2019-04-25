@@ -89,7 +89,7 @@ class DigitalShippingAddress extends Component {
               <Col sm={12} md={4} lg={4}>
                 <form onSubmit={this.onSubmit}>
                   <FormGroup controlId="email">
-                    Choose Email:
+                    <b>Choose another email:</b>
                     <FormControl
                       autoFocus
                       name="email"

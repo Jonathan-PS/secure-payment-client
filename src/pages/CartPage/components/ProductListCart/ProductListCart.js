@@ -61,7 +61,6 @@ class ProductListCart extends Component {
         <th scope="row">
           <img src={product.imageUrl} alt="Product Image" width="30" />
         </th>
-        <td>{product.productId}</td>
         <td>{product.productName}</td>
         <td>
           <Button
@@ -71,7 +70,7 @@ class ProductListCart extends Component {
           >
             -
           </Button>
-          &nbsp; &nbsp; &nbsp; {product.selectedQuantity} &nbsp; &nbsp; &nbsp;
+          &nbsp;  <strong>{product.selectedQuantity}</strong>  &nbsp;
           <Button
             variant="dark"
             onClick={() => this.handleIncrease(product)}
@@ -97,21 +96,19 @@ class ProductListCart extends Component {
 
     return (
       <div className="container" id="generalStyle">
-        <table className="table table-striped">
+        <table className="table table-sm table-striped">
           <thead>
             <tr>
               <th scope="col" />
-              <th scope="col">Id</th>
               <th scope="col">Name</th>
-              {<th scope="col">Quantity</th>}
-              <th scope="col">price</th>
+              {<th scope="col">&nbsp; &nbsp; &nbsp;Qty.</th>}
+              <th scope="col">Price</th>
               <th scope="col" />
             </tr>
           </thead>
           <tbody>
             {products}
             <tr>
-              <th scope="col" />
               <th scope="col" />
               <th scope="col" />
               {<th scope="col" />}
@@ -129,11 +126,11 @@ class ProductListCart extends Component {
             </tr>
           </tbody>
         </table>
-        Price:{" "}
-        {String(this.state.totalPrice)
-          .toString()
-          .replace(".", ",")}{" "}
-        NOK
+        <p align="center">
+          Price:{" "}
+          {String(this.state.totalPrice).toString().replace(".", ",")}{" NOK"}
+        </p>
+        
       </div>
     );
   }

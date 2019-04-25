@@ -7,6 +7,7 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 /* Routes */
 import Routes from "./Routes";
 
+
 class App extends Component {
   constructor(props) {
     super(props);

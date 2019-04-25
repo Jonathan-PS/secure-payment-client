@@ -101,6 +101,7 @@ class InputForm extends Component {
             {localStorage.getItem("user_id") > 0 ? null : (
               <div>
                 <br />
+                
                 <FormGroup controlId="firstName">
                   First Name
                   <FormControl
@@ -139,6 +140,7 @@ class InputForm extends Component {
             )}
 
             <FormGroup controlId="streetName">
+            <h6>Select a new address:</h6>
               Street Name *
               <FormControl
                 autoFocus
@@ -227,9 +229,8 @@ class InputForm extends Component {
                       Add Address
                     </Button>
                 </div>
-
             }
-
+          <br/><br/>
           </form>
         </div>
       </div>

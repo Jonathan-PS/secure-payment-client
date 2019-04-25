@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
-import "./../../../../App.css";
+//import "./../../../../App.css";
 import { Container, Row, Col } from "react-bootstrap";
 
 import AddAddressForm from "../AddAddressForm/AddAddressForm";
@@ -41,11 +41,13 @@ class Dashboard extends Component {
                         <Container>
                             <Row>
                                 <Col sm={12} md={4} lg={4}>
+                                <h6 ><b>Add a new address:</b></h6>
                                     <AddAddressForm
                                         triggerGetAddresses={this.state.getAddresses}
                                     />
                                 </Col>
                                 <Col sm={12} md={8} lg={8}>
+                                <h6><b> &emsp; &emsp; &emsp; Existing address:</b></h6>
                                     <Address
                                         triggerSetAddressesFunction={this.setAddressesFunction}
                                     />

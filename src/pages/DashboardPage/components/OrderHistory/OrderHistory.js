@@ -40,6 +40,8 @@ class OrderHistory extends Component {
         createdAt={orders.createdAt}
         updatedAt={orders.updatedAt}
         shippingAddress={orders.shippingAddress}
+        totalPrice={orders.totalPrice}
+        currency={orders.currency}
         status={orders.status}
       />
     ));

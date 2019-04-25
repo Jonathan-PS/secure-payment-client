@@ -67,7 +67,7 @@ class OrderSuccessPage extends Component {
             .catch(err => {
                 console.log("ERROR: " + err)
             });
-        
+
     }
 
 
@@ -130,15 +130,20 @@ class OrderSuccessPage extends Component {
 
         } else {
             // If no error, render as normal
+            console.log(
+                "\nPaid: " + String(successDetails.paid) +
+                "Risk Level: " + successDetails.outcomeRiskLevel + "(out of 99)" +
+                "\nRisk Score: " + successDetails.outcomeRiskScore + "(out of 99)"
+            );
 
             return (
 
-                <div className="block-example border border-dark rounded mb-0" style={{ backgroundColor: '#f1f1f1' }}>
+                <div className="block-example border border-light rounded mb-0" style={{ backgroundColor: '#f1f1f1' }}>
                     <div className="col-xs-12 col-sm-6 col-md-12" align="left">
 
                         {/* PRINT INFO */}
                         <br />
-                        <h3>Thank you for the purchase!</h3>
+                        <h5>Thank you for the purchase!</h5>
                         <h1> <span class="symbol">✓</span> {String(successDetails.outcomeSellerMessage).replace(".", "")}</h1>
 
 
@@ -151,32 +156,20 @@ class OrderSuccessPage extends Component {
 
                             </li>
                             <li class="list-group-item">
-                                <b>Date & Time</b><br />{formattedDate}
+                                <b>Date & Time</b> {formattedDate}
                             </li>
 
                             <li class="list-group-item">
-                                <b>Amount</b><br />{prettyAmount}
+                                <b>Amount</b> {prettyAmount}
                             </li>
                             <li class="list-group-item">
-                                <b>Receipt Email</b><br />{successDetails.receiptEmail}
+                                <b>Receipt Email</b> {successDetails.receiptEmail}
                             </li>
                             <li class="list-group-item">
-                                <b>Receipt Url</b><br />{<a href={successDetails.receiptUrl} target="_blank">See Receipt</a>}
+                                <b>Receipt Url</b> {<a href={successDetails.receiptUrl} target="_blank">See Receipt</a>}
                             </li>
-
-                            {/* REMOVE LATER! */}
-                            <br /><br />
-                            <div>
-                                <h5><i>This under will be removed! Only for show now:</i></h5>
-                                <li><b>Success User Order ID</b> {userOrderId}</li>
-                                <li><b>Success TokenID</b> {tokenID}</li>
-                                <li><b>Paid</b> {String(successDetails.paid)}</li>
-                                <li><b>Risk Level</b> {successDetails.outcomeRiskLevel}</li>
-                                <li><b>Risk Score</b> {successDetails.outcomeRiskScore} (out of 99)</li>
-                                <li><b>Network Status</b> {String(successDetails.outcomeNetworkStatus).replace(/_/g, ' ')}</li>
-                                <br />
-                            </div>
                         </ul>
+                        <br/>
                     </div>
 
                 </div>
