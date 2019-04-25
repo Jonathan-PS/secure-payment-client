@@ -1,5 +1,5 @@
 .checkoutImageBox {
-  width: 30px;
-  height: 30px;
-  padding: 10px;
+  height: 30px; /*can be anything*/
+  width: 30px; /*can be anything*/
+  position: relative;
 }
