@@ -60,6 +60,7 @@ class DatabaseList extends Component {
 
   handleClick(address) {
     const shippingInformation = {
+      valid: true,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       receiptEmail: this.state.receiptEmail,
