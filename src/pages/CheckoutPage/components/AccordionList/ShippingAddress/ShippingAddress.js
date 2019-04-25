@@ -33,7 +33,7 @@ class ShippingAddress extends Component {
                   }
                 />
               </Col>
-              {sessionStorage.getItem("user_id") > 0 ? (
+              {localStorage.getItem("user_id") > 0 ? (
                 <Col sm={12} md={8} lg={8}>
                   <DatabaseList
                     triggerSetAddressesFunction={this.setAddressesFunction}

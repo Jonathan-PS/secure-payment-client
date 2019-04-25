@@ -68,7 +68,6 @@ class Card extends Component {
                 {this.props.status}
               </li>
               <Button
-                block
                 type="submit"
                 onClick={this.handleRedirect}
                 variant="dark"

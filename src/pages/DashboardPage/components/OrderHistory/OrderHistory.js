@@ -15,7 +15,7 @@ class OrderHistory extends Component {
   getOrders = event => {
     fetch(
       "https://secure-payment-api.herokuapp.com/orders/users/" +
-        sessionStorage.getItem("user_id")
+        localStorage.getItem("user_id")
     )
       .then(resp => resp.json())
       .then(data => {
