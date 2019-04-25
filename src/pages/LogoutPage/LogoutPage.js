@@ -16,8 +16,8 @@ const LogoutPage = props => {
           <Button variant="secondary">Close</Button>
         </Modal.Footer>
       </Modal.Dialog>
-      ;{sessionStorage.removeItem("user_id")}
-      {sessionStorage.removeItem("email")}
+      ;{localStorage.removeItem("user_id")}
+      {localStorage.removeItem("email")}
       {(window.location = "/")}
     </div>
   );

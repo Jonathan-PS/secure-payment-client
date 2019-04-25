@@ -113,8 +113,8 @@ class AccordionList extends Component {
     if (this.state.anyPhysical) {
       newUserOrder = {
         registeredUserId:
-          sessionStorage.getItem("user_id") > 0
-            ? sessionStorage.getItem("user_id")
+          localStorage.getItem("user_id") > 0
+            ? localStorage.getItem("user_id")
             : "",
         shippingName:
           this.state.shippingInformation.firstName +
@@ -139,8 +139,8 @@ class AccordionList extends Component {
     } else {
       newUserOrder = {
         registeredUserId:
-          sessionStorage.getItem("user_id") > 0
-            ? sessionStorage.getItem("user_id")
+          localStorage.getItem("user_id") > 0
+            ? localStorage.getItem("user_id")
             : "",
         shippingName: "",
         shippingAddress: this.state.shippingInformation.receiptEmail,

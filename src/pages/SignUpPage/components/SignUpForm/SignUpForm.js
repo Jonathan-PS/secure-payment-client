@@ -73,12 +73,12 @@ class SignUpForm extends Component {
           if (response.data < 1) {
             alert("login failed");
           } else {
-            sessionStorage.setItem("user_id", response.data);
-            sessionStorage.setItem("email", this.state.registerUser.email);
+            localStorage.setItem("user_id", response.data);
+            localStorage.setItem("email", this.state.registerUser.email);
 
             console.log("user_id: " + response.data);
 
-            //alert(sessionStorage.getItem("user_id"));
+            //alert(localStorage.getItem("user_id"));
             window.location = "/dashboard";
           }
         })

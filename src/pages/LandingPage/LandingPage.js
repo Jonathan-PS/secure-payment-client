@@ -1,45 +1,68 @@
-import React, { Component } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Button from 'react-bootstrap/Button';
-import './LandingPage.css';
+import React, { Component } from "react";
+import Carousel from "react-bootstrap/Carousel";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Button from "react-bootstrap/Button";
+import "./LandingPage.css";
+import NavbarCollapse from "react-bootstrap/NavbarCollapse";
+import { NavLink } from "react-router-dom";
 
 class LandingPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+  constructor(props, context) {
+    super(props, context);
 
-        this.onSelect = this.onSelect.bind(this);
+    this.onSelect = this.onSelect.bind(this);
 
-        this.state = {
-            index: 0,
-            direction: null,
-        };
-    }
+    this.state = {
+      index: 0,
+      direction: null
+    };
+  }
 
-    onSelect(selectedIndex, e) {
-        this.setState({
-            index: selectedIndex,
-            direction: e.direction,
-        });
-    }
+  onSelect(selectedIndex, e) {
+    this.setState({
+      index: selectedIndex,
+      direction: e.direction
+    });
+  }
 
-    render() {
-        const { index, direction } = this.state;
+  render() {
+    const { index, direction } = this.state;
 
-        return (
+    return (
+      <div>
+        <Jumbotron>
+          <h1>Welcome!</h1>
+          <p> Welcome to Secure Payment Webshop! </p>
+          {localStorage.getItem("user_id") > 0 ? (
+            <p />
+          ) : (
             <div>
-                <Jumbotron>
-                    <h1>Welcome!</h1>
-                    <p> Welcome to Secure Payment Webshop!  </p>
-                    <h5> Sign up or Log in to our page! </h5>
-                    <Button href="/signup" variant="primary">Sign up here</Button> <Button href="/login" variant="primary">Login</Button>
-                    <br /><br />
-                    <h5>Feel free to browse our goods.</h5>
-                    <Button href="/products" variant="primary">Go to Products</Button>
-                </Jumbotron>
+              <h5> Sign up or Log in to our page! </h5>
+              <NavLink
+                to="/login"
+                className="nav-link"
+                activeClassName="active"
+              >
+                <Button variant="primary">Login</Button> &nbsp;
+              </NavLink>
+              <NavLink
+                to="/signup"
+                className="nav-link"
+                activeClassName="active"
+              >
+                <Button variant="primary"> Sign up here</Button> &nbsp;
+              </NavLink>
+            </div>
+          )}
+          <br />
+          <br />
+          <h5>Feel free to browse our goods.</h5>
+          <NavLink to="/products" className="nav-link" activeClassName="active">
+            <Button variant="primary"> Go to Products</Button> &nbsp;
+          </NavLink>
+        </Jumbotron>
 
-
-                {/* 
+        {/* 
                 <Carousel
                     id="carousel"
                     activeIndex={index}
@@ -86,9 +109,9 @@ class LandingPage extends React.Component {
                     </Carousel.Item>
                 </Carousel>
                 */}
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 export default LandingPage;

@@ -99,42 +99,58 @@ class OrderPage extends Component {
       );
     } else {
       return (
-        <div id="generalStyle">
+        <div>
           <h4>Order Review</h4>
           <hr />
           <h5>Order Information</h5>
-          <ul>
-            <li>UserOrderId: {this.state.userOrderInformation.userOrderId} </li>
-            <li>
-              registeredUserId:{" "}
-              {this.state.userOrderInformation.registeredUserId}
-            </li>
-            <li>
-              shippingName: {this.state.userOrderInformation.shippingName}
-            </li>
-            <li>
-              shippingAddress: {this.state.userOrderInformation.shippingAddress}{" "}
-            </li>
-            <li>orderEmail: {this.state.userOrderInformation.orderEmail} </li>
-            <li>totalPrice: {this.state.userOrderInformation.totalPrice} </li>
-            <li>currency: {this.state.userOrderInformation.currency} </li>
-            <li>
-              Created:{" "}
-              {new Date(
-                this.state.userOrderInformation.createdAt
-              ).toUTCString()}
-            </li>
-            <li>status: {this.state.userOrderInformation.status} </li>
-          </ul>
+          <div  className="containerOutter">
+            <div  className="containerLeft">
+              <ul>
+                <li><br/><b>Shipped to:</b></li>
+                <li>
+                  {this.state.userOrderInformation.shippingName}
+                </li>
+                <li>
+                  {this.state.userOrderInformation.shippingAddress}{" "}
+                </li>
+                <li><br/><b>Email:</b> {this.state.userOrderInformation.orderEmail} </li>
+                <li><br/><b>Total price:</b> {this.state.userOrderInformation.totalPrice},- {this.state.userOrderInformation.currency}</li>
+              </ul>
+              </div>
+              <div className="containerRight">
+                <ul>
+                  <li><br/><b>Order ID:</b> {this.state.userOrderInformation.userOrderId} </li>
+                  <li>
+                    <b>User ID:</b>{" "}
+                    {this.state.userOrderInformation.registeredUserId}
+                  </li>
+                  <li>
+                  <br/><b>Order created:</b>{" "}
+                    {new Date(
+                      this.state.userOrderInformation.createdAt
+                    ).toUTCString()}
+                  </li>
+                  <li>
+                    <b>Last Updated:</b>{" "}
+                    {new Date(
+                      this.state.userOrderInformation.updatedAt
+                    ).toUTCString()}
+                  </li>
+                  <li><br/><b>Order status:</b> {this.state.userOrderInformation.status} </li>
+                </ul>
+            </div>
+          </div>
+
           <hr />
           <h5>Order Products Information</h5>
           <ProductList orderProducts={this.state.orderProducts} />
-          <b>Total Price: {this.state.userOrderInformation.totalPrice} NOK</b>
+          <b>Total Price: {this.state.userOrderInformation.totalPrice},- NOK</b>
           <hr />
           <div align="center">
             <br />
-            <StripePayment userOrderId={this.state.userOrderId} />
-            BUTTON : Cancel order - BUTTON : Pay
+            {this.state.userOrderInformation.status === "in progress" ? (
+              <StripePayment userOrderId={this.state.userOrderId} />
+            ) : null}
             <br />
           </div>
           <hr />

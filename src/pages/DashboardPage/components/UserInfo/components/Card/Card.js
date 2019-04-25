@@ -5,9 +5,9 @@ class Card extends Component {
   render() {
     return (
       <div className="col-xs-12 col-sm-12 col-md-12" align="left">
-        <div className="card" id="border">
-          <div className="card-body">
-            <h4 className="card-title" />
+        <div className="userCard" id="border">
+          <div className="userCard-body">
+            <h4 className="userCard-title" />
             <ul>
               <li>
                 <b>Name:</b> {this.props.firstName} {this.props.lastName}

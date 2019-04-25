@@ -16,13 +16,13 @@ class DigitalShippingAddress extends Component {
   }
 
   async componentDidMount() {
-    if (sessionStorage.getItem("user_id") > 0) {
+    if (localStorage.getItem("user_id") > 0) {
       await this.setState({
         shippingInformation: {
           valid: true,
           firstName: "",
           lastName: "",
-          receiptEmail: sessionStorage.getItem("email"),
+          receiptEmail: localStorage.getItem("email"),
           streetName: "",
           streetNumber: "",
           housingCode: "",
@@ -78,17 +78,14 @@ class DigitalShippingAddress extends Component {
         <div label="Address">
           <Container>
             <Row>
-              {sessionStorage.getItem("user_id") > 0 ?
-                (
-                  <Col sm={12} md={4} lg={4}>
-                    <b>Selected email:</b>
-                    <br />
-                    {this.state.shippingInformation.receiptEmail}
-                  </Col>
-                )
-                :
-                null
-              }
+
+              {localStorage.getItem("user_id") > 0 ? (
+                <Col sm={12} md={4} lg={4}>
+                  <b>Selected email:</b>
+                  <br />
+                  {this.state.shippingInformation.receiptEmail}
+                </Col>
+              ) : null}
               <Col sm={12} md={4} lg={4}>
                 <form onSubmit={this.onSubmit}>
                   <FormGroup controlId="email">

@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./AddAddressForm.css";
 import axios from "axios";
 
+//
 class AddressForm extends Component {
   constructor() {
     super();
@@ -14,7 +15,7 @@ class AddressForm extends Component {
         city: "",
         postalCode: "",
         country: "",
-        registeredUserId: sessionStorage.getItem("user_id"),
+        registeredUserId: localStorage.getItem("user_id"),
         isCurrent: true
       }
     };
@@ -22,12 +23,18 @@ class AddressForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  // onChange sets address at the address from what we set in the constructor
   onChange(e) {
     const address = this.state.addAddress;
     address[e.target.name] = e.target.value;
     this.setState({ addAddress: address });
     console.log(this.state.addAddress);
   }
+
+  /* onSubmit handles what happens when the 'Add address'-button is pressed.
+   * It makes an axios-call to put the JSON-object in our database using the
+   * correct endpoint /addresses/create.
+   */
 
   async onSubmit(e) {
     e.preventDefault();
@@ -44,9 +51,6 @@ class AddressForm extends Component {
         console.log(response);
         //this.addAddress();
         this.props.triggerGetAddresses();
-        {
-          /* WHERE CAN WE PUT THIS TO REFRESH THE PAGE WHEN ADDRESS IS ADDED ????*/
-        }
       })
       .catch(error => {
         console.log(error.response);
@@ -54,6 +58,11 @@ class AddressForm extends Component {
   }
 
   render() {
+    {
+      /* render() renders a form which has the following fields:
+      streetName, streetNumber, housingCode, postalCode, city & country
+      and a submit-button which sends the data. */
+    }
     return (
       <div>
         <div className="Login" id="generalStyle">

@@ -18,7 +18,7 @@ class InputForm extends Component {
       city: "",
       postalCode: "",
       country: "",
-      registeredUserId: sessionStorage.getItem("user_id"),
+      registeredUserId: localStorage.getItem("user_id"),
       isCurrent: true
     };
     this.onChange = this.onChange.bind(this);
@@ -46,10 +46,10 @@ class InputForm extends Component {
     console.log("Submit");
     console.log(addAddress);
 
-    if (sessionStorage.getItem("user_id") > 0) {
+    if (localStorage.getItem("user_id") > 0) {
       await fetch(
         "https://secure-payment-api.herokuapp.com/users/" +
-        sessionStorage.getItem("user_id")
+          localStorage.getItem("user_id")
       )
         .then(resp => resp.json())
         .then(data => {
@@ -98,7 +98,7 @@ class InputForm extends Component {
       <div>
         <div>
           <form onSubmit={this.onSubmit}>
-            {sessionStorage.getItem("user_id") > 0 ? null : (
+            {localStorage.getItem("user_id") > 0 ? null : (
               <div>
                 <br />
                 <FormGroup controlId="firstName">

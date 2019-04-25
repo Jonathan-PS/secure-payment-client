@@ -9,7 +9,7 @@ class LoginPage extends Component {
       <div id="generalStyle">
         <h4>Login</h4>
         <hr />
-        {sessionStorage.getItem("user_id") < 1 ? (
+        {localStorage.getItem("user_id") < 1 ? (
           <LoginForm />
         ) : (
           (window.location = "/")

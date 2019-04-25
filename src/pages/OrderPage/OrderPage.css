@@ -1,0 +1,18 @@
+.containerOutter { 
+    align-content: left;
+    width: 50%; 
+    border:red;
+}
+
+.containerLeft { 
+    width: 50%;
+    float:left; 
+    border:green;
+}
+
+.containerRight { 
+    width: 50%;
+    float:right; 
+    border:blue;
+}
+
