@@ -10,7 +10,7 @@ class OrderPage extends Component {
     super(props);
     this.state = {
       /* Variable from Redirection */
-      userOrderId: this.props.location.state.userOrderId,
+      userOrderId: "",
       /* To check if variables are sent from Stripe Checkout */
       cantLoad: false,
 
@@ -28,40 +28,7 @@ class OrderPage extends Component {
         status: ""
       },
       /* Products that are part of the UserOrder, which are retrieved from the databse upon mount */
-      orderProducts: [
-        {
-          orderProductId: 1,
-          userOrderId: 1,
-          productId: 1,
-          priceEach: 79.99,
-          quantity: 2,
-          product: {
-            productId: 1,
-            productName: "Red Socks",
-            description: "Nice pair of red socks",
-            stock: 10,
-            imageUrl:
-              "http://sweetclipart.com/multisite/sweetclipart/files/socks_red.png",
-            active: true
-          }
-        },
-        {
-          orderProductId: 1,
-          userOrderId: 1,
-          productId: 1,
-          priceEach: 79.99,
-          quantity: 2,
-          product: {
-            productId: 1,
-            productName: "Red Socks",
-            description: "Nice pair of red socks",
-            stock: 10,
-            imageUrl:
-              "http://sweetclipart.com/multisite/sweetclipart/files/socks_red.png",
-            active: true
-          }
-        }
-      ]
+      orderProducts: []
       /*[{
         orderProductId: "",
         userOrderId: "",
@@ -79,30 +46,44 @@ class OrderPage extends Component {
     };
   }
 
-  componentDidMount() {
-    /* GET USER ORDER FROM DATABASE */
-    axios
-      .get(
-        "https://secure-payment-api.herokuapp.com/orders/" +
-          this.state.userOrderId
-      )
-      .then(response => {
-        console.log(JSON.stringify(response.data));
-        this.setState({
-          userOrderInformation: response.data
-        });
-      });
-
+  async componentDidMount() {
     try {
-      this.setState({
+      await this.setState({
         userOrderId: this.props.location.state.userOrderId
       });
 
+      /* GET USER ORDER FROM DATABASE */
+      axios
+        .get(
+          "https://secure-payment-api.herokuapp.com/orders/" +
+            this.state.userOrderId
+        )
+        .then(response => {
+          console.log(JSON.stringify(response.data));
+          this.setState({
+            userOrderInformation: response.data
+          });
+        })
+        .catch(err => {
+          alert(err);
+        });
       /* GET ORDERPRODUCTS FROM DATABASE */
-      /*axios
-        .get("https://secure-payment-api.herokuapp.com/ORDERPRODUCTS/{THIS.STATE.USERORDERID}")
-      */
+      axios
+        .get(
+          "https://secure-payment-api.herokuapp.com/orderproducts/orders/" +
+            this.state.userOrderId
+        )
+        .then(response => {
+          console.log(JSON.stringify(response.data));
+          this.setState({
+            orderProducts: this.state.orderProducts.concat(response.data)
+          });
+        })
+        .catch(err => {
+          console.log("Fetching Order Products Error : " + err);
+        });
     } catch (error) {
+      console.log("failed to redirect");
       this.setState({
         cantLoad: true
       });
