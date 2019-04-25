@@ -13,8 +13,10 @@ class Address extends Component {
     this.getAddresses = this.getAddresses.bind(this);
   }
 
+  /* getAddresses() gets the addresses using fetch. It appends the stored user_id to make sure that
+  *  we serve the correct addresses to the user that is currently logged in */
   getAddresses = event => {
-    fetch('http://secure-payment-api.herokuapp.com/addresses/users/' + sessionStorage.getItem('user_id'))
+    fetch('https://secure-payment-api.herokuapp.com/addresses/users/' + sessionStorage.getItem('user_id'))
         .then(resp => resp.json())
         .then(data => {
           console.log(data);
@@ -30,6 +32,7 @@ class Address extends Component {
     this.props.triggerSetAddressesFunction(this.getAddresses);
   }
 
+  // Rendering and returning the cards on screen using the layout from Card.js 
   render() {
     const cards = this.state.allAddresses.map(addresses => (
         <Card
