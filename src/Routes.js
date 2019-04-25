@@ -43,6 +43,7 @@ export default class Routes extends Component {
               triggerAddCartProduct={this.props.triggerAddCartProduct}
               triggerDecreaseCartProduct={this.props.triggerDecreaseCartProduct}
               triggerRemoveProduct={this.props.triggerRemoveProduct}
+              triggerClearCart={this.props.triggerClearCart}
             />
           )}
         />

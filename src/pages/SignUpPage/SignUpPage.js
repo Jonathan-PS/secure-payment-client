@@ -9,7 +9,7 @@ class SignUpPage extends Component {
       <div id="generalStyle">
         <h4>Sign Up</h4>
         <hr />
-        {sessionStorage.getItem("user_id") < 1 ? (
+        {localStorage.getItem("user_id") < 1 ? (
           <SignUpForm />
         ) : (
           (window.location = "/")

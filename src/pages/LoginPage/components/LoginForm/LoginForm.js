@@ -38,13 +38,12 @@ class LoginForm extends Component {
         )
         .then(response => {
           if (response.data < 1) {
-            alert("login failed");
             window.location = "/login";
           } else {
-            sessionStorage.setItem("user_id", response.data);
-            sessionStorage.setItem("email", this.state.email);
+            localStorage.setItem("user_id", response.data);
+            localStorage.setItem("email", this.state.email);
 
-            //alert("Logged in with user_id: " + sessionStorage.getItem("user_id"));
+            //alert("Logged in with user_id: " + localStorage.getItem("user_id"));
             window.location = "/dashboard";
           }
         })

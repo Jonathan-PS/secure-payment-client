@@ -5,18 +5,21 @@ import Card from "./components/Card/Card";
 class UserInfo extends Component {
   state = {
     allUsers: []
-    };
+  };
 
   componentDidMount() {
-    fetch("https://secure-payment-api.herokuapp.com/users/" + sessionStorage.getItem("user_id"))
-    .then(resp => resp.json())
-    .then(data => {
-      console.log(data);
-      this.setState({
-        allUsers: this.state.allUsers.concat(data)
-      });
-    })
-    .catch(err => {});
+    fetch(
+      "https://secure-payment-api.herokuapp.com/users/" +
+        localStorage.getItem("user_id")
+    )
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data);
+        this.setState({
+          allUsers: this.state.allUsers.concat(data)
+        });
+      })
+      .catch(err => {});
   }
 
   render() {
@@ -37,7 +40,9 @@ class UserInfo extends Component {
 
     return (
       <div id="generalStyle">
-        <div className="row" id="margins">{cards}</div>
+        <div className="row" id="margins">
+          {cards}
+        </div>
       </div>
     );
   }
