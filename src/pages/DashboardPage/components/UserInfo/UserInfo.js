@@ -40,9 +40,11 @@ class UserInfo extends Component {
 
     return (
       <div id="generalStyle">
+
         <div className="row" id="margins">
           {cards}
         </div>
+
       </div>
     );
   }
