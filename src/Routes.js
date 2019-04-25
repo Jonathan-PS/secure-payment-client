@@ -9,7 +9,6 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ProductListPage from "./pages/ProductListPage/ProductListPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
-import StripePaymentPage from "./pages/StripePaymentPage/StripePaymentPage";
 import CartPage from "./pages/CartPage/CartPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage/OrderSuccessPage";
 import OrderFailPage from "./pages/OrderFailPage/OrderFailPage";
@@ -25,7 +24,6 @@ export default class Routes extends Component {
         <Route exact path="/logout" component={LogoutPage} />
         <Route exact path="/signup" component={SignUpPage} />
         <Route exact path="/dashboard" component={DashboardPage} />
-        <Route exact path="/stripepayment" component={StripePaymentPage} />
         <Route exact path="/" component={LandingPage} />
         <Route
           exact
