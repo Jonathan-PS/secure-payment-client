@@ -42,6 +42,15 @@ const NavigationBar = props => {
                 Products
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink
+                to="/checkout"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Checkout
+              </NavLink>
+            </NavItem>
             {localStorage.getItem("user_id") > 0 ? (
               <NavItem>
                 <NavLink
@@ -84,15 +93,7 @@ const NavigationBar = props => {
                 </NavLink>
               </NavItem>
             )}
-            <NavItem>
-              <NavLink
-                to="/checkout"
-                className="nav-link"
-                activeClassName="active"
-              >
-                Checkout
-              </NavLink>
-            </NavItem>
+            
           </Nav>
           <Nav>
             <NavItem>

@@ -39,6 +39,7 @@ class CartPage extends Component {
             </Button>
           </NavLink>
         </div>
+        <br/>
       </div>
     );
   }

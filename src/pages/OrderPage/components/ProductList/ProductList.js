@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import "./ProductList.css";
 
 class ProductList extends Component {
+
+   // FORMAT PRICE TO LOOK LIKE THIS: 500,25
+   showPrice = (price) =>{
+    const showPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2).toString().replace(".", ",")
+    return showPrice
+  }
+
+
   render() {
     let listKey = 1;
 
@@ -14,24 +22,22 @@ class ProductList extends Component {
             width="30"
           />
         </th>
-        <td>{orderProduct.product.productId}</td>
         <td>{orderProduct.product.productName}</td>
         {<td>{orderProduct.quantity}</td>}
         <td>
-          {orderProduct.quantity} x {orderProduct.priceEach}
+          {orderProduct.quantity} x {this.showPrice(orderProduct.priceEach)} NOK
         </td>
       </tr>
     ));
 
     return (
       <div className="container" id="generalStyle">
-        <table className="table table-striped">
+        <table className="table table-sm table-striped">
           <thead>
             <tr>
               <th scope="col" />
-              <th scope="col">Id</th>
               <th scope="col">Name</th>
-              {<th scope="col">Quantity</th>}
+              {<th scope="col">Qty.</th>}
               <th scope="col">price</th>
             </tr>
           </thead>

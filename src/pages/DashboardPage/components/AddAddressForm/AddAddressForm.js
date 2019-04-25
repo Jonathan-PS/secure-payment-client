@@ -65,7 +65,7 @@ class AddressForm extends Component {
     }
     return (
       <div>
-        <div className="Login" id="generalStyle">
+        <div id="generalStyle">
           <form onSubmit={this.onSubmit}>
             <FormGroup controlId="streetName">
               Street Name *
@@ -142,6 +142,7 @@ class AddressForm extends Component {
               Add Address
             </Button>
           </form>
+          <br/><br/>
         </div>
       </div>
     );

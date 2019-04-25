@@ -36,6 +36,11 @@ class Card extends Component {
     this.setState({ redirect: true });
   }
 
+  showPrice = (price) =>{
+    const showPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2).toString().replace(".", ",")
+    return showPrice
+  }
+
   render() {
     {
       /* This component basically makes the card that is used to display the orders.
@@ -64,9 +69,14 @@ class Card extends Component {
                 {new Date(this.props.updatedAt).toUTCString()}
               </li>
               <li>
+                <b>Total price: </b>
+                {this.showPrice(this.props.totalPrice)} {String(this.props.currency).toUpperCase()}
+              </li>
+              <li>
                 <b>Order status: </b>
                 {this.props.status}
               </li>
+              <br/>
               <Button
                 type="submit"
                 onClick={this.handleRedirect}

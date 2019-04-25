@@ -60,10 +60,10 @@ class ProductListCard extends Component {
                 <small>Digital Product</small>
               </span>
             ) : (
-              <span>
-                <small>Physical Product</small>
-              </span>
-            )}
+                <span>
+                  <small>Physical Product</small>
+                </span>
+              )}
 
             {/* IS PRODUCT DIGITAL ? */}
             {this.props.digital ? (
@@ -78,44 +78,42 @@ class ProductListCard extends Component {
                 </button>
               </span>
             ) : /* IS PRODUCT IN STOCK ? */
-            this.props.stock > 0 ? (
-              this.props.stock > 75 ? (
-                <span>
-                  <p>
-                    <small>In stock (75+)</small>
-                  </p>
-                  <button
-                    onClick={this.addToCart}
-                    type="button"
-                    className="btn btn-success"
-                  >
-                    Add to Cart
+              this.props.stock > 0 ? (
+                this.props.stock > 75 ? (
+                  <span>
+                    <p>
+                      <small>In stock (75+)</small>
+                    </p>
+                    <button
+                      onClick={this.addToCart}
+                      type="button"
+                      className="btn btn-success"
+                    >
+                      Add to Cart
                   </button>
-                </span>
+                  </span>
+                ) : (
+                    <span>
+                      <p>
+                        <small>In stock ({this.props.stock})</small>
+                      </p>
+                      <button
+                        onClick={this.addToCart}
+                        type="button"
+                        className="btn btn-success"
+                      >
+                        Add to Cart
+                  </button>
+                    </span>
+                  )
               ) : (
-                <span>
-                  <p>
-                    <small>In stock ({this.props.stock})</small>
-                  </p>
-                  <button
-                    onClick={this.addToCart}
-                    type="button"
-                    className="btn btn-success"
-                  >
-                    Add to Cart
-                  </button>
-                </span>
-              )
-            ) : (
-              <span>
-                <p>
-                  <small>Sold out!</small>
-                </p>
-                <button disabled type="button" className="btn btn-secondary">
-                  Add to Cart
+                  <span>
+                    <p> </p>
+                    <button disabled type="button" className="btn btn-secondary">
+                      Sold out!
                 </button>
-              </span>
-            )}
+                  </span>
+                )}
           </div>
         </div>
       </div>

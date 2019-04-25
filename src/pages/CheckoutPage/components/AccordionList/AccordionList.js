@@ -215,25 +215,39 @@ class AccordionList extends Component {
     }
   }
 
+  showPrice = (price) =>{
+    const showPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2).toString().replace(".", ",")
+    return showPrice
+  }
+
   render() {
+
+    const {currency} = this.state;
+
+    const { firstName, lastName, streetName, streetNumber, housingCode,
+      postalCode, city, country, receiptEmail } = this.state.shippingInformation;
+
 
     const productList = this.props.cartProducts.map(product => (
       <ul key={product.productId} className="list-style: none;">
         <li>
           {/*Math.round(product.priceEach * product.selectedQuantity)*/}
           <b>{product.productName}</b>
-          <br />Price: {product.priceEach}x{product.selectedQuantity}{" "}
-          ({parseFloat(Math.round(product.priceEach * product.selectedQuantity * 100) / 100).toFixed(2)})
+          <br />
+          <small>Price:</small> {this.showPrice(product.priceEach)} x {product.selectedQuantity}{" "}
+          ({this.showPrice(product.priceEach * product.selectedQuantity)} {currency.toUpperCase()})
         </li>
       </ul>
     ));
 
 
     const formattedTotalPrice = String(this.state.totalPrice).toString().replace(".", ",");
+    
+    
+
 
     return (
       <div>
-
         {/** Back To Cart Button */}
         <div align="center">
           <NavLink to="/cart" activeClassName="active">
@@ -244,10 +258,10 @@ class AccordionList extends Component {
         {/** List */}
         <Accordion defaultActiveKey="0">
           <Card>
-            {/* First Card */}
+            {/* First Card - PRODUCTS*/}
             <Accordion.Toggle as={Card.Header} eventKey="0">
-              <strong> 1 |</strong> Products ({" "}
-              {formattedTotalPrice}{" "} NOK )
+              <strong> 1 |</strong> Products ({" "} {formattedTotalPrice}{" "} NOK ) &nbsp;
+              {(this.props.cartProducts.length > 0) ? <span class="symbol">✓</span> : <span></span>}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
@@ -257,20 +271,27 @@ class AccordionList extends Component {
             </Accordion.Collapse>
           </Card>
           <Card>
-            {/* Second Card */}
+            {/* Second Card - DELIVERY METHOD */}
             <Accordion.Toggle as={Card.Header} eventKey="1">
-              <strong> 2 |</strong> Delivery Method {/* "SHIPPING ADDRESS" */}
+              <strong> 2 |</strong> Delivery Method &nbsp;
+              {}
+              {/*((streetName.length > 0) || (receiptEmail))? <span class="symbol">✓</span> : <span></span>*/}
+              {((streetName) || (receiptEmail)) ? <span class="symbol">✓</span> : <span></span>}
+              {/* "SHIPPING ADDRESS" */}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
               <Card.Body>
                 {this.state.anyPhysical ?
+                  /* IF PHYSICAL */
                   <div>
                     <small><i>Since you're buying physical products, we'll need your shipping information.</i></small>
+                    <br /><br />
                     <ShippingAddress
                       triggerSetShippingInformation={this.setShippingInformation}
                     />
                   </div>
                   :
+                  /* IF DIGITAL */
                   <div>
                     <small><i>Since you're buying digital products, we'll need your email.</i></small>
                     <br /><br />
@@ -283,48 +304,69 @@ class AccordionList extends Component {
             </Accordion.Collapse>
           </Card>
           <Card>
-            {/*  Third Card */}
+            {/*  Third Card - CREATE ORDER */}
             <Accordion.Toggle as={Card.Header} eventKey="2">
-              <strong> 3 |</strong> Create Your Order
+              <strong> 3 |</strong> Create Your Order &nbsp;
+              {((this.props.cartProducts.length > 0) && ((streetName) || (receiptEmail))) ? <span class="symbol">✓</span> : <span></span>}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <div align="center">
                 <div id="generalStyle">
+                  <br />
                   <Container>
                     <Row>
-                      <Col sm={12} md={4} lg={4}>
-                        <ul><b>Shipping Address</b></ul>
+                      <Col sm={12} md={6} lg={6}>
+                        {
+                          (this.state.anyPhysical) ?
+                            <ul><b>Shipping address</b></ul>
+                            :
+                            <ul><b>Delivery address</b></ul>
+                        }
+                        {
+                          (streetName || receiptEmail) ?
+                            <div>
+                              <ul className="list-style: none;">
+                                <li>
+                                  {firstName}{" "}
+                                  {lastName}
+                                </li>
 
-                        <ul className="list-style: none;">
-                          <li>
-                            {this.state.shippingInformation.firstName}{" "}
-                            {this.state.shippingInformation.lastName}
-                          </li>
+                                <li>
+                                  {streetName}{" "}
+                                  {streetNumber}{" "}
+                                  {housingCode}
+                                </li>
+                                <li>
+                                  {postalCode}{" "}
+                                  {city}{" "}
+                                  {country}
+                                </li>
+                              </ul>
+                              <ul><b>Email</b><br /><i>{receiptEmail}</i></ul>
+                            </div>
+                            :
+                            <div>
+                              <ul><small><i>You need to select delivery method!</i></small></ul>
+                            </div>
+                        }
 
-                          <li>
-                            {this.state.shippingInformation.streetName}{" "}
-                            {this.state.shippingInformation.streetNumber}{" "}
-                            {this.state.shippingInformation.housingCode}
-                          </li>
-                          <li>
-                            {this.state.shippingInformation.postalCode}{" "}
-                            {this.state.shippingInformation.city}{" "}
-                            {this.state.shippingInformation.country}
-                          </li>
-                        </ul>
-                        <ul><b>Email</b><br/><i>{this.state.shippingInformation.receiptEmail}</i></ul>
+
 
                       </Col>
-                      <Col sm={12} md={8} lg={8}>
-                        <ul><b>SUMMARY</b></ul>
-                        {productList}
-                        <ul className="list-style: none;">
+                      <Col sm={12} md={6} lg={6}>
+                        <ul><b>Products summary</b></ul>
+                        {
+                          (productList.length > 0) ?
+                            <span>{productList}</span>
+                            :
+                            <ul><small><i>You need to select products!</i></small></ul>
+                        }
 
-                        </ul>
                       </Col>
                     </Row>
                   </Container>
                 </div>
+                <br />
                 <p><b><i>Total price to pay: {formattedTotalPrice + " NOK"} </i></b></p>
                 <Button
                   disabled={

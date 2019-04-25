@@ -75,30 +75,33 @@ class DatabaseList extends Component {
   }
 
   render() {
-    /*check if user is logged in */
+    
     let listItems = null;
+
+    /*check if user is logged in */
     if (localStorage.getItem("user_id") > 0) {
       let listKey = 1;
       listItems = this.state.allAddresses.map(address => (
-        <Col sm={6} md={4} lg={4} key={address.addressId} className="border">
-          <div id="generalStyle">
+        
+        <Col sm={6} md={4} lg={5} key={address.addressId} className="existingAddressBox border">
+          <div className="existingAddress">
+          <h6><b>Existing address</b></h6>
             <p>
               {address.streetName} {address.streetNumber},{" "}
-            </p>
-
-            {address.housingCode}
-            <p>
+              {address.housingCode}
               {address.postalCode}, {address.city}, {address.country}
             </p>
           </div>
-          <Button
-            align="center"
-            type="submit"
-            onClick={() => this.handleClick(address)}
-            variant="success"
-          >
-            Select
-          </Button>
+          <div className="button">
+            <Button
+              align="center"
+              type="submit"
+              onClick={() => this.handleClick(address)}
+              variant="success"
+            >
+              Select
+            </Button>
+          </div>
         </Col>
       ));
     }
@@ -106,7 +109,7 @@ class DatabaseList extends Component {
     return (
       <div align="right">
         <div className="container" id="generalStyle" />
-
+        <Row><h6>&nbsp;&nbsp;&nbsp; Select an existing address</h6></Row>
         <Row>{listItems}</Row>
       </div>
     );

@@ -100,7 +100,7 @@ class OrderFailPage extends Component {
     render() {
 
         /* Checks for errors */
-        if ((this.state.failError) == null) { 
+        if ((this.state.failError) == null) {
             /* If data from Stripe/DB is not yet saved to state */
             console.log("Not yet loaded")
             return (<div><p></p></div>);
@@ -119,10 +119,11 @@ class OrderFailPage extends Component {
             /* If no error, render as normal */
 
             const { failError, failErrorMessage, failErrorResponseStatus, failErrorResponseDataMessage, failErrorRequest, failErrorConfig } = this.state;
-
+            console.log("Error Response Data Message" + failErrorResponseDataMessage);
             return (
 
-                <div className="block-example border border-dark rounded mb-0" style={{ backgroundColor: '#f1f1f1' }}>
+
+                <div className="block-example border border-light rounded mb-0" style={{ backgroundColor: '#f1f1f1' }}>
                     <div className="col-xs-12 col-sm-6 col-md-12" align="left">
 
                         {/* PRINT INFO */}
@@ -139,15 +140,8 @@ class OrderFailPage extends Component {
                             <li class="list-group-item">
                                 <b>Error Response Status</b> <br />{failErrorResponseStatus}
                             </li>
-
-                            {/* REMOVE LATER! */}
-                            <br /><br />
-                            <h5><i>This under will be removed! Only for show now:</i></h5>
-                            <li><b>Error Response Data Message</b> {failErrorResponseDataMessage}</li>
-                            <li><b>Error Request</b> {failErrorRequest}</li>
-                            <li><b>Error Config</b> {failErrorConfig}</li>
-                            <br />
                         </ul>
+                        <br />
                     </div>
                 </div>
             );
