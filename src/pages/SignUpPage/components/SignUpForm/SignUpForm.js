@@ -27,15 +27,6 @@ class SignUpForm extends Component {
     console.log(this.state.registerUser);
   }
 
-  validateForm() {
-    return (
-      this.state.registerUser.firstName.length > 0 &&
-      this.state.registerUser.lastName.length > 0 &&
-      this.state.registerUser.email.length > 0 &&
-      this.state.registerUser.password.length > 0
-    );
-  }
-
   async onSubmit(e) {
     e.preventDefault();
     const { registerUser } = this.state;
@@ -143,7 +134,6 @@ class SignUpForm extends Component {
             block
             type="submit"
             variant="dark"
-            disabled={!this.validateForm()}
           >
             Sign Up
           </Button>
