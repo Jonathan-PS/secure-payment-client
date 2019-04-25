@@ -10,7 +10,12 @@ class CartPage extends Component {
       <div id="generalStyle">
         <h4>Cart</h4>
         <hr />
-        <ProductListCart cartProducts={this.props.cartProducts} />
+        <ProductListCart
+          cartProducts={this.props.cartProducts}
+          triggerAddCartProduct={this.props.triggerAddCartProduct}
+          triggerDecreaseCartProduct={this.props.triggerDecreaseCartProduct}
+          triggerRemoveProduct={this.props.triggerRemoveProduct}
+        />
 
         <div align="center">
           {this.props.cartProducts.length > 0 ? (

@@ -37,7 +37,14 @@ export default class Routes extends Component {
         <Route
           exact
           path="/cart"
-          render={() => <CartPage cartProducts={this.props.cartProducts} />}
+          render={() => (
+            <CartPage
+              cartProducts={this.props.cartProducts}
+              triggerAddCartProduct={this.props.triggerAddCartProduct}
+              triggerDecreaseCartProduct={this.props.triggerDecreaseCartProduct}
+              triggerRemoveProduct={this.props.triggerRemoveProduct}
+            />
+          )}
         />
         <Route
           exact
