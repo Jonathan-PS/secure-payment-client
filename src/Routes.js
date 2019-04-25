@@ -54,7 +54,13 @@ export default class Routes extends Component {
         />
 
         <Route exact path="/order" component={OrderPage} />
-        <Route exact path="/order/success" component={OrderSuccessPage} />
+        <Route
+          exact
+          path="/order/success"
+          render={() => (
+            <OrderSuccessPage triggerClearCart={this.props.triggerClearCart} />
+          )}
+        />
         <Route exact path="/order/fail" component={OrderFailPage} />
         <Route component={NotFoundPage} />
       </Switch>

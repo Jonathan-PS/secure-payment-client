@@ -108,24 +108,26 @@ class ProductListCart extends Component {
               <th scope="col" />
             </tr>
           </thead>
-          <tbody>{products}</tbody>
-          <tr>
-            <th scope="col" />
-            <th scope="col" />
-            <th scope="col" />
-            {<th scope="col" />}
-            <th scope="col" />
-            <th scope="col">
-              <Button
-                disabled={this.props.cartProducts.length == 0}
-                variant="danger"
-                onClick={() => this.handleClearCart()}
-                size="sm"
-              >
-                Clear Cart
-              </Button>
-            </th>
-          </tr>
+          <tbody>
+            {products}
+            <tr>
+              <th scope="col" />
+              <th scope="col" />
+              <th scope="col" />
+              {<th scope="col" />}
+              <th scope="col" />
+              <th scope="col">
+                <Button
+                  disabled={this.props.cartProducts.length == 0}
+                  variant="danger"
+                  onClick={() => this.handleClearCart()}
+                  size="sm"
+                >
+                  Clear Cart
+                </Button>
+              </th>
+            </tr>
+          </tbody>
         </table>
         Price:{" "}
         {String(this.state.totalPrice)
