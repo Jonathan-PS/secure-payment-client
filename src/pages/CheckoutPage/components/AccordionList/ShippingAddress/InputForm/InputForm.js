@@ -102,7 +102,7 @@ class InputForm extends Component {
               <div>
                 <br />
                 <FormGroup controlId="firstName">
-                  First Name *
+                  First Name
                   <FormControl
                     autoFocus
                     name="firstName"
@@ -110,11 +110,10 @@ class InputForm extends Component {
                     placeholder="First Name (e.g. Ola)"
                     onChange={this.onChange}
                     defaultValue={this.state.firstName}
-                    required="required"
                   />
                 </FormGroup>
                 <FormGroup controlId="lastName">
-                  Last Name *
+                  Last Name
                   <FormControl
                     autoFocus
                     name="lastName"
@@ -122,7 +121,6 @@ class InputForm extends Component {
                     placeholder="Last Name (e.g. Nordmann)"
                     onChange={this.onChange}
                     defaultValue={this.state.lastName}
-                    required="required"
                   />
                 </FormGroup>
                 <FormGroup controlId="receiptEmail">
@@ -131,7 +129,7 @@ class InputForm extends Component {
                     autoFocus
                     name="receiptEmail"
                     type="receiptEmail"
-                    placeholder="Street Name (e.g. ola.nordmann@mail.no)"
+                    placeholder="Email (e.g. ola.nordmann@mail.no)"
                     onChange={this.onChange}
                     defaultValue={this.state.receiptEmail}
                     required="required"
@@ -200,7 +198,7 @@ class InputForm extends Component {
               />
             </FormGroup>
             <FormGroup controlId="country">
-              City *
+              Country *
               <FormControl
                 autoFocus
                 name="country"
