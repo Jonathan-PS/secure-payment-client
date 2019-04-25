@@ -33,17 +33,11 @@ class LandingPage extends React.Component {
                     <h1>Welcome!</h1>
                     <p> Welcome to Secure Payment Webshop!  </p>
                     {sessionStorage.getItem("user_id") > 0 ? (
-                        <p></p> ) : (
-                        <h5> Sign up or Log in to our page! </h5>
-                    )}
-                    {sessionStorage.getItem("user_id") > 0 ? (
-                        <p></p> ) : (
-                        <Button href="/login" variant="primary">Login</Button>
-                    )}
-                    &nbsp;
-                    {sessionStorage.getItem("user_id") > 0 ? (
-                        <p></p> ) : (
+                        <div><h5> Sign up or Log in to our page! </h5>
+                        <Button href="/login" variant="primary">Login</Button> &nbsp;
                         <Button href="/signup" variant="primary">Sign up here</Button>
+                        </div> ) : (
+                        <p></p>
                     )}
                     <br /><br />
                     <h5>Feel free to browse our goods.</h5>
