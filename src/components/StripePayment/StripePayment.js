@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import Spinner from 'react-bootstrap/Spinner';
 
 // PUBLISHABLE KEY FROM STRIPE
 const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
@@ -438,7 +439,12 @@ class StripeCards extends React.Component {
         // If Stripe is loading...
         loading || stripeLoading ? (
           // If loading: text
-          <p>Stripe is loading...</p> // <Button> Loading ... </Button>
+          <div>
+          <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+          </Spinner>
+          {/* <p>Stripe is loading...</p> // <Button> Loading ... </Button> */}
+          </div>
         ) : (
           // If not loading: Show Pay-button
           <Button variant="primary" onClick={this.onStripeUpdate}>

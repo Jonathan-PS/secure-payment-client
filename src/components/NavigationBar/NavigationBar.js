@@ -93,15 +93,7 @@ const NavigationBar = props => {
                   Checkout
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink
-                    to="/stripePayment"
-                    className="nav-link"
-                    activeClassName="active"
-                >
-                  Stripe
-                </NavLink>
-              </NavItem>
+             
             </Nav>
             <Nav />
             <Nav>
