@@ -8,11 +8,10 @@ class ProductList extends Component {
     const products = this.props.cartProducts.map(product => (
       <tr key={listKey++}>
         <th scope="row">
-          <div className="imageBox">
-            <img src={product.imageUrl} alt="Product Image" />
+          <div className="checkoutImageBox">
+            <img className="checkoutImg" src={product.imageUrl} alt="Product Image" />
           </div>
         </th>
-        <td>{product.productId}</td>
         <td>{product.productName}</td>
         {<td>{product.selectedQuantity}</td>}
         <td>
@@ -22,15 +21,14 @@ class ProductList extends Component {
     ));
 
     return (
-      <div className="container" id="generalStyle">
+      <div >
         <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col" />
-              <th scope="col">Id</th>
               <th scope="col">Name</th>
-              {<th scope="col">Quantity</th>}
-              <th scope="col">price</th>
+              {<th scope="col">Qty.</th>}
+              <th scope="col">Price</th>
             </tr>
           </thead>
           <tbody>{products}</tbody>

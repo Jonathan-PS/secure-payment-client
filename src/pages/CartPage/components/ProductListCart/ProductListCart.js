@@ -13,6 +13,7 @@ class ProductListCart extends Component {
     this.handleIncrease = this.handleIncrease.bind(this);
     this.handleDecrease = this.handleDecrease.bind(this);
     this.handleRemoval = this.handleRemoval.bind(this);
+    this.handleClearCart = this.handleClearCart.bind(this);
   }
   componentDidMount() {
     this.computeTotalPrice();
@@ -44,6 +45,11 @@ class ProductListCart extends Component {
 
   async handleDecrease(product) {
     await this.props.triggerDecreaseCartProduct(product);
+    await this.computeTotalPrice();
+  }
+
+  async handleClearCart(product) {
+    await this.props.triggerClearCart(product);
     await this.computeTotalPrice();
   }
 
@@ -102,7 +108,26 @@ class ProductListCart extends Component {
               <th scope="col" />
             </tr>
           </thead>
-          <tbody>{products}</tbody>
+          <tbody>
+            {products}
+            <tr>
+              <th scope="col" />
+              <th scope="col" />
+              <th scope="col" />
+              {<th scope="col" />}
+              <th scope="col" />
+              <th scope="col">
+                <Button
+                  disabled={this.props.cartProducts.length == 0}
+                  variant="danger"
+                  onClick={() => this.handleClearCart()}
+                  size="sm"
+                >
+                  Clear Cart
+                </Button>
+              </th>
+            </tr>
+          </tbody>
         </table>
         Price:{" "}
         {String(this.state.totalPrice)

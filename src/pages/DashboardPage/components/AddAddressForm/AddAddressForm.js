@@ -3,7 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./AddAddressForm.css";
 import axios from "axios";
 
-// 
+//
 class AddressForm extends Component {
   constructor() {
     super();
@@ -15,7 +15,7 @@ class AddressForm extends Component {
         city: "",
         postalCode: "",
         country: "",
-        registeredUserId: sessionStorage.getItem("user_id"),
+        registeredUserId: localStorage.getItem("user_id"),
         isCurrent: true
       }
     };
@@ -31,10 +31,10 @@ class AddressForm extends Component {
     console.log(this.state.addAddress);
   }
 
-  /* onSubmit handles what happens when the 'Add address'-button is pressed. 
-  * It makes an axios-call to put the JSON-object in our database using the
-  * correct endpoint /addresses/create.
-  */
+  /* onSubmit handles what happens when the 'Add address'-button is pressed.
+   * It makes an axios-call to put the JSON-object in our database using the
+   * correct endpoint /addresses/create.
+   */
 
   async onSubmit(e) {
     e.preventDefault();
@@ -58,9 +58,11 @@ class AddressForm extends Component {
   }
 
   render() {
-    { /* render() renders a form which has the following fields:
+    {
+      /* render() renders a form which has the following fields:
       streetName, streetNumber, housingCode, postalCode, city & country
-      and a submit-button which sends the data. */ } 
+      and a submit-button which sends the data. */
+    }
     return (
       <div>
         <div className="Login" id="generalStyle">

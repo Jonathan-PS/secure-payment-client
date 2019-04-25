@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { Popover, OverlayTrigger } from "react-bootstrap";
 
 class DigitalShippingAddress extends Component {
   constructor(props) {
@@ -15,13 +16,13 @@ class DigitalShippingAddress extends Component {
   }
 
   async componentDidMount() {
-    if (sessionStorage.getItem("user_id") > 0) {
+    if (localStorage.getItem("user_id") > 0) {
       await this.setState({
         shippingInformation: {
           valid: true,
           firstName: "",
           lastName: "",
-          receiptEmail: sessionStorage.getItem("email"),
+          receiptEmail: localStorage.getItem("email"),
           streetName: "",
           streetNumber: "",
           housingCode: "",
@@ -61,13 +62,24 @@ class DigitalShippingAddress extends Component {
     this.props.triggerSetShippingInformation(this.state.shippingInformation);
   }
 
+
+
   render() {
+
+    // BUTTON POPOVER
+    const popover = (
+      <Popover id="popover-basic" title="Thank you!">
+        Email added
+      </Popover>
+    );
+
     return (
       <div id="generalStyle">
         <div label="Address">
           <Container>
             <Row>
-              {sessionStorage.getItem("user_id") > 0 ? (
+
+              {localStorage.getItem("user_id") > 0 ? (
                 <Col sm={12} md={4} lg={4}>
                   <b>Selected email:</b>
                   <br />
@@ -88,9 +100,24 @@ class DigitalShippingAddress extends Component {
                       required="required"
                     />
                   </FormGroup>
-                  <Button block type="submit" variant="dark">
-                    Choose
-                  </Button>
+                  { /* IF EMAIL IS FILLED IN */
+                    (this.state.email) ?
+                      <div>
+                        {/* BUTTON POPOVER (OverLayTrigger) */}
+                        <OverlayTrigger trigger="click" placement="right" overlay={popover} >
+                          <Button block type="submit" variant="dark">
+                            Choose
+                          </Button>
+                        </OverlayTrigger>
+                      </div>
+                      :
+                      <div>
+                        {/* NON-CLICKABLE BUTTON */}
+                        <Button block type="submit" disabled variant="dark">
+                          Choose
+                        </Button>
+                      </div>
+                  }
                 </form>
               </Col>
             </Row>

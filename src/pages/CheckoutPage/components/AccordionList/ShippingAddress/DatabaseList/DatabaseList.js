@@ -22,7 +22,7 @@ class DatabaseList extends Component {
   getAddresses = event => {
     fetch(
       "https://secure-payment-api.herokuapp.com/addresses/users/" +
-        sessionStorage.getItem("user_id")
+        localStorage.getItem("user_id")
     )
       .then(resp => resp.json())
       .then(data => {
@@ -38,7 +38,7 @@ class DatabaseList extends Component {
   getUserInfo() {
     fetch(
       "https://secure-payment-api.herokuapp.com/users/" +
-        sessionStorage.getItem("user_id")
+        localStorage.getItem("user_id")
     )
       .then(resp => resp.json())
       .then(data => {
@@ -77,7 +77,7 @@ class DatabaseList extends Component {
   render() {
     /*check if user is logged in */
     let listItems = null;
-    if (sessionStorage.getItem("user_id") > 0) {
+    if (localStorage.getItem("user_id") > 0) {
       let listKey = 1;
       listItems = this.state.allAddresses.map(address => (
         <Col sm={6} md={4} lg={4} key={address.addressId} className="border">

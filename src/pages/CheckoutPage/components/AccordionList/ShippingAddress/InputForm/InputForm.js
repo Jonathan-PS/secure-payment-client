@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { Popover, OverlayTrigger } from "react-bootstrap";
 import "./InputForm.css";
 import axios from "axios";
 
@@ -17,7 +18,7 @@ class InputForm extends Component {
       city: "",
       postalCode: "",
       country: "",
-      registeredUserId: sessionStorage.getItem("user_id"),
+      registeredUserId: localStorage.getItem("user_id"),
       isCurrent: true
     };
     this.onChange = this.onChange.bind(this);
@@ -45,10 +46,10 @@ class InputForm extends Component {
     console.log("Submit");
     console.log(addAddress);
 
-    if (sessionStorage.getItem("user_id") > 0) {
+    if (localStorage.getItem("user_id") > 0) {
       await fetch(
         "https://secure-payment-api.herokuapp.com/users/" +
-          sessionStorage.getItem("user_id")
+          localStorage.getItem("user_id")
       )
         .then(resp => resp.json())
         .then(data => {
@@ -60,7 +61,7 @@ class InputForm extends Component {
             receiptEmail: data.email
           });
         })
-        .catch(err => {});
+        .catch(err => { });
 
       await axios
         .put(
@@ -80,14 +81,28 @@ class InputForm extends Component {
   }
 
   render() {
+
+    const { firstName, lastName, receiptEmail, streetName,
+      streetNumber, housingCode, city, postalCode, country } = this.state
+
+
+    // BUTTON POPOVER
+    const popover = (
+      <Popover id="popover-basic" title="Thank you!">
+        Address added
+      </Popover>
+    );
+
+
     return (
       <div>
-        <div className="Login" id="generalStyle">
+        <div>
           <form onSubmit={this.onSubmit}>
-            {sessionStorage.getItem("user_id") > 0 ? null : (
+            {localStorage.getItem("user_id") > 0 ? null : (
               <div>
+                <br />
                 <FormGroup controlId="firstName">
-                  First Name *
+                  First Name
                   <FormControl
                     autoFocus
                     name="firstName"
@@ -95,11 +110,10 @@ class InputForm extends Component {
                     placeholder="First Name (e.g. Ola)"
                     onChange={this.onChange}
                     defaultValue={this.state.firstName}
-                    required="required"
                   />
                 </FormGroup>
                 <FormGroup controlId="lastName">
-                  Last Name *
+                  Last Name
                   <FormControl
                     autoFocus
                     name="lastName"
@@ -107,7 +121,6 @@ class InputForm extends Component {
                     placeholder="Last Name (e.g. Nordmann)"
                     onChange={this.onChange}
                     defaultValue={this.state.lastName}
-                    required="required"
                   />
                 </FormGroup>
                 <FormGroup controlId="receiptEmail">
@@ -116,7 +129,7 @@ class InputForm extends Component {
                     autoFocus
                     name="receiptEmail"
                     type="receiptEmail"
-                    placeholder="Street Name (e.g. ola.nordmann@mail.no)"
+                    placeholder="Email (e.g. ola.nordmann@mail.no)"
                     onChange={this.onChange}
                     defaultValue={this.state.receiptEmail}
                     required="required"
@@ -185,7 +198,7 @@ class InputForm extends Component {
               />
             </FormGroup>
             <FormGroup controlId="country">
-              City *
+              Country *
               <FormControl
                 autoFocus
                 name="country"
@@ -196,9 +209,27 @@ class InputForm extends Component {
                 required="required"
               />
             </FormGroup>
-            <Button block type="submit" variant="dark">
-              Add Address
-            </Button>
+            { /* IF ALL ARE FILLED IN */
+              (firstName, lastName, receiptEmail, streetName,
+                streetNumber, housingCode, city, postalCode, country) ?
+                <div>
+                  {/* BUTTON POPOVER (OverLayTrigger) */}
+                  <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                    <Button block type="submit" variant="dark">
+                      Add Address
+                    </Button>
+                  </OverlayTrigger>
+                </div>
+                :
+                <div>
+                  {/* NON-CLICKABLE BUTTON */}
+                    <Button block type="submit" disabled variant="dark">
+                      Add Address
+                    </Button>
+                </div>
+
+            }
+
           </form>
         </div>
       </div>

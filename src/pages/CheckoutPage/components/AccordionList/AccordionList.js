@@ -113,8 +113,8 @@ class AccordionList extends Component {
     if (this.state.anyPhysical) {
       newUserOrder = {
         registeredUserId:
-          sessionStorage.getItem("user_id") > 0
-            ? sessionStorage.getItem("user_id")
+          localStorage.getItem("user_id") > 0
+            ? localStorage.getItem("user_id")
             : "",
         shippingName:
           this.state.shippingInformation.firstName +
@@ -139,8 +139,8 @@ class AccordionList extends Component {
     } else {
       newUserOrder = {
         registeredUserId:
-          sessionStorage.getItem("user_id") > 0
-            ? sessionStorage.getItem("user_id")
+          localStorage.getItem("user_id") > 0
+            ? localStorage.getItem("user_id")
             : "",
         shippingName: "",
         shippingAddress: this.state.shippingInformation.receiptEmail,
@@ -216,20 +216,23 @@ class AccordionList extends Component {
   }
 
   render() {
+
     const productList = this.props.cartProducts.map(product => (
       <ul key={product.productId} className="list-style: none;">
-        {/*Math.round(product.priceEach * product.selectedQuantity)*/}
-        {parseFloat(
-          Math.round(product.priceEach * product.selectedQuantity * 100) / 100
-        ).toFixed(2)}{" "}
-        NOK = NOK = {product.priceEach}x{product.selectedQuantity}{" "}
-        {product.productName}
+        <li>
+          {/*Math.round(product.priceEach * product.selectedQuantity)*/}
+          <b>{product.productName}</b>
+          <br />Price: {product.priceEach}x{product.selectedQuantity}{" "}
+          ({parseFloat(Math.round(product.priceEach * product.selectedQuantity * 100) / 100).toFixed(2)})
+        </li>
       </ul>
     ));
 
+
+    const formattedTotalPrice = String(this.state.totalPrice).toString().replace(".", ",");
+
     return (
       <div>
-        <b>anyPhysical: {JSON.stringify(this.state.anyPhysical)}</b>
 
         {/** Back To Cart Button */}
         <div align="center">
@@ -243,42 +246,46 @@ class AccordionList extends Component {
           <Card>
             {/* First Card */}
             <Accordion.Toggle as={Card.Header} eventKey="0">
-              Products ({" "}
-              {String(this.state.totalPrice)
-                .toString()
-                .replace(".", ",")}{" "}
-              NOK )
+              <strong> 1 |</strong> Products ({" "}
+              {formattedTotalPrice}{" "} NOK )
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
                 <ProductList cartProducts={this.props.cartProducts} />
-                <b>Total price in NOK: {this.state.totalPrice},- </b>
+                <b>Total price in NOK: {formattedTotalPrice} </b>
               </Card.Body>
             </Accordion.Collapse>
           </Card>
           <Card>
             {/* Second Card */}
             <Accordion.Toggle as={Card.Header} eventKey="1">
-              Select a Shipping Address
+              <strong> 2 |</strong> Delivery Method {/* "SHIPPING ADDRESS" */}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
               <Card.Body>
-                {this.state.anyPhysical ? (
-                  <ShippingAddress
-                    triggerSetShippingInformation={this.setShippingInformation}
-                  />
-                ) : (
-                  <DigitalShippingAddress
-                    triggerSetShippingInformation={this.setShippingInformation}
-                  />
-                )}
+                {this.state.anyPhysical ?
+                  <div>
+                    <small><i>Since you're buying physical products, we'll need your shipping information.</i></small>
+                    <ShippingAddress
+                      triggerSetShippingInformation={this.setShippingInformation}
+                    />
+                  </div>
+                  :
+                  <div>
+                    <small><i>Since you're buying digital products, we'll need your email.</i></small>
+                    <br /><br />
+                    <DigitalShippingAddress
+                      triggerSetShippingInformation={this.setShippingInformation}
+                    />
+                  </div>
+                }
               </Card.Body>
             </Accordion.Collapse>
           </Card>
           <Card>
             {/*  Third Card */}
             <Accordion.Toggle as={Card.Header} eventKey="2">
-              Create Your Order
+              <strong> 3 |</strong> Create Your Order
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <div align="center">
@@ -286,14 +293,14 @@ class AccordionList extends Component {
                   <Container>
                     <Row>
                       <Col sm={12} md={4} lg={4}>
-                        <b>Shipping Address</b>
+                        <ul><b>Shipping Address</b></ul>
 
                         <ul className="list-style: none;">
                           <li>
                             {this.state.shippingInformation.firstName}{" "}
                             {this.state.shippingInformation.lastName}
                           </li>
-                          <li>{this.state.shippingInformation.receiptEmail}</li>
+
                           <li>
                             {this.state.shippingInformation.streetName}{" "}
                             {this.state.shippingInformation.streetNumber}{" "}
@@ -305,21 +312,20 @@ class AccordionList extends Component {
                             {this.state.shippingInformation.country}
                           </li>
                         </ul>
+                        <ul><b>Email</b><br/><i>{this.state.shippingInformation.receiptEmail}</i></ul>
+
                       </Col>
                       <Col sm={12} md={8} lg={8}>
-                        <b>Summary</b>
-
+                        <ul><b>SUMMARY</b></ul>
                         {productList}
                         <ul className="list-style: none;">
-                          {String(this.state.totalPrice)
-                            .toString()
-                            .replace(".", ",")}{" "}
-                          NOK = sum
+
                         </ul>
                       </Col>
                     </Row>
                   </Container>
                 </div>
+                <p><b><i>Total price to pay: {formattedTotalPrice + " NOK"} </i></b></p>
                 <Button
                   disabled={
                     !this.state.shippingInformation.valid ||
@@ -331,7 +337,7 @@ class AccordionList extends Component {
                 >
                   Create Order
                 </Button>
-                <br />
+                <br /><br />
               </div>
             </Accordion.Collapse>
           </Card>

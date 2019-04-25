@@ -43,6 +43,7 @@ export default class Routes extends Component {
               triggerAddCartProduct={this.props.triggerAddCartProduct}
               triggerDecreaseCartProduct={this.props.triggerDecreaseCartProduct}
               triggerRemoveProduct={this.props.triggerRemoveProduct}
+              triggerClearCart={this.props.triggerClearCart}
             />
           )}
         />
@@ -53,7 +54,13 @@ export default class Routes extends Component {
         />
 
         <Route exact path="/order" component={OrderPage} />
-        <Route exact path="/order/success" component={OrderSuccessPage} />
+        <Route
+          exact
+          path="/order/success"
+          render={() => (
+            <OrderSuccessPage triggerClearCart={this.props.triggerClearCart} />
+          )}
+        />
         <Route exact path="/order/fail" component={OrderFailPage} />
         <Route component={NotFoundPage} />
       </Switch>

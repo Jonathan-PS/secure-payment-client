@@ -9,11 +9,6 @@ class LoginForm extends Component {
     password: ""
   };
 
-  /* Checks whether email and password are typed in at all */
-  validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
-  }
-
   /* Handles user inputs into the fields of email and password. */
   handleChange = event => {
     this.setState({
@@ -38,13 +33,12 @@ class LoginForm extends Component {
         )
         .then(response => {
           if (response.data < 1) {
-            alert("login failed");
             window.location = "/login";
           } else {
-            sessionStorage.setItem("user_id", response.data);
-            sessionStorage.setItem("email", this.state.email);
+            localStorage.setItem("user_id", response.data);
+            localStorage.setItem("email", this.state.email);
 
-            //alert("Logged in with user_id: " + sessionStorage.getItem("user_id"));
+            //alert("Logged in with user_id: " + localStorage.getItem("user_id"));
             window.location = "/dashboard";
           }
         })
@@ -68,6 +62,7 @@ class LoginForm extends Component {
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
+                required="required"
               />
             </FormGroup>
             <FormGroup controlId="password">
@@ -76,11 +71,11 @@ class LoginForm extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
                 type="password"
+                required="required"
               />
             </FormGroup>
             <Button
               block
-              disabled={!this.validateForm()}
               type="submit"
               variant="dark"
             >
