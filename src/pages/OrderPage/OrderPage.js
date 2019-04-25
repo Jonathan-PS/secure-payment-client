@@ -10,7 +10,7 @@ class OrderPage extends Component {
     super(props);
     this.state = {
       /* Variable from Redirection */
-      userOrderId: "",
+      userOrderId: this.props.location.state.userOrderId,
       /* To check if variables are sent from Stripe Checkout */
       cantLoad: false,
 
@@ -46,9 +46,9 @@ class OrderPage extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     try {
-      await this.setState({
+      this.setState({
         userOrderId: this.props.location.state.userOrderId
       });
 
@@ -63,10 +63,8 @@ class OrderPage extends Component {
           this.setState({
             userOrderInformation: response.data
           });
-        })
-        .catch(err => {
-          alert(err);
         });
+
       /* GET ORDERPRODUCTS FROM DATABASE */
       axios
         .get(
@@ -83,7 +81,6 @@ class OrderPage extends Component {
           console.log("Fetching Order Products Error : " + err);
         });
     } catch (error) {
-      console.log("failed to redirect");
       this.setState({
         cantLoad: true
       });
@@ -101,29 +98,6 @@ class OrderPage extends Component {
         />
       );
     } else {
-      const orderProducts = this.state.orderProducts.map(orderProduct => {
-        return (
-          <ul>
-            <li> orderProductId: {orderProduct.orderProductId} </li>
-            <li> userOrderId: {orderProduct.userOrderId} </li>
-            <li> productId: {orderProduct.productId} </li>
-            <li> priceEach:{orderProduct.priceEach}</li>
-            <li> quantity: {orderProduct.quantity}</li>
-            <li>
-              product:
-              <ul>
-                <li> productId: {orderProduct.product.productId}</li>
-                <li> productName: {orderProduct.product.productName}</li>
-                <li> description: {orderProduct.product.description}</li>
-                <li> stock: {orderProduct.product.stock}</li>
-                <li> imageUrl: {orderProduct.product.imageUrl}</li>
-                <li> active: {orderProduct.product.active} </li>
-              </ul>
-            </li>
-          </ul>
-        );
-      });
-
       return (
         <div id="generalStyle">
           <h4>Order Review</h4>
