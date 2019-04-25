@@ -30,7 +30,7 @@ const NavigationBar = props => {
           </Navbar.Brand>
         </NavLink>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-navac" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <NavItem>
@@ -94,7 +94,6 @@ const NavigationBar = props => {
               </NavLink>
             </NavItem>
           </Nav>
-          <Nav />
           <Nav>
             <NavItem>
               <CartButton cartProducts={props.cartProducts} />

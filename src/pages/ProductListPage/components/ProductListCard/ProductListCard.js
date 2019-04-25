@@ -20,12 +20,16 @@ class ProductListCard extends Component {
   };
 
   render() {
-
-    let priceEachFormatted = parseFloat(Math.round(this.props.priceEach * 100) / 100).toFixed(2).toString().replace(".", ",");
+    let priceEachFormatted = parseFloat(
+      Math.round(this.props.priceEach * 100) / 100
+    )
+      .toFixed(2)
+      .toString()
+      .replace(".", ",");
 
     return (
       <div
-        className="col-xs-12 col-sm-6 col-md-3"
+        className="col-xs-12 col-sm-6 col-md-4"
         align="center"
         id="generalStyle"
       >
@@ -42,35 +46,76 @@ class ProductListCard extends Component {
             </div>
             {/* DESCRIPTION */}
             <div className="descriptionBox">
-              <p><small><i>"{this.props.description}"</i></small></p>
+              <p>
+                <small>
+                  <i>"{this.props.description}"</i>
+                </small>
+              </p>
             </div>
             {/* PRICE */}
             <p className="priceText">{priceEachFormatted} NOK</p>
             {/* IS PRODUCT DIGITAL OR PHYSICAL ? */}
-            {(this.props.digital) ?
-              <span><small>Digital Product</small></span>
-              :
-              <span><small>Physical Product</small></span>
-            }
-            {/* IS PRODUCT IN STOCK ? */}
-            {(this.props.stock > 0) ?
-              (this.props.stock > 75) ?
-                <span>
-                  <p><small>In stock (75+)</small></p>
-                  <button onClick={this.addToCart} type="button" className="btn btn-success">Add to Cart</button>
-                </span>
-                :
-                <span>
-                  <p><small>In stock ({this.props.stock})</small></p>
-                  <button onClick={this.addToCart} type="button" className="btn btn-success">Add to Cart</button>
-                </span>
-
-              :
+            {this.props.digital ? (
               <span>
-                <p><small>Sold out!</small></p>
-                <button disabled type="button" className="btn btn-secondary">Add to Cart</button>
+                <small>Digital Product</small>
               </span>
-            }
+            ) : (
+              <span>
+                <small>Physical Product</small>
+              </span>
+            )}
+
+            {/* IS PRODUCT DIGITAL ? */}
+            {this.props.digital ? (
+              <span>
+                <p />
+                <button
+                  onClick={this.addToCart}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Add to Cart
+                </button>
+              </span>
+            ) : /* IS PRODUCT IN STOCK ? */
+            this.props.stock > 0 ? (
+              this.props.stock > 75 ? (
+                <span>
+                  <p>
+                    <small>In stock (75+)</small>
+                  </p>
+                  <button
+                    onClick={this.addToCart}
+                    type="button"
+                    className="btn btn-success"
+                  >
+                    Add to Cart
+                  </button>
+                </span>
+              ) : (
+                <span>
+                  <p>
+                    <small>In stock ({this.props.stock})</small>
+                  </p>
+                  <button
+                    onClick={this.addToCart}
+                    type="button"
+                    className="btn btn-success"
+                  >
+                    Add to Cart
+                  </button>
+                </span>
+              )
+            ) : (
+              <span>
+                <p>
+                  <small>Sold out!</small>
+                </p>
+                <button disabled type="button" className="btn btn-secondary">
+                  Add to Cart
+                </button>
+              </span>
+            )}
           </div>
         </div>
       </div>
