@@ -10,8 +10,10 @@ import Spinner from 'react-bootstrap/Spinner';
 
 // PUBLISHABLE KEY FROM STRIPE
 const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
+const UrlApiOrders = "https://secure-payment-api.herokuapp.com/orders/";
+const UrlAPiStripeCharge = "https://secure-payment-api.herokuapp.com/stripe/charge";
 
-class StripeCards extends React.Component {
+class StripePayment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,16 +29,18 @@ class StripeCards extends React.Component {
       cantLoad: false,
       cantLoadUserId: false,
       cantLoadOrder: false,
+      gotAllVariablesNeeded: false,
 
+      /* */
       allOrders: [],
       orders: [],
 
       /* ORDER CONTENT */
       amount: 0, // STRIPE'S, in øre, cents, etc..
-      totalPrice: 0, // From order, in kr, dollars, etc
-      currency: null, //String("nok").toLowerCase(), // this.props.location.state.currency
-      orderEmail: "", // When empty, Checkout asks for email. Else, it uses this email!
-      userOrderId: null, // this.props.location.state.userOrderId
+      totalPrice: 0, // FROM DB after creating order, in kr, dollars, etc
+      currency: null, // FROM DB after creating order(String, lowercase)
+      orderEmail: "", // FROM DB after creating order (When empty, Checkout asks for email. Else, it uses this email!)
+      userOrderId: null, // FROM ORDER (will be given from Order Page)
 
       /* Get back from calling Stripe */
       tokenID: "null",
@@ -67,7 +71,7 @@ class StripeCards extends React.Component {
   loadStripe(onload) {
     if (!window.StripeCheckout) {
       const script = document.createElement("script");
-      script.onload = function() {
+      script.onload = function () {
         console.info("Stripe script loaded");
         onload();
       };
@@ -90,78 +94,61 @@ class StripeCards extends React.Component {
       this.setState({
         userOrderId: this.props.userOrderId
       });
+
+      // GET ORDERS FROM DATABASE
+      try {
+        // AXIOS GET FROM ORDERS
+        axios
+          .get(UrlApiOrders + this.props.userOrderId)
+          //.then(resp => resp.json())
+
+          .then(data => {
+
+            this.setState({
+              order: data.data // all transactions from /orders
+            });
+
+            // TRY TO SET totalPrice, amount, currecy and oderEmail to STATE
+            try {
+              this.setState({
+                totalPrice: this.state.order.totalPrice, // set totalPrice (handling kr, dollars, etc...)
+                amount: this.state.order.totalPrice * 100, // For Stripe (handling øre, cents, etc..)
+                currency: String(this.state.order.currency).toLowerCase(), // currency set to Lower Case
+                orderEmail: this.state.order.orderEmail, // When empty, Checkout asks for email. Else, it uses this email!
+                //userOrderId: this.state.order.totalPrice,
+                gotAllVariablesNeeded: true
+              });
+            } catch (error) {
+              console.log(
+                "STRIPE:\n ERROR! Can't get amount, currency or email from order. Error:\n" + error
+              );
+            }
+          })
+          .catch(err => {
+            console.log("STRIPE:\n AXIOS ERROR: " + err);
+          });
+        // CATCH ERRORS IF ORDERS FROM DATABASE AND STRIPE FAILED
+      } catch (error) {
+        console.log("STRIPE:\n Can't find order. \nERROR: " + error);
+        this.setState({
+          //
+          cantLoadOrder: true
+        });
+      }
+      // IF FAILED SETTING USER ORDER ID
     } catch (error) {
-      console.log("STRIPE:\n Getting userId from Order...");
+      console.log("STRIPE:\n Error getting userId from Order! Error:" + error);
       this.setState({
-        //userOrderId: 6, // <--- DELETE THIS!!!!
         cantLoadUserId: true
       });
     }
 
-    // GET ORDERS FROM DATABASE AND STRIPE
-    try {
-      // AXIOS
-      axios
-        .get("https://secure-payment-api.herokuapp.com/orders")
-        //.then(resp => resp.json())
 
-        .then(data => {
-          // set state
-          this.setState({
-            allOrders: data.data // all transactions from /orders
-          });
-
-          console.log("STRIPE:\n Axios: Got all orders!:");
-          console.log(this.state.allOrders);
-
-          // Goes through all orders
-          for (let key in this.state.allOrders) {
-            // Finds matching order from database with the one that was sent from Order Page.
-            // (this is sent from "Order" --> this.props.location.state.userOrderId) */
-            if (
-              this.state.allOrders[key].userOrderId === this.state.userOrderId
-            ) {
-              this.setState({
-                order: this.state.allOrders[key]
-              });
-              console.log("STRIPE:\n Axios: Order received from database!");
-              console.log(
-                "STRIPE:\n ORDER DETAILS:\n" + JSON.stringify(this.state.order)
-              );
-
-              // TRY TO SET totalPrice, amount, currecy and oderEmail to STATE
-              try {
-                this.setState({
-                  totalPrice: this.state.order.totalPrice, // set totalPrice (handling kr, dollars, etc...)
-                  amount: this.state.order.totalPrice * 100, // For Stripe (handling øre, cents, etc..)
-                  currency: String(this.state.order.currency).toLowerCase(), // currency set to Lower Case
-                  orderEmail: this.state.order.orderEmail // When empty, Checkout asks for email. Else, it uses this email!
-                  //userOrderId: this.state.order.totalPrice,
-                });
-              } catch (error) {
-                console.log(
-                  "STRIPE:\n ERROR! Can't get amount, currency or email from order. Error:\n" +
-                    error
-                );
-              }
-            }
-          }
-        })
-        .catch(err => {
-          console.log("STRIPE:\n AXIOS ERROR: " + err);
-        });
-    } catch (error) {
-      console.log("STRIPE:\n Can't find order. \nERROR: " + error);
-      this.setState({
-        //
-        cantLoadOrder: true
-      });
-    }
-
+    // LOAD STRIPE, AND SEND INFO TO STRIPE/BACKEND 
     this.loadStripe(() => {
+
       this.stripeHandler = window.StripeCheckout.configure({
         key: publishableKey,
-        //image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
         locale: "auto",
         token: token => {
           this.setState({
@@ -170,13 +157,13 @@ class StripeCards extends React.Component {
             tokenEmail: token.email,
             last4: token.card.last4
           });
-          //console.log("Token ID: " + token.id);
 
+          // AXIOS POST TO BACKEND
           axios
-            .put("https://secure-payment-api.herokuapp.com/stripe/charge", {
+            .put(UrlAPiStripeCharge, {
               amount: this.state.amount,
               currency: this.state.currency,
-              token: token.id, // token.id
+              token: token.id,
               receiptEmail: token.email,
               userOrderId: this.state.userOrderId,
               last4: this.state.last4
@@ -184,21 +171,21 @@ class StripeCards extends React.Component {
             .then(data => {
               console.log(
                 "STRIPE:\n" +
-                  "Payment Success!!" +
-                  "\nData STATUS:" +
-                  data.status +
-                  "\n\nToken Email: " +
-                  token.email +
-                  "\n\nToken: " +
-                  JSON.stringify(token) +
-                  "\n\nData content: " +
-                  JSON.stringify(data)
+                "Payment Success!!" +
+                "\nData STATUS:" +
+                data.status +
+                "\n\nToken Email: " +
+                token.email +
+                "\n\nToken: " +
+                JSON.stringify(token) +
+                "\n\nData content: " +
+                JSON.stringify(data)
               );
 
               // REDIRECT SUCCESS
-              //this.setState({ redirectSuccess: true });
               this.setSuccessRedirect();
             })
+            // ERRORS
             .catch(error => {
               this.setState({
                 failError: String(error),
@@ -215,7 +202,7 @@ class StripeCards extends React.Component {
                 "STRIPE:\n" + "Payment FAILED!" + "\n Payment Error: ",
                 error + "\n error.response.data: ",
                 JSON.stringify(error.response.data.message) +
-                  "\n error.response.status: ",
+                "\n error.response.status: ",
                 error.response.status + "\n error.response.headers: ",
                 JSON.stringify(error.response.headers) + "\n error.request: ",
                 JSON.stringify(error.request) + "\n error.message: ",
@@ -241,12 +228,10 @@ class StripeCards extends React.Component {
               );
 
               // REDIRECT FAIL
-              //this.setState({ redirectFail: true });
               this.setFailRedirect();
             });
         }
       });
-
       this.setState({
         stripeLoading: false,
         // loading needs to be explicitly set false so component will render in 'loaded' state.
@@ -365,98 +350,93 @@ class StripeCards extends React.Component {
   }
 
   render() {
-    const { stripeLoading, loading } = this.state;
-    const { amount, currency } = this.state;
-    const { hasError, hasErrorError, hasErrorInfo } = this.state;
-    /*
-        if ((this.state.orders).length == 0) {
-            // shows this fallback UI if successDetails is empty
-            console.log("No order received")
-            return (<div><h3></h3></div>);
 
-        } else 
-        */
+    const { stripeLoading, loading } = this.state;
+    const { userOrderId, amount, totalPrice, currency, orderEmail } = this.state;
+    const { hasError, hasErrorError, hasErrorInfo, cantLoadUserId, cantLoadOrder, gotAllVariablesNeeded } = this.state;
+
     if (hasError) {
-      // custom fallback UI
+      // IF Error from hasError
       console.log(
         "STRIPE:\n " +
-          "hasErrorError: " +
-          hasErrorError +
-          "\nhasErrorInfo: " +
-          hasErrorInfo
+        "hasErrorError: " + hasErrorError +
+        "\nhasErrorInfo: " + hasErrorInfo
       );
+      // Render custom fallback UI
       return (
         <div>
           <h4>Something went wrong! </h4>
-          <p>
-            {hasErrorError} {hasErrorInfo}
-          </p>
+          <p>{hasErrorError} {hasErrorInfo}</p>
         </div>
       );
-    } /*else if (this.state.cantLoadUserId == true) {
-            // if variables from Stripe Checkout Payment are not received
-            console.log("Can't load userId from Order...")
-            return (<div><h3>Can't load userId from Order...</h3></div>);
 
-        } else if (this.state.cantLoadOrder == true) {
-            // if variables from Stripe Checkout Payment are not received
-            console.log("Variables from Order DB are not received...")
-            return (<div><h3>Variables from Order DB are not received...</h3></div>);
+    } else if (cantLoadUserId) {
+      // if variables from Stripe Checkout Payment are not received
+      console.log("Can't load userId from Order...")
+      // Render custom fallback UI
+      return (<div><h3>Can't load userId from Order...</h3></div>);
 
-        }
-        */
+    } else if (cantLoadOrder) {
+      // if variables from Stripe Checkout Payment are not received
+      console.log("Variables from Order DB are not received...")
+      // Render custom fallback UI
+      return (<div><h3>Variables from Order DB are not received...</h3></div>);
 
-    console.log(
-      "STRIPE: Loading variables..." +
-        "\n totalPrice: " +
-        this.state.totalPrice +
-        "\n amount: " +
-        this.state.amount +
-        "\n currency: " +
-        this.state.currency +
-        "\n orderEmail: " +
-        this.state.orderEmail +
-        "\n userOrderId: " +
-        this.state.userOrderId
-    );
+    } else if (!gotAllVariablesNeeded) {
+      // If we still haven't loaded all variables...
+      console.log("Getting variables...")
+      // Render custom fallback UI
+      return (<div><h3>Getting variables from Order DB...</h3></div>);
 
-    return (
-      <div>
-        {/* CHECK IF AMOUNT IS HIGH ENOUGH */}
-        {// CHECK IF AMOUNT IS HIGH ENOUGH
-        (currency == "nok" && amount < 300) ||
-        (currency == "usd" && amount < 50) ? (
-          // IF FALSE
-          <div>
-            <Button variant="primary" disabled>
-              Pay with Card
-            </Button>
-            <p>
-              <small>Amount too low!</small>
-            </p>
-          </div>
-        ) : // IF TRUE
-        // If Stripe is loading...
-        loading || stripeLoading ? (
-          // If loading: text
-          <div>
-          <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-          </Spinner>
-          {/* <p>Stripe is loading...</p> // <Button> Loading ... </Button> */}
-          </div>
-        ) : (
-          // If not loading: Show Pay-button
-          <Button variant="primary" onClick={this.onStripeUpdate}>
-            Pay with Card
-          </Button>
-        )}
+    } else {
+      // If everything's good, render normal!
 
-        {/* REDIRECT if redirectSuccess or redirectFail is set to true*/}
-        {this.renderRedirect()}
-      </div>
-    );
+      console.log(
+        "STRIPE: Got variables..." +
+        "\n totalPrice: " + totalPrice +
+        "\n amount: " + amount +
+        "\n currency: " + currency +
+        "\n orderEmail: " + orderEmail +
+        "\n userOrderId: " + userOrderId
+      );
+
+      return (
+        <div>
+          {// CHECK IF AMOUNT IS HIGH ENOUGH
+            (currency == "nok" && amount < 300) ||
+              (currency == "usd" && amount < 50) ? (
+                // IF FALSE
+                <div>
+                  <Button variant="primary" disabled>
+                    Pay with Card
+                  </Button>
+                  <p>
+                    <small>Amount too low!</small>
+                  </p>
+                </div>
+              ) : // IF TRUE
+              // If Stripe is loading...
+              loading || stripeLoading ? (
+                // If loading: text
+                <div>
+                  <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
+                  {/* <p>Stripe is loading...</p> // <Button> Loading ... </Button> */}
+                </div>
+              ) : (
+                  // If not loading: Show Pay-button
+                  <Button variant="primary" onClick={this.onStripeUpdate}>
+                    Pay with Card
+                </Button>
+                )}
+
+          {/* REDIRECT if redirectSuccess or redirectFail is set to true*/}
+          {this.renderRedirect()}
+        </div>
+      );
+    }
   }
 }
 
-export default StripeCards;
+export default StripePayment;

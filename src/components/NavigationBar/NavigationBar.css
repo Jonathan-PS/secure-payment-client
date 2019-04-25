@@ -1,5 +1,5 @@
 .logoText {
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #555;
   text-decoration: none;
   text-transform: uppercase;
@@ -9,4 +9,37 @@
   line-height: 1;
   text-shadow: #EDEDED 3px 2px 0;
   position: relative;
+  -ms-word-break: break-all;
+  word-break: break-all;
+}
+
+/* Extra small devices (phones, up to 480px) */
+@media screen and (max-width: 767px) {
+  .logoText {
+    font-family: 'Open Sans', sans-serif;
+    color: #555;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 1;
+    text-shadow: #EDEDED 3px 2px 0;
+    position: relative;
+    -ms-word-break: break-all;
+    word-break: break-all;
+  }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+/* large desktops and up ----------- */
+@media screen and (min-width: 1200px) {
+
 }
