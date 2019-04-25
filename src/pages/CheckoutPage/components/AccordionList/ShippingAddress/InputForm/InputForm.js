@@ -7,6 +7,7 @@ class InputForm extends Component {
   constructor() {
     super();
     this.state = {
+      valid: true,
       firstName: "",
       lastName: "",
       receiptEmail: "",
@@ -68,11 +69,7 @@ class InputForm extends Component {
         )
         .then(response => {
           console.log(response);
-          //this.addAddress();
           this.props.triggerGetAddresses();
-          {
-            /* WHERE CAN WE PUT THIS TO REFRESH THE PAGE WHEN ADDRESS IS ADDED ????*/
-          }
         })
         .catch(error => {
           console.log(error.response);

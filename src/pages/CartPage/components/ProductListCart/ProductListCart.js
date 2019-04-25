@@ -51,7 +51,11 @@ class ProductListCart extends Component {
           </thead>
           <tbody>{products}</tbody>
         </table>
-        Price: {String(this.state.totalPrice).toString().replace(".", ",")} NOK
+        Price:{" "}
+        {String(this.state.totalPrice)
+          .toString()
+          .replace(".", ",")}{" "}
+        NOK
       </div>
     );
   }

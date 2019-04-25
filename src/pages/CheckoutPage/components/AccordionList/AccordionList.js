@@ -32,6 +32,7 @@ class AccordionList extends Component {
 
       // All required fields for creation of an order
       shippingInformation: {
+        valid: false,
         firstName: "",
         lastName: "",
         receiptEmail: "",
@@ -47,7 +48,7 @@ class AccordionList extends Component {
     this.computeTotalPrice = this.computeTotalPrice.bind(this);
     this.checkAnyPhysical = this.checkAnyPhysical.bind(this);
     this.setShippingInformation = this.setShippingInformation.bind(this);
-    this.validateForm = this.validateForm.bind(this);
+    //this.validateForm = this.validateForm.bind(this);
     this.createOrderAndContinue = this.createOrderAndContinue.bind(this);
     this.redirectToOrderPage = this.redirectToOrderPage.bind(this);
   }
@@ -90,47 +91,64 @@ class AccordionList extends Component {
     });
   }
 
-  /* Checks whether email and password are typed in at all */
-  validateForm() {
+  /* Checks whether required forms are typed in at all */
+  /*validateForm() {
     return (
       this.state.totalPrice > 0 &&
       this.state.shippingInformation.firstName.length > 0 &&
       this.state.shippingInformation.lastName.length > 0 &&
-      this.state.shippingInformation.receiptEmail.length > 0 &&
+      (this.state.shippingInformation.receiptEmail + "").length > 0 &&
       this.state.shippingInformation.streetName.length > 0 &&
       (this.state.shippingInformation.streetNumber + "").length > 0 &&
-      this.state.shippingInformation.postalCode > 0 &&
-      this.state.shippingInformation.city.length > 0
+      (this.state.shippingInformation.postalCode + "").length > 0 &&
+      (this.state.shippingInformation.city + "").length > 0
     );
-  }
+  }*/
 
   async createOrderAndContinue() {
     // 1 - create UserOrder - Retrieves the userOrderId
-    let newUserOrder = {
-      registeredUserId:
-        sessionStorage.getItem("user_id") > 0
-          ? sessionStorage.getItem("user_id")
-          : "",
-      shippingName:
-        this.state.shippingInformation.firstName +
-        " " +
-        this.state.shippingInformation.lastName,
-      shippingAddress:
-        this.state.shippingInformation.streetName +
-        " " +
-        this.state.shippingInformation.streetNumber +
-        " " +
-        this.state.shippingInformation.housingCode +
-        ", " +
-        this.state.shippingInformation.postalCode +
-        " " +
-        this.state.shippingInformation.city +
-        ", " +
-        this.state.shippingInformation.country,
-      orderEmail: this.state.shippingInformation.receiptEmail,
-      currency: this.state.currency,
-      totalPrice: this.state.totalPrice
-    };
+
+    let newUserOrder;
+
+    if (this.state.anyPhysical) {
+      newUserOrder = {
+        registeredUserId:
+          sessionStorage.getItem("user_id") > 0
+            ? sessionStorage.getItem("user_id")
+            : "",
+        shippingName:
+          this.state.shippingInformation.firstName +
+          " " +
+          this.state.shippingInformation.lastName,
+        shippingAddress:
+          this.state.shippingInformation.streetName +
+          " " +
+          this.state.shippingInformation.streetNumber +
+          " " +
+          this.state.shippingInformation.housingCode +
+          ", " +
+          this.state.shippingInformation.postalCode +
+          " " +
+          this.state.shippingInformation.city +
+          ", " +
+          this.state.shippingInformation.country,
+        orderEmail: this.state.shippingInformation.receiptEmail,
+        currency: this.state.currency,
+        totalPrice: this.state.totalPrice
+      };
+    } else {
+      newUserOrder = {
+        registeredUserId:
+          sessionStorage.getItem("user_id") > 0
+            ? sessionStorage.getItem("user_id")
+            : "",
+        shippingName: "",
+        shippingAddress: this.state.shippingInformation.receiptEmail,
+        orderEmail: this.state.shippingInformation.receiptEmail,
+        currency: this.state.currency,
+        totalPrice: this.state.totalPrice
+      };
+    }
 
     await axios
       .put(
@@ -200,15 +218,19 @@ class AccordionList extends Component {
   render() {
     const productList = this.props.cartProducts.map(product => (
       <ul key={product.productId} className="list-style: none;">
-        {/*Math.round(product.priceEach * product.selectedQuantity)*/} 
-        {parseFloat(Math.round((product.priceEach * product.selectedQuantity) * 100) / 100).toFixed(2)} NOK ={" "}NOK ={" "}
-        {product.priceEach}x{product.selectedQuantity} {product.productName}
+        {/*Math.round(product.priceEach * product.selectedQuantity)*/}
+        {parseFloat(
+          Math.round(product.priceEach * product.selectedQuantity * 100) / 100
+        ).toFixed(2)}{" "}
+        NOK = NOK = {product.priceEach}x{product.selectedQuantity}{" "}
+        {product.productName}
       </ul>
     ));
 
     return (
       <div>
         <b>anyPhysical: {JSON.stringify(this.state.anyPhysical)}</b>
+
         {/** Back To Cart Button */}
         <div align="center">
           <NavLink to="/cart" activeClassName="active">
@@ -221,7 +243,11 @@ class AccordionList extends Component {
           <Card>
             {/* First Card */}
             <Accordion.Toggle as={Card.Header} eventKey="0">
-              Products ( {String(this.state.totalPrice).toString().replace(".", ",")} NOK )
+              Products ({" "}
+              {String(this.state.totalPrice)
+                .toString()
+                .replace(".", ",")}{" "}
+              NOK )
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
@@ -285,14 +311,20 @@ class AccordionList extends Component {
 
                         {productList}
                         <ul className="list-style: none;">
-                          {String(this.state.totalPrice).toString().replace(".", ",")} NOK = sum
+                          {String(this.state.totalPrice)
+                            .toString()
+                            .replace(".", ",")}{" "}
+                          NOK = sum
                         </ul>
                       </Col>
                     </Row>
                   </Container>
                 </div>
                 <Button
-                  disabled={!this.validateForm()}
+                  disabled={
+                    !this.state.shippingInformation.valid ||
+                    this.state.totalPrice < 1
+                  }
                   onClick={this.createOrderAndContinue}
                   type="submit"
                   variant="primary"

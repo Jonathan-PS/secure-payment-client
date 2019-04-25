@@ -1,12 +1,8 @@
-/* Used parts from:
- * - https://stackoverflow.com/questions/41500135/react-js-stripe-checkout-is-not-working
- */
-
 import React, { Component } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 
 // PUBLISHABLE KEY FROM STRIPE
 const publishableKey = "pk_test_pt1UnWeg7M8aXk1Qh8Ef5UmM00NyCvXYL4";
