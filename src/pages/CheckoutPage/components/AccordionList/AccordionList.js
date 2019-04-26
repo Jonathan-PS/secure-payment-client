@@ -307,7 +307,7 @@ class AccordionList extends Component {
             {/*  Third Card - CREATE ORDER */}
             <Accordion.Toggle as={Card.Header} eventKey="2">
               <strong> 3 |</strong> Create Your Order &nbsp;
-              {((this.props.cartProducts.length > 0) && ((streetName) || (receiptEmail))) ? <span class="symbol">✓</span> : <span></span>}
+              {((this.props.cartProducts.length > 0) && ((streetName) || (receiptEmail))) ? <span className="symbol">✓</span> : <span></span>}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <div align="center">
