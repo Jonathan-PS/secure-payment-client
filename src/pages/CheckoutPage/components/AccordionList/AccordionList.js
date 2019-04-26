@@ -276,7 +276,7 @@ class AccordionList extends Component {
               <strong> 2 |</strong> Delivery Method &nbsp;
               {}
               {/*((streetName.length > 0) || (receiptEmail))? <span class="symbol">✓</span> : <span></span>*/}
-              {((streetName) || (receiptEmail)) ? <span class="symbol">✓</span> : <span></span>}
+              {((streetName) || (receiptEmail)) ? <span className="symbol">✓</span> : <span></span>}
               {/* "SHIPPING ADDRESS" */}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
