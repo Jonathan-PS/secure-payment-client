@@ -11,7 +11,7 @@ class ProductList extends Component {
     fetch("https://secure-payment-api.herokuapp.com/products")
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
+        //console.log(data);
         this.setState({
           allProducts: data
         });

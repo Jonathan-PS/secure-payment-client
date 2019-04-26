@@ -14,7 +14,7 @@ class UserInfo extends Component {
     )
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
+        //console.log(data);
         this.setState({
           allUsers: this.state.allUsers.concat(data)
         });

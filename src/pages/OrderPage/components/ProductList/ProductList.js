@@ -18,7 +18,7 @@ class ProductList extends Component {
         <th scope="row">
           <img
             src={orderProduct.product.imageUrl}
-            alt="Product"
+            alt="Product Image"
             width="30"
           />
         </th>
