@@ -1,7 +1,16 @@
 import React from "react";
 import "./NavigationBar.css";
 import CartButton from "./CartButton/CartButton";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import {
+  Col,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button,
+  NavItem
+} from "react-bootstrap";
 
 import { NavLink } from "react-router-dom";
 
