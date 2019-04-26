@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
@@ -195,14 +195,13 @@ class StripePayment extends React.Component {
               });
 
               console.log(
-                "STRIPE:\n" + "Payment FAILED!" + "\n Payment Error: ",
-                error + "\n error.response.data: ",
-                JSON.stringify(error.response.data.message) +
-                "\n error.response.status: ",
-                error.response.status + "\n error.response.headers: ",
-                JSON.stringify(error.response.headers) + "\n error.request: ",
-                JSON.stringify(error.request) + "\n error.message: ",
-                error.message
+                "STRIPE:\n Payment FAILED!" + 
+                "\n Payment Error: " + error + 
+                "\n error.response.data: " + JSON.stringify(error.response.data.message) +
+                "\n error.response.status: " + error.response.status + 
+                "\n error.response.headers: " + JSON.stringify(error.response.headers) + 
+                "\n error.request: " + JSON.stringify(error.request) + 
+                "\n error.message: " + error.message
               );
               if (error.response) {
                 /* The request was made and the server responded with a status code
@@ -399,8 +398,8 @@ class StripePayment extends React.Component {
       return (
         <div>
           {// CHECK IF AMOUNT IS HIGH ENOUGH
-            (currency == "nok" && amount < 300) ||
-              (currency == "usd" && amount < 50) ? (
+            (currency === "nok" && amount < 300) ||
+              (currency === "usd" && amount < 50) ? (
                 // IF FALSE
                 <div>
                   <Button variant="primary" disabled>
