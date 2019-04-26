@@ -25,15 +25,8 @@ class ShippingAddress extends Component {
         <div label="Address">
           <Container>
             <Row>
-              <Col sm={12} md={4} lg={4}>
-                <InputForm
-                  triggerGetAddresses={this.state.getAddresses}
-                  triggerSetShippingInformation={
-                    this.props.triggerSetShippingInformation
-                  }
-                />
-              </Col>
-              {localStorage.getItem("user_id") > 0 ? (
+
+            {localStorage.getItem("user_id") > 0 ? (
                 <Col sm={12} md={8} lg={8}>
                   <DatabaseList
                     triggerSetAddressesFunction={this.setAddressesFunction}
@@ -42,7 +35,19 @@ class ShippingAddress extends Component {
                     }
                   />
                 </Col>
-              ) : null}
+              ) 
+              : 
+              null
+              }
+              <Col sm={12} md={4} lg={4}>
+                <InputForm
+                  triggerGetAddresses={this.state.getAddresses}
+                  triggerSetShippingInformation={
+                    this.props.triggerSetShippingInformation
+                  }
+                />
+              </Col>
+
             </Row>
           </Container>
         </div>

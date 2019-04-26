@@ -80,12 +80,14 @@ class DigitalShippingAddress extends Component {
             <Row>
 
               {localStorage.getItem("user_id") > 0 ? (
-                <Col sm={12} md={4} lg={4}>
+                <Col sm={12} md={6} lg={6}>
                   <b>Selected email:</b>
                   <br />
                   {this.state.shippingInformation.receiptEmail}
+                  <br/><br/>
                 </Col>
               ) : null}
+              
               <Col sm={12} md={4} lg={4}>
                 <form onSubmit={this.onSubmit}>
                   <FormGroup controlId="email">

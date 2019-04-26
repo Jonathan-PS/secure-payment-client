@@ -5,9 +5,7 @@ import { NavLink } from "react-router-dom";
 import './LandingPage.css';
 
 class LandingPage extends Component {
-    constructor(props, context) {
-        super(props, context);
-    }
+    
 
     render() {
         return (

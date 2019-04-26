@@ -115,7 +115,7 @@ class OrderSuccessPage extends Component {
         /*  Checks for errors */
         if ((this.state.successDetails).length === 0) {
             // shows this fallback UI if successDetails is empty
-            console.log("No success data")
+            console.log("Trying to fetch data from latest transaction...")
             return (<div></div>);
 
         } else if (cantLoad) {
@@ -131,9 +131,11 @@ class OrderSuccessPage extends Component {
         } else {
             // If no error, render as normal
             console.log(
-                "\nPaid: " + String(successDetails.paid) +
-                "Risk Level: " + successDetails.outcomeRiskLevel + "(out of 99)" +
-                "\nRisk Score: " + successDetails.outcomeRiskScore + "(out of 99)"
+                "Transaction complete!" + 
+                "\nOrder created: " + formattedDate +
+                "\nPaid: " + this.firstLetterUpperCase(String(successDetails.paid)) +
+                "\nRisk Level: " + this.firstLetterUpperCase(String(successDetails.outcomeRiskLevel)) +
+                "\nRisk Score: " + successDetails.outcomeRiskScore + " (out of 99)"
             );
 
             return (
