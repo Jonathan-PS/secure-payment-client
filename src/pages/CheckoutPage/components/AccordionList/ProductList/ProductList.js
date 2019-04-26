@@ -18,7 +18,7 @@ class ProductList extends Component {
       <tr key={listKey++}>
         <th scope="row">
           <div className="checkoutImageBox">
-            <img className="checkoutImg" src={product.imageUrl} alt="Product Image" />
+            <img className="checkoutImg" src={product.imageUrl} alt="Product" />
           </div>
         </th>
         <td>{product.productName}</td>

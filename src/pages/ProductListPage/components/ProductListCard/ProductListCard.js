@@ -37,7 +37,7 @@ class ProductListCard extends Component {
           {/* IMAGE */}
           <br />
           <div className="imageBox">
-            <img src={this.props.imageUrl} alt="Product Image" width="100" />
+            <img src={this.props.imageUrl} alt="Product" width="100" />
           </div>
           <div className="card-body">
             {/* PRODUCT NAME */}
