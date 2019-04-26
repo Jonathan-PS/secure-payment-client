@@ -53,7 +53,7 @@ class InputForm extends Component {
       )
         .then(resp => resp.json())
         .then(data => {
-          console.log(data);
+          //console.log(data);
 
           this.setState({
             firstName: data.firstName,
@@ -73,7 +73,8 @@ class InputForm extends Component {
           this.props.triggerGetAddresses();
         })
         .catch(error => {
-          console.log(error.response);
+          console.log("Error getting response");
+          //console.log(error.response);
         });
     }
 

@@ -19,7 +19,7 @@ class OrderHistory extends Component {
     )
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
+        //console.log(data);
         this.setState({
           allOrders: this.state.allOrders.concat(data),
           redirect: true // ADDED TO REDIRECT

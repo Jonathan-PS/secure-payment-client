@@ -166,17 +166,21 @@ class StripePayment extends React.Component {
             })
             .then(data => {
               console.log(
+                "STRIPE: " +
+                "Payment Success!" +
+                "\nData STATUS: " + data.status +
+                "\n\nEmail: " + token.email
+              );
+              /*
+              console.log(
                 "STRIPE:\n" +
                 "Payment Success!!" +
-                "\nData STATUS:" +
-                data.status +
-                "\n\nToken Email: " +
-                token.email +
-                "\n\nToken: " +
-                JSON.stringify(token) +
-                "\n\nData content: " +
-                JSON.stringify(data)
+                "\nData STATUS:" + data.status +
+                "\n\nToken Email: " + token.email +
+                "\n\nToken: " + JSON.stringify(token) +
+                "\n\nData content: " + JSON.stringify(data)
               );
+              */
 
               // REDIRECT SUCCESS
               this.setSuccessRedirect();
@@ -379,13 +383,16 @@ class StripePayment extends React.Component {
 
     } else if (!gotAllVariablesNeeded) {
       // If we still haven't loaded all variables...
-      console.log("Getting variables...")
+      //console.log("Getting variables...")
       // Render custom fallback UI
       return (<div><h3>Getting variables from Order DB...</h3></div>);
 
     } else {
       // If everything's good, render normal!
-
+      if (totalPrice && amount && currency && orderEmail && userOrderId) {
+        console.log("Got all information needed for order payment!");
+      }
+      /*
       console.log(
         "STRIPE: Got variables..." +
         "\n totalPrice: " + totalPrice +
@@ -394,6 +401,7 @@ class StripePayment extends React.Component {
         "\n orderEmail: " + orderEmail +
         "\n userOrderId: " + userOrderId
       );
+      */
 
       return (
         <div>

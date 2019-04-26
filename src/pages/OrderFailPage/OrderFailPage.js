@@ -27,7 +27,7 @@ class OrderFailPage extends Component {
     }
 
     componentDidMount() {
-        //console.log("cDM: "+((this.state.failError) == null))
+        //console.log("cDM: "+((this.state.failError) === null))
         try {
             this.setState({
                 failError: this.props.location.state.failError,
@@ -38,13 +38,13 @@ class OrderFailPage extends Component {
                 failErrorConfig: this.props.location.state.failErrorConfig
             });
             //console.log("cDM in try cantLoad: " + this.state.cantLoad);
-            //console.log("cDM after try: "+((this.state.failError) == null))
+            //console.log("cDM after try: "+((this.state.failError) === null))
         }
         catch (error) {
             this.setState({
                 cantLoad: true
             });
-            //console.log("cDM after catch: "+((this.state.failError) == null))
+            //console.log("cDM after catch: "+((this.state.failError) === null))
         }
     }
 
@@ -78,15 +78,15 @@ class OrderFailPage extends Component {
     render() {
 
         /* Checks for errors */
-        if ((this.state.failError) == null) {
+        if ((this.state.failError) === null) {
             /* If data from Stripe/DB is not yet saved to state */
             console.log("Not yet loaded")
             return (<div><p></p></div>);
 
-        } else if (this.state.cantLoad == true) {
+        } else if (this.state.cantLoad === true) {
             /* if variables from Stripe Checkout Payment are not received */
             console.log("Variables from Stripe Checkout Payment are not received")
-            return (<div><h3></h3></div>);
+            return (<div><p></p></div>);
 
         } else if (this.state.componentError) {
             /* shows the fallback UI if there's an error */
@@ -96,7 +96,7 @@ class OrderFailPage extends Component {
         } else {
             /* If no error, render as normal */
 
-            const { failError, failErrorMessage, failErrorResponseStatus, failErrorResponseDataMessage, failErrorRequest, failErrorConfig } = this.state;
+            const { failError, failErrorMessage, failErrorResponseStatus, failErrorResponseDataMessage} = this.state;
             console.log("Error Response Data Message" + failErrorResponseDataMessage);
             return (
 

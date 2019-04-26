@@ -39,8 +39,8 @@ class AddressForm extends Component {
   async onSubmit(e) {
     e.preventDefault();
     const { addAddress } = this.state;
-    console.log("Submit");
-    console.log(addAddress);
+    console.log("Submitting address");
+    //console.log(addAddress);
 
 
     await axios
@@ -54,14 +54,15 @@ class AddressForm extends Component {
         this.props.triggerGetAddresses();
       })
       .catch(error => {
+        console.log("Error getting response from server.")
         console.log(error.response);
       });
   }
 
   render() {
-    { /* render() renders a form which has the following fields:
+    /* render() renders a form which has the following fields:
       streetName, streetNumber, housingCode, postalCode, city & country
-      and a submit-button which sends the data. */ }
+      and a submit-button which sends the data. */
 
     const { streetName, streetNumber, housingCode, city, postalCode, country } = this.state.addAddress;
 

@@ -20,34 +20,35 @@ class DatabaseList extends Component {
 
   // Adds a product to the cart
   getAddresses = event => {
-    fetch(
+    axios
+    .get(
       "https://secure-payment-api.herokuapp.com/addresses/users/" +
         localStorage.getItem("user_id")
     )
-      .then(resp => resp.json())
-      .then(data => {
-        console.log(data);
+      //.then(resp => resp.json())
+      .then(response => {
+        //console.log(response);
 
         this.setState({
-          allAddresses: data
+          allAddresses: response.data
         });
       })
       .catch(err => {});
   };
 
   getUserInfo() {
-    fetch(
+    axios
+    .get(
       "https://secure-payment-api.herokuapp.com/users/" +
         localStorage.getItem("user_id")
     )
-      .then(resp => resp.json())
-      .then(data => {
-        console.log(data);
+      .then(response => {
+        //console.log(data);
 
         this.setState({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          receiptEmail: data.email
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          receiptEmail: response.data.email
         });
       })
       .catch(err => {});
@@ -75,33 +76,30 @@ class DatabaseList extends Component {
   }
 
   render() {
-    
-    let listItems = null;
-
     /*check if user is logged in */
+    let listItems = null;
     if (localStorage.getItem("user_id") > 0) {
-      let listKey = 1;
+      //let listKey = 1;
       listItems = this.state.allAddresses.map(address => (
-        
-        <Col sm={6} md={4} lg={5} key={address.addressId} className="existingAddressBox border">
-          <div className="existingAddress">
-          <h6><b>Existing address</b></h6>
+        <Col sm={6} md={5} lg={5} key={address.addressId} className="border existingAddressBox">
+          <div id="generalStyle">
             <p>
               {address.streetName} {address.streetNumber},{" "}
-              {address.housingCode}
+            </p>
+
+            {address.housingCode}
+            <p>
               {address.postalCode}, {address.city}, {address.country}
             </p>
           </div>
-          <div className="button">
-            <Button
-              align="center"
-              type="submit"
-              onClick={() => this.handleClick(address)}
-              variant="success"
-            >
-              Select
-            </Button>
-          </div>
+          <Button
+            align="center"
+            type="submit"
+            onClick={() => this.handleClick(address)}
+            variant="success"
+          >
+            Select
+          </Button>
         </Col>
       ));
     }
@@ -109,8 +107,15 @@ class DatabaseList extends Component {
     return (
       <div align="right">
         <div className="container" id="generalStyle" />
-        <Row><h6>&nbsp;&nbsp;&nbsp; Select an existing address</h6></Row>
+        {
+          (localStorage.getItem("user_id") > 0) ? 
+          <div><Row><h6>&emsp; Select a new address:</h6></Row></div> 
+          : 
+          <div></div>
+          }
+
         <Row>{listItems}</Row>
+        <br/><br/>
       </div>
     );
   }

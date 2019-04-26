@@ -42,8 +42,8 @@ class Card extends Component {
   }
 
   render() {
-    { /* This component basically makes the card that is used to display the orders.
-       It gets the data from OrderHistory.js and displays it the way we want to */ }
+    /* This component basically makes the card that is used to display the orders.
+       It gets the data from OrderHistory.js and displays it the way we want to */
     return (
       <div className="col-xs-12 col-sm-12 col-md-12" align="left">
         <div className="card" id="border">

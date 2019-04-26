@@ -46,7 +46,8 @@ class OrderPage extends Component {
             this.state.userOrderId
         )
         .then(response => {
-          console.log("Getting User Order: " + JSON.stringify(response.data));
+          //console.log("Getting User Order: " + JSON.stringify(response.data));
+          console.log("Getting User Order...");
           this.setState({
             userOrderInformation: response.data
           });
@@ -62,7 +63,8 @@ class OrderPage extends Component {
             this.state.userOrderId
         )
         .then(response => {
-          console.log(JSON.stringify(response.data));
+          //console.log(JSON.stringify(response.data));
+          console.log("Connected to server.");
           this.setState({
             orderProducts: this.state.orderProducts.concat(response.data)
           });
@@ -100,8 +102,6 @@ class OrderPage extends Component {
       orderEmail,
       totalPrice,
       currency,
-      userOrderId,
-      registeredUserId,
       createdAt,
       updatedAt,
       status
@@ -117,12 +117,12 @@ class OrderPage extends Component {
         />
       );
     } else {
+      /*
       console.log(
-        "userOrderId: " +
-          userOrderId +
-          "\nregisteredUserId: " +
-          registeredUserId
+        "userOrderId: " + userOrderId +
+        "\nregisteredUserId: " + registeredUserId
       );
+      */
 
       return (
         <div>

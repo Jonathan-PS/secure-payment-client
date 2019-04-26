@@ -167,7 +167,8 @@ class AccordionList extends Component {
           alert("In Then - Order Creation failed. Not a valid UserOrderId");
         } else {
           this.state.userOrderId = response.data;
-          console.log("Success! UserOrderId: " + response.data);
+          console.log("Order created. Success!");
+          //console.log("UserOrderId: " + response.data);
         }
       })
       .catch(error => {
@@ -184,7 +185,7 @@ class AccordionList extends Component {
           quantity: product.selectedQuantity
         };
       });
-      console.log(JSON.stringify(orderProductList));
+      //console.log(JSON.stringify(orderProductList));
 
       await axios
         .put(
@@ -298,8 +299,6 @@ class AccordionList extends Component {
             {/* Second Card - DELIVERY METHOD */}
             <Accordion.Toggle as={Card.Header} eventKey="1">
               <strong> 2 |</strong> Delivery Method &nbsp;
-              {}
-              {/*((streetName.length > 0) || (receiptEmail))? <span class="symbol">✓</span> : <span></span>*/}
               {streetName || receiptEmail ? (
                 <span className="symbol">✓</span>
               ) : (
