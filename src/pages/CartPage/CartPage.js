@@ -31,7 +31,7 @@ class CartPage extends Component {
         <div align="center">
           <NavLink to="/checkout" activeClassName="active">
             <Button
-              disabled={this.props.cartProducts.length == 0}
+              disabled={this.props.cartProducts.length === 0}
               variant="primary"
               size="sm"
             >
