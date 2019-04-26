@@ -70,7 +70,7 @@ class ProductListCart extends Component {
           >
             -
           </Button>
-          &nbsp;  <strong>{product.selectedQuantity}</strong>  &nbsp;
+          &nbsp; <strong>{product.selectedQuantity}</strong> &nbsp;
           <Button
             variant="dark"
             onClick={() => this.handleIncrease(product)}
@@ -128,9 +128,11 @@ class ProductListCart extends Component {
         </table>
         <p align="center">
           Price:{" "}
-          {String(this.state.totalPrice).toString().replace(".", ",")}{" NOK"}
+          {String(this.state.totalPrice)
+            .toString()
+            .replace(".", ",")}
+          {" NOK"}
         </p>
-        
       </div>
     );
   }
