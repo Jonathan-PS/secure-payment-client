@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl } from "react-bootstrap";
 import "./SignUpForm.css";
-import "./../../../../App.css";
 import axios from "axios";
 
 class SignUpForm extends Component {
@@ -24,14 +23,11 @@ class SignUpForm extends Component {
     const user = this.state.registerUser;
     user[e.target.name] = e.target.value;
     this.setState({ registerUser: user });
-    console.log(this.state.registerUser);
   }
 
   async onSubmit(e) {
     e.preventDefault();
     const { registerUser } = this.state;
-    console.log("Submit");
-    console.log(registerUser);
 
     // First register user in db
     await axios
@@ -40,7 +36,6 @@ class SignUpForm extends Component {
         registerUser
       )
       .then(response => {
-        console.log(response);
         this.loginUser();
       })
       .catch(error => {
@@ -54,7 +49,6 @@ class SignUpForm extends Component {
         email: this.state.registerUser.email,
         password: this.state.registerUser.password
       };
-      alert(JSON.stringify(user_query));
       await axios
         .post(
           "https://secure-payment-api.herokuapp.com/users/login",
@@ -67,9 +61,6 @@ class SignUpForm extends Component {
             localStorage.setItem("user_id", response.data);
             localStorage.setItem("email", this.state.registerUser.email);
 
-            console.log("user_id: " + response.data);
-
-            //alert(localStorage.getItem("user_id"));
             window.location = "/dashboard";
           }
         })
@@ -77,7 +68,7 @@ class SignUpForm extends Component {
           alert("In catch - " + error);
         });
     } catch (e) {
-      alert("Login failed - Wrong Email or password \n" + e);
+      alert("Login failed - Wrong email or password \n" + e);
     }
   }
 

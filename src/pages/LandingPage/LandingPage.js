@@ -7,25 +7,9 @@ import './LandingPage.css';
 class LandingPage extends Component {
     constructor(props, context) {
         super(props, context);
-
-        this.onSelect = this.onSelect.bind(this);
-
-        this.state = {
-            index: 0,
-            direction: null,
-        };
-    }
-
-    onSelect(selectedIndex, e) {
-        this.setState({
-            index: selectedIndex,
-            direction: e.direction,
-        });
     }
 
     render() {
-        const { index, direction } = this.state;
-
         return (
             <div>
                 <Jumbotron>
