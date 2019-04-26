@@ -58,7 +58,7 @@ class OrderSuccessPage extends Component {
                         });
                     }
                 }
-                if (!(this.state.successDetails).length == 0) {
+                if (!(this.state.successDetails).length === 0) {
                     console.log("PAYMENT COMPLETE!")
                     console.log("SUCCESS DETAILS:\n" + JSON.stringify(this.state.successDetails))
                 }
@@ -99,7 +99,7 @@ class OrderSuccessPage extends Component {
 
     render() {
 
-        const { successDetails, userOrderId, tokenID } = this.state;
+        const { successDetails } = this.state;
         const { cantLoad, componentError } = this.state;
 
         // format amount
@@ -116,12 +116,12 @@ class OrderSuccessPage extends Component {
         if ((this.state.successDetails).length === 0) {
             // shows this fallback UI if successDetails is empty
             console.log("No success data")
-            return (<p></p>);
+            return (<div></div>);
 
         } else if (cantLoad) {
             // if variables from Stripe Checkout Payment are not received
             console.log("Variables from Stripe Checkout Payment are not received")
-            return (<div><h3></h3></div>);
+            return (<div></div>);
 
         } else if (componentError) {
             //  shows the fallback UI if there's an error
@@ -166,7 +166,7 @@ class OrderSuccessPage extends Component {
                                 <b>Receipt Email</b> {successDetails.receiptEmail}
                             </li>
                             <li className="list-group-item">
-                                <b>Receipt Url</b> {<a href={successDetails.receiptUrl} target="_blank">See Receipt</a>}
+                                <b>Receipt Url</b> {<a href={successDetails.receiptUrl} target="_blank" rel="noopener noreferrer">See Receipt</a>}
                             </li>
                         </ul>
                         <br />
