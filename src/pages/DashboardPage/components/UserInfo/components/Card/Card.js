@@ -4,10 +4,9 @@ import "./Card.css";
 class Card extends Component {
   render() {
     return (
-      <div className="col-xs-12 col-sm-12 col-md-12" align="left">
-        <div className="userCard" id="border">
+      <div className="col-xs-12 col-sm-12 col-md-12">
+        <div className="userCard">
           <div className="userCard-body">
-            <h4 className="userCard-title" />
             <ul>
               <li>
                 <b>Name:</b> {this.props.firstName} {this.props.lastName}
