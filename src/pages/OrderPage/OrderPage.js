@@ -11,7 +11,7 @@ class OrderPage extends Component {
     super(props);
     this.state = {
       /* Variable from Redirection */
-      userOrderId: this.props.location.state.userOrderId,
+      userOrderId: "",
       /* To check if variables are sent from Stripe Checkout */
       cantLoad: false,
 
@@ -33,9 +33,9 @@ class OrderPage extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     try {
-      this.setState({
+      await this.setState({
         userOrderId: this.props.location.state.userOrderId
       });
 
@@ -43,7 +43,7 @@ class OrderPage extends Component {
       axios
         .get(
           "https://secure-payment-api.herokuapp.com/orders/" +
-          this.state.userOrderId
+            this.state.userOrderId
         )
         .then(response => {
           console.log(JSON.stringify(response.data));
@@ -56,7 +56,7 @@ class OrderPage extends Component {
       axios
         .get(
           "https://secure-payment-api.herokuapp.com/orderproducts/orders/" +
-          this.state.userOrderId
+            this.state.userOrderId
         )
         .then(response => {
           console.log(JSON.stringify(response.data));
@@ -75,15 +75,27 @@ class OrderPage extends Component {
   }
 
   // FORMAT PRICE TO LOOK LIKE THIS: 500,25
-  showPrice = (price) => {
-    const showPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2).toString().replace(".", ",")
-    return showPrice
-  }
+  showPrice = price => {
+    const showPrice = parseFloat(Math.round(price * 100) / 100)
+      .toFixed(2)
+      .toString()
+      .replace(".", ",");
+    return showPrice;
+  };
 
   render() {
-
-    const { shippingName, shippingAddress, orderEmail, totalPrice, currency,
-      userOrderId, registeredUserId, createdAt, updatedAt, status } = this.state.userOrderInformation;
+    const {
+      shippingName,
+      shippingAddress,
+      orderEmail,
+      totalPrice,
+      currency,
+      userOrderId,
+      registeredUserId,
+      createdAt,
+      updatedAt,
+      status
+    } = this.state.userOrderInformation;
 
     if (this.state.cantLoad) {
       return (
@@ -96,13 +108,14 @@ class OrderPage extends Component {
       );
     } else {
       console.log(
-        "userOrderId: " + userOrderId +
-        "\nregisteredUserId: " + registeredUserId
-      )
+        "userOrderId: " +
+          userOrderId +
+          "\nregisteredUserId: " +
+          registeredUserId
+      );
 
       return (
         <div>
-
           <h4>Order Review</h4>
           <hr />
           <h5>Order Information</h5>
@@ -112,11 +125,16 @@ class OrderPage extends Component {
               <Col sm={12} md={12} lg={6}>
                 <dl class="row">
                   <dt class="col-sm-5">Shipping to:</dt>
-                  <dd class="col-sm-10">{shippingName} <br /> {shippingAddress}</dd>
+                  <dd class="col-sm-10">
+                    {shippingName} <br /> {shippingAddress}
+                  </dd>
                   <dt class="col-sm-5 text-truncate">Email:</dt>
                   <dd class="col-sm-10">{orderEmail}</dd>
                   <dt class="col-sm-5">Total price:</dt>
-                  <dd class="col-sm-10">{this.showPrice(totalPrice)} {String(currency).toUpperCase()}</dd>
+                  <dd class="col-sm-10">
+                    {this.showPrice(totalPrice)}{" "}
+                    {String(currency).toUpperCase()}
+                  </dd>
                 </dl>
               </Col>
               <Col sm={12} md={12} lg={6}>
@@ -132,15 +150,15 @@ class OrderPage extends Component {
             </Row>
           </Container>
 
-
           <hr />
           <h5>Order Products Information</h5>
           <ProductList orderProducts={this.state.orderProducts} />
-          
+
           <hr />
           <div align="center">
-          <b>Total Price: {this.showPrice(totalPrice)} NOK</b>
-            <br /><br />
+            <b>Total Price: {this.showPrice(totalPrice)} NOK</b>
+            <br />
+            <br />
             {status === "in progress" ? (
               <StripePayment userOrderId={this.state.userOrderId} />
             ) : null}
