@@ -61,8 +61,10 @@ class OrderSuccessPage extends Component {
                         });
                     }
                 }
-                console.log("PAYMENT COMPLETE!")
-                console.log("SUCCESS DETAILS:\n" + JSON.stringify(this.state.successDetails))
+                if (!(this.state.successDetails).length == 0) {
+                    console.log("PAYMENT COMPLETE!")
+                    console.log("SUCCESS DETAILS:\n" + JSON.stringify(this.state.successDetails))
+                }
             })
             .catch(err => {
                 console.log("ERROR: " + err)
@@ -101,6 +103,7 @@ class OrderSuccessPage extends Component {
     render() {
 
         const { successDetails, userOrderId, tokenID } = this.state;
+        const { cantLoad, componentError } = this.state;
 
         // format amount
         const stringAmount = String(successDetails.amount);
@@ -113,20 +116,20 @@ class OrderSuccessPage extends Component {
 
 
         /*  Checks for errors */
-        if ((this.state.successDetails).length == 0) {
+        if ((this.state.successDetails).length === 0) {
             // shows this fallback UI if successDetails is empty
             console.log("No success data")
-            return (<div><h3></h3></div>);
+            return (<p></p>);
 
-        } else if (this.state.cantLoad == true) {
+        } else if (cantLoad) {
             // if variables from Stripe Checkout Payment are not received
             console.log("Variables from Stripe Checkout Payment are not received")
             return (<div><h3></h3></div>);
 
-        } else if (this.state.componentError) {
+        } else if (componentError) {
             //  shows the fallback UI if there's an error
             console.log("Component error")
-            return (<div><h3>Something went wrong!</h3><p>{this.state.componentError.toString()}</p></div>);
+            return (<div><h3>Something went wrong!</h3><p>{componentError.toString()}</p></div>);
 
         } else {
             // If no error, render as normal
@@ -144,32 +147,32 @@ class OrderSuccessPage extends Component {
                         {/* PRINT INFO */}
                         <br />
                         <h5>Thank you for the purchase!</h5>
-                        <h1> <span class="symbol">✓</span> {String(successDetails.outcomeSellerMessage).replace(".", "")}</h1>
+                        <h1> <span className="symbol">✓</span> {String(successDetails.outcomeSellerMessage).replace(".", "")}</h1>
 
 
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
                                 <b>Status</b><br />
-                                <span class="statusText"><span class="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.outcomeType))}</span><br />
-                                <span class="statusText"><span class="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.stripeStatus))}</span><br />
-                                <span class="statusText"><span class="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.outcomeNetworkStatus)).replace(/_/g, ' ')}</span>
+                                <span className="statusText"><span className="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.outcomeType))}</span><br />
+                                <span className="statusText"><span className="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.stripeStatus))}</span><br />
+                                <span className="statusText"><span className="symbol">✓</span> {this.firstLetterUpperCase(String(successDetails.outcomeNetworkStatus)).replace(/_/g, ' ')}</span>
 
                             </li>
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 <b>Date & Time</b> {formattedDate}
                             </li>
 
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 <b>Amount</b> {prettyAmount}
                             </li>
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 <b>Receipt Email</b> {successDetails.receiptEmail}
                             </li>
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 <b>Receipt Url</b> {<a href={successDetails.receiptUrl} target="_blank">See Receipt</a>}
                             </li>
                         </ul>
-                        <br/>
+                        <br />
                     </div>
 
                 </div>

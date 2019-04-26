@@ -128,16 +128,16 @@ class OrderFailPage extends Component {
 
                         {/* PRINT INFO */}
                         <br />
-                        <h2><span class="symbol">✘</span> Something went wrong! Payment failed.</h2>
+                        <h2><span className="symbol">✘</span> Something went wrong! Payment failed.</h2>
 
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
                                 <b>{String(failError)}</b>
                             </li>
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 <b>Error Message</b> <br />{failErrorMessage}
                             </li>
-                            <li class="list-group-item">
+                            <li className="list-group-item">
                                 <b>Error Response Status</b> <br />{failErrorResponseStatus}
                             </li>
                         </ul>
