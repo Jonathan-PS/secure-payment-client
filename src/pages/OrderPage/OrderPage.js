@@ -46,10 +46,13 @@ class OrderPage extends Component {
             this.state.userOrderId
         )
         .then(response => {
-          console.log(JSON.stringify(response.data));
+          console.log("Getting User Order: " + JSON.stringify(response.data));
           this.setState({
             userOrderInformation: response.data
           });
+        })
+        .catch(err => {
+          console.log("Fetching User Order Error : " + err);
         });
 
       /* GET ORDERPRODUCTS FROM DATABASE */
@@ -140,9 +143,13 @@ class OrderPage extends Component {
               <Col sm={12} md={12} lg={6}>
                 <dl className="row">
                   <dt className="col-sm-5">Order created:</dt>
-                  <dd className="col-sm-10">{new Date(createdAt).toUTCString()}</dd>
+                  <dd className="col-sm-10">
+                    {new Date(createdAt).toUTCString()}
+                  </dd>
                   <dt className="col-sm-5">Last Updated:</dt>
-                  <dd className="col-sm-10">{new Date(updatedAt).toUTCString()}</dd>
+                  <dd className="col-sm-10">
+                    {new Date(updatedAt).toUTCString()}
+                  </dd>
                   <dt className="col-sm-5">Order status:</dt>
                   <dd className="col-sm-10">{status}</dd>
                 </dl>

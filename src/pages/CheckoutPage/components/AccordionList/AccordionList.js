@@ -109,12 +109,10 @@ class AccordionList extends Component {
   }*/
 
   async createOrderAndContinue() {
-
     // first set the isButtonDisabled to true
     this.setState({
       isButtonDisabled: true
     });
-    
 
     // 1 - create UserOrder - Retrieves the userOrderId
     let newUserOrder;
@@ -210,6 +208,8 @@ class AccordionList extends Component {
 
   redirectToOrderPage() {
     if (this.state.redirect) {
+      this.props.triggerClearCart();
+
       return (
         <Redirect
           to={{
@@ -224,18 +224,28 @@ class AccordionList extends Component {
     }
   }
 
-  showPrice = (price) =>{
-    const showPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2).toString().replace(".", ",")
-    return showPrice
-  }
+  showPrice = price => {
+    const showPrice = parseFloat(Math.round(price * 100) / 100)
+      .toFixed(2)
+      .toString()
+      .replace(".", ",");
+    return showPrice;
+  };
 
   render() {
+    const { currency } = this.state;
 
-    const {currency} = this.state;
-
-    const { firstName, lastName, streetName, streetNumber, housingCode,
-      postalCode, city, country, receiptEmail } = this.state.shippingInformation;
-
+    const {
+      firstName,
+      lastName,
+      streetName,
+      streetNumber,
+      housingCode,
+      postalCode,
+      city,
+      country,
+      receiptEmail
+    } = this.state.shippingInformation;
 
     const productList = this.props.cartProducts.map(product => (
       <ul key={product.productId} className="list-style: none;">
@@ -243,17 +253,17 @@ class AccordionList extends Component {
           {/*Math.round(product.priceEach * product.selectedQuantity)*/}
           <b>{product.productName}</b>
           <br />
-          <small>Price:</small> {this.showPrice(product.priceEach)} x {product.selectedQuantity}{" "}
-          ({this.showPrice(product.priceEach * product.selectedQuantity)} {currency.toUpperCase()})
+          <small>Price:</small> {this.showPrice(product.priceEach)} x{" "}
+          {product.selectedQuantity} (
+          {this.showPrice(product.priceEach * product.selectedQuantity)}{" "}
+          {currency.toUpperCase()})
         </li>
       </ul>
     ));
 
-
-    const formattedTotalPrice = String(this.state.totalPrice).toString().replace(".", ",");
-    
-    
-
+    const formattedTotalPrice = String(this.state.totalPrice)
+      .toString()
+      .replace(".", ",");
 
     return (
       <div>
@@ -269,8 +279,13 @@ class AccordionList extends Component {
           <Card>
             {/* First Card - PRODUCTS*/}
             <Accordion.Toggle as={Card.Header} eventKey="0">
-              <strong> 1 |</strong> Products ({" "} {formattedTotalPrice}{" "} NOK ) &nbsp;
-              {(this.props.cartProducts.length > 0) ? <span className="symbol">✓</span> : <span></span>}
+              <strong> 1 |</strong> Products ( {formattedTotalPrice} NOK )
+              &nbsp;
+              {this.props.cartProducts.length > 0 ? (
+                <span className="symbol">✓</span>
+              ) : (
+                <span />
+              )}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
@@ -285,30 +300,50 @@ class AccordionList extends Component {
               <strong> 2 |</strong> Delivery Method &nbsp;
               {}
               {/*((streetName.length > 0) || (receiptEmail))? <span class="symbol">✓</span> : <span></span>*/}
-              {((streetName) || (receiptEmail)) ? <span className="symbol">✓</span> : <span></span>}
+              {streetName || receiptEmail ? (
+                <span className="symbol">✓</span>
+              ) : (
+                <span />
+              )}
               {/* "SHIPPING ADDRESS" */}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="1">
               <Card.Body>
-                {this.state.anyPhysical ?
+                {this.state.anyPhysical ? (
                   /* IF PHYSICAL */
                   <div>
-                    <small><i>Since you're buying physical products, we'll need your shipping information.</i></small>
-                    <br /><br />
+                    <small>
+                      <i>
+                        Since you're buying physical products, we'll need your
+                        shipping information.
+                      </i>
+                    </small>
+                    <br />
+                    <br />
                     <ShippingAddress
-                      triggerSetShippingInformation={this.setShippingInformation}
+                      triggerSetShippingInformation={
+                        this.setShippingInformation
+                      }
                     />
                   </div>
-                  :
+                ) : (
                   /* IF DIGITAL */
                   <div>
-                    <small><i>Since you're buying digital products, we'll need your email.</i></small>
-                    <br /><br />
+                    <small>
+                      <i>
+                        Since you're buying digital products, we'll need your
+                        email.
+                      </i>
+                    </small>
+                    <br />
+                    <br />
                     <DigitalShippingAddress
-                      triggerSetShippingInformation={this.setShippingInformation}
+                      triggerSetShippingInformation={
+                        this.setShippingInformation
+                      }
                     />
                   </div>
-                }
+                )}
               </Card.Body>
             </Accordion.Collapse>
           </Card>
@@ -316,7 +351,12 @@ class AccordionList extends Component {
             {/*  Third Card - CREATE ORDER */}
             <Accordion.Toggle as={Card.Header} eventKey="2">
               <strong> 3 |</strong> Create Your Order &nbsp;
-              {((this.props.cartProducts.length > 0) && ((streetName) || (receiptEmail))) ? <span className="symbol">✓</span> : <span></span>}
+              {this.props.cartProducts.length > 0 &&
+              (streetName || receiptEmail) ? (
+                <span className="symbol">✓</span>
+              ) : (
+                <span />
+              )}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="2">
               <div align="center">
@@ -325,71 +365,82 @@ class AccordionList extends Component {
                   <Container>
                     <Row>
                       <Col sm={12} md={6} lg={6}>
-                        {
-                          (this.state.anyPhysical) ?
-                            <ul><b>Shipping address</b></ul>
-                            :
-                            <ul><b>Delivery address</b></ul>
-                        }
-                        {
-                          (streetName || receiptEmail) ?
-                            <div>
-                              <ul className="list-style: none;">
-                                <li>
-                                  {firstName}{" "}
-                                  {lastName}
-                                </li>
+                        {this.state.anyPhysical ? (
+                          <ul>
+                            <b>Shipping address</b>
+                          </ul>
+                        ) : (
+                          <ul>
+                            <b>Delivery address</b>
+                          </ul>
+                        )}
+                        {streetName || receiptEmail ? (
+                          <div>
+                            <ul className="list-style: none;">
+                              <li>
+                                {firstName} {lastName}
+                              </li>
 
-                                <li>
-                                  {streetName}{" "}
-                                  {streetNumber}{" "}
-                                  {housingCode}
-                                </li>
-                                <li>
-                                  {postalCode}{" "}
-                                  {city}{" "}
-                                  {country}
-                                </li>
-                              </ul>
-                              <ul><b>Email</b><br /><i>{receiptEmail}</i></ul>
-                            </div>
-                            :
-                            <div>
-                              <ul><small><i>You need to select delivery method!</i></small></ul>
-                            </div>
-                        }
-
-
-
+                              <li>
+                                {streetName} {streetNumber} {housingCode}
+                              </li>
+                              <li>
+                                {postalCode} {city} {country}
+                              </li>
+                            </ul>
+                            <ul>
+                              <b>Email</b>
+                              <br />
+                              <i>{receiptEmail}</i>
+                            </ul>
+                          </div>
+                        ) : (
+                          <div>
+                            <ul>
+                              <small>
+                                <i>You need to select delivery method!</i>
+                              </small>
+                            </ul>
+                          </div>
+                        )}
                       </Col>
                       <Col sm={12} md={6} lg={6}>
-                        <ul><b>Products summary</b></ul>
-                        {
-                          (productList.length > 0) ?
-                            <span>{productList}</span>
-                            :
-                            <ul><small><i>You need to select products!</i></small></ul>
-                        }
-
+                        <ul>
+                          <b>Products summary</b>
+                        </ul>
+                        {productList.length > 0 ? (
+                          <span>{productList}</span>
+                        ) : (
+                          <ul>
+                            <small>
+                              <i>You need to select products!</i>
+                            </small>
+                          </ul>
+                        )}
                       </Col>
                     </Row>
                   </Container>
                 </div>
                 <br />
-                <p><b><i>Total price to pay: {formattedTotalPrice + " NOK"} </i></b></p>
+                <p>
+                  <b>
+                    <i>Total price to pay: {formattedTotalPrice + " NOK"} </i>
+                  </b>
+                </p>
                 <Button
                   disabled={
                     !this.state.shippingInformation.valid ||
-                    this.state.totalPrice < 1
+                    this.state.totalPrice < 1 ||
+                    this.state.isButtonDisabled // will disable after calling createOrderAndContinue!
                   }
                   onClick={this.createOrderAndContinue}
-                  disabled={this.state.isButtonDisabled} // will disable after calling createOrderAndContinue!
                   type="submit"
                   variant="primary"
                 >
                   Create Order
                 </Button>
-                <br /><br />
+                <br />
+                <br />
               </div>
             </Accordion.Collapse>
           </Card>

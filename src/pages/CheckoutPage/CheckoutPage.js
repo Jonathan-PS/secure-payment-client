@@ -8,7 +8,10 @@ class CheckoutPage extends Component {
       <div id="generalStyle">
         <h4>Creation and review</h4>
         <hr />
-        <AccordionList cartProducts={this.props.cartProducts} />
+        <AccordionList
+          cartProducts={this.props.cartProducts}
+          triggerClearCart={this.props.triggerClearCart}
+        />
         <hr />
       </div>
     );
