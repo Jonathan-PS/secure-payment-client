@@ -59,7 +59,7 @@ class ProductListCart extends Component {
     const products = this.props.cartProducts.map(product => (
       <tr key={listKey++}>
         <th scope="row">
-          <img src={product.imageUrl} alt="Product Image" width="30" />
+          <img src={product.imageUrl} alt="Product" width="30" />
         </th>
         <td>{product.productName}</td>
         <td>
@@ -115,7 +115,7 @@ class ProductListCart extends Component {
               <th scope="col" />
               <th scope="col">
                 <Button
-                  disabled={this.props.cartProducts.length == 0}
+                  disabled={this.props.cartProducts.length === 0}
                   variant="danger"
                   onClick={() => this.handleClearCart()}
                   size="sm"
