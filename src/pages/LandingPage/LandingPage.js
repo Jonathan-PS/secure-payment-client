@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { NavLink } from "react-router-dom";
 import './LandingPage.css';
 
-class LandingPage extends React.Component {
+class LandingPage extends Component {
     constructor(props, context) {
         super(props, context);
 

@@ -1,4 +1,4 @@
-import React, { components } from "react";
+import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
 const LogoutPage = props => {
