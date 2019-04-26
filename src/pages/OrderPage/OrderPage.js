@@ -123,28 +123,28 @@ class OrderPage extends Component {
           <Container>
             <Row>
               <Col sm={12} md={12} lg={6}>
-                <dl class="row">
-                  <dt class="col-sm-5">Shipping to:</dt>
-                  <dd class="col-sm-10">
+                <dl className="row">
+                  <dt className="col-sm-5">Shipping to:</dt>
+                  <dd className="col-sm-10">
                     {shippingName} <br /> {shippingAddress}
                   </dd>
-                  <dt class="col-sm-5 text-truncate">Email:</dt>
-                  <dd class="col-sm-10">{orderEmail}</dd>
-                  <dt class="col-sm-5">Total price:</dt>
-                  <dd class="col-sm-10">
+                  <dt className="col-sm-5 text-truncate">Email:</dt>
+                  <dd className="col-sm-10">{orderEmail}</dd>
+                  <dt className="col-sm-5">Total price:</dt>
+                  <dd className="col-sm-10">
                     {this.showPrice(totalPrice)}{" "}
                     {String(currency).toUpperCase()}
                   </dd>
                 </dl>
               </Col>
               <Col sm={12} md={12} lg={6}>
-                <dl class="row">
-                  <dt class="col-sm-5">Order created:</dt>
-                  <dd class="col-sm-10">{new Date(createdAt).toUTCString()}</dd>
-                  <dt class="col-sm-5">Last Updated:</dt>
-                  <dd class="col-sm-10">{new Date(updatedAt).toUTCString()}</dd>
-                  <dt class="col-sm-5">Order status:</dt>
-                  <dd class="col-sm-10">{status}</dd>
+                <dl className="row">
+                  <dt className="col-sm-5">Order created:</dt>
+                  <dd className="col-sm-10">{new Date(createdAt).toUTCString()}</dd>
+                  <dt className="col-sm-5">Last Updated:</dt>
+                  <dd className="col-sm-10">{new Date(updatedAt).toUTCString()}</dd>
+                  <dt className="col-sm-5">Order status:</dt>
+                  <dd className="col-sm-10">{status}</dd>
                 </dl>
               </Col>
             </Row>
