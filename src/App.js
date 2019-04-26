@@ -7,7 +7,6 @@ import NavigationBar from "./components/NavigationBar/NavigationBar";
 /* Routes */
 import Routes from "./Routes";
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +17,7 @@ class App extends Component {
 
     this.addCartProduct = this.addCartProduct.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
+    this.decreaseCartProduct = this.decreaseCartProduct.bind(this);
     this.clearCart = this.clearCart.bind(this);
   }
 
