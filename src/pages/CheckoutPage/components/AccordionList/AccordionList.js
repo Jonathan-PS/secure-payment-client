@@ -261,7 +261,7 @@ class AccordionList extends Component {
             {/* First Card - PRODUCTS*/}
             <Accordion.Toggle as={Card.Header} eventKey="0">
               <strong> 1 |</strong> Products ({" "} {formattedTotalPrice}{" "} NOK ) &nbsp;
-              {(this.props.cartProducts.length > 0) ? <span class="symbol">✓</span> : <span></span>}
+              {(this.props.cartProducts.length > 0) ? <span className="symbol">✓</span> : <span></span>}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
