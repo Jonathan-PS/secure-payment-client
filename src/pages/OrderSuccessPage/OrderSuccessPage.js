@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { render } from 'react-dom';
-import { Elements, StripeProvider } from 'react-stripe-elements';
-import { Redirect } from 'react-router-dom'
 
 import "./OrderSuccessPage.css";
 
