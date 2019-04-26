@@ -22,7 +22,7 @@ class Address extends Component {
     )
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
+        //console.log(data);
         this.setState({
           allAddresses: this.state.allAddresses.concat(data)
         });

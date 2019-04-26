@@ -28,7 +28,7 @@ class AddressForm extends Component {
     const address = this.state.addAddress;
     address[e.target.name] = e.target.value;
     this.setState({ addAddress: address });
-    console.log(this.state.addAddress);
+    //console.log(this.state.addAddress);
   }
 
   /* onSubmit handles what happens when the 'Add address'-button is pressed.
@@ -41,6 +41,7 @@ class AddressForm extends Component {
     const { addAddress } = this.state;
     console.log("Submit");
     console.log(addAddress);
+
 
     await axios
       .put(
@@ -61,6 +62,10 @@ class AddressForm extends Component {
     { /* render() renders a form which has the following fields:
       streetName, streetNumber, housingCode, postalCode, city & country
       and a submit-button which sends the data. */ }
+
+    const { streetName, streetNumber, housingCode, city, postalCode, country } = this.state.addAddress;
+
+
     return (
       <div>
         <div id="generalStyle">
@@ -136,11 +141,25 @@ class AddressForm extends Component {
                 required="required"
               />
             </FormGroup>
-            <Button block type="submit" variant="dark">
-              Add Address
-            </Button>
+
+            { /* IF ALL ARE FILLED IN */
+              (streetName, streetNumber, housingCode, city, postalCode, country) ?
+                <div>
+                  {/* BUTTON POPOVER (OverLayTrigger) */}
+                    <Button block type="submit" variant="dark">
+                      Add Address
+                    </Button>
+                </div>
+                :
+                <div>
+                  {/* NON-CLICKABLE BUTTON */}
+                  <Button block type="submit" disabled variant="dark">
+                    Add Address
+                    </Button>
+                </div>
+            }
           </form>
-          <br/><br/>
+          <br /><br />
         </div>
       </div>
     );

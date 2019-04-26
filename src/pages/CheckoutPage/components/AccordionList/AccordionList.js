@@ -23,6 +23,9 @@ class AccordionList extends Component {
       // it changes page automatically.
       redirect: false,
 
+      // disable "Create Order"- button after pressed (to not get duplicates)
+      isButtonDisabled: false,
+
       // calculated in its own function
       totalPrice: 0,
       currency: "nok",
@@ -106,8 +109,14 @@ class AccordionList extends Component {
   }*/
 
   async createOrderAndContinue() {
-    // 1 - create UserOrder - Retrieves the userOrderId
 
+    // first set the isButtonDisabled to true
+    this.setState({
+      isButtonDisabled: true
+    });
+    
+
+    // 1 - create UserOrder - Retrieves the userOrderId
     let newUserOrder;
 
     if (this.state.anyPhysical) {
@@ -374,6 +383,7 @@ class AccordionList extends Component {
                     this.state.totalPrice < 1
                   }
                   onClick={this.createOrderAndContinue}
+                  disabled={this.state.isButtonDisabled} // will disable after calling createOrderAndContinue!
                   type="submit"
                   variant="primary"
                 >
