@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl } from "react-bootstrap";
 import "./AddAddressForm.css";
 import axios from "axios";
 
@@ -58,11 +58,9 @@ class AddressForm extends Component {
   }
 
   render() {
-    {
-      /* render() renders a form which has the following fields:
+    { /* render() renders a form which has the following fields:
       streetName, streetNumber, housingCode, postalCode, city & country
-      and a submit-button which sends the data. */
-    }
+      and a submit-button which sends the data. */ }
     return (
       <div>
         <div id="generalStyle">
