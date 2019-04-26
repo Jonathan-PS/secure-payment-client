@@ -17,7 +17,7 @@ class Address extends Component {
    *  we serve the correct addresses to the user that is currently logged in */
   getAddresses = event => {
     fetch(
-      "https://secure-payment-api.herokuapp.com/addresses/users/" +
+      "http://localhost:9090/addresses/users" +
         localStorage.getItem("user_id")
     )
       .then(resp => resp.json())

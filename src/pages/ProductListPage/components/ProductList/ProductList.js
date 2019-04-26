@@ -8,7 +8,7 @@ class ProductList extends Component {
   };
 
   componentDidMount() {
-    fetch("https://secure-payment-api.herokuapp.com/products")
+    fetch("http://localhost:9090/products")
       .then(resp => resp.json())
       .then(data => {
         console.log(data);

@@ -9,7 +9,7 @@ class UserInfo extends Component {
 
   componentDidMount() {
     fetch(
-      "https://secure-payment-api.herokuapp.com/users/" +
+      "http://localhost:9090/users" +
         localStorage.getItem("user_id")
     )
       .then(resp => resp.json())
