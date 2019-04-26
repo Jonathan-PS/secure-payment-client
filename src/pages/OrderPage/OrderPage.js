@@ -81,7 +81,14 @@ class OrderPage extends Component {
       .toString()
       .replace(".", ",");
     return showPrice;
-  };
+  }
+
+  /* Use on Strings to make first letter Uppercase */
+  firstLetterUpperCase(word) {
+    const firstLetter = word.substring(0, 1).toUpperCase()
+    const restOfLetters = word.substring(1, word.length)
+    return firstLetter + restOfLetters
+}
 
   render() {
     const {
@@ -144,7 +151,7 @@ class OrderPage extends Component {
                   <dt className="col-sm-5">Last Updated:</dt>
                   <dd className="col-sm-10">{new Date(updatedAt).toUTCString()}</dd>
                   <dt className="col-sm-5">Order status:</dt>
-                  <dd className="col-sm-10">{status}</dd>
+                  <dd className="col-sm-10">{this.firstLetterUpperCase(status)}</dd>
                 </dl>
               </Col>
             </Row>

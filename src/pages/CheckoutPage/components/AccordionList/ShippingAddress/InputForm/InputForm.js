@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
-import { Popover, OverlayTrigger } from "react-bootstrap";
+//import { Popover, OverlayTrigger } from "react-bootstrap";
 import "./InputForm.css";
 import axios from "axios";
 
@@ -43,8 +43,8 @@ class InputForm extends Component {
       registeredUserId: this.state.registeredUserId,
       isCurrent: this.state.isCurrent
     };
-    console.log("Submit");
-    console.log(addAddress);
+    console.log("Submitted address");
+    //console.log(addAddress);
 
     if (localStorage.getItem("user_id") > 0) {
       await fetch(
@@ -85,13 +85,14 @@ class InputForm extends Component {
     const { firstName, lastName, receiptEmail, streetName,
       streetNumber, housingCode, city, postalCode, country } = this.state
 
-
+    /*  
     // BUTTON POPOVER
     const popover = (
       <Popover id="popover-basic" title="Thank you!">
         Address added
       </Popover>
     );
+    */
 
 
     return (
@@ -216,11 +217,11 @@ class InputForm extends Component {
                 streetNumber, housingCode, city, postalCode, country) ?
                 <div>
                   {/* BUTTON POPOVER (OverLayTrigger) */}
-                  <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                   {/*<OverlayTrigger trigger="click" placement="right" overlay={popover}>*/}
                     <Button block type="submit" variant="dark">
                       Add Address
                     </Button>
-                  </OverlayTrigger>
+                  {/*</OverlayTrigger>*/}
                 </div>
                 :
                 <div>
