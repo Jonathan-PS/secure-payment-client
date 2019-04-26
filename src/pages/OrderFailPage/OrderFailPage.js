@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { render } from 'react-dom';
-import { Elements, StripeProvider } from 'react-stripe-elements';
-import { Redirect } from 'react-router-dom'
 
 class OrderFailPage extends Component {
     constructor(props) {
@@ -29,24 +25,6 @@ class OrderFailPage extends Component {
             componentErrorInfo: null
         }
     }
-
-    /* DONT REALLY NEED TO GET ANY INFO FROM DB?
-    componentDidMount() {
-        axios
-            .get("https://secure-payment-api.herokuapp.com/stripe")
-            //.then(resp => resp.json())
-            .then(data => {
-                //console.log(data);
-                this.setState({
-                    allDetails: data.data
-                });
-                //console.log("DETAILS:\n" + JSON.stringify(this.state.allDetails))
-            })
-            .catch(err => {
-                console.log("ERROR: " + err)
-            });
-    }
-    */
 
     componentDidMount() {
         //console.log("cDM: "+((this.state.failError) == null))

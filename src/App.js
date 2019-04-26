@@ -26,7 +26,7 @@ class App extends Component {
     // 1. First check if product already exist:
     let index = -1;
     for (let i = 0; i < this.state.cartProducts.length; i++) {
-      if (this.state.cartProducts[i].productId == event.productId) {
+      if (this.state.cartProducts[i].productId === event.productId) {
         index = i;
       }
     }
@@ -57,7 +57,7 @@ class App extends Component {
     // 1. First check if product already exist:
     let index = -1;
     for (let i = 0; i < this.state.cartProducts.length; i++) {
-      if (this.state.cartProducts[i].productId == event.productId) {
+      if (this.state.cartProducts[i].productId === event.productId) {
         index = i;
       }
     }
