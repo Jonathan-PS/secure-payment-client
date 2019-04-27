@@ -116,16 +116,16 @@ class StripePayment extends React.Component {
               });
             } catch (error) {
               console.log(
-                "STRIPE:\n ERROR! Can't get amount, currency or email from order. Error:\n" + error
+                "ERROR! Can't get amount, currency or email from order. Error:\n" + error
               );
             }
           })
           .catch(err => {
-            console.log("STRIPE:\n AXIOS ERROR: " + err);
+            console.log("AXIOS ERROR: " + err);
           });
         // CATCH ERRORS IF ORDERS FROM DATABASE AND STRIPE FAILED
       } catch (error) {
-        console.log("STRIPE:\n Can't find order. \nERROR: " + error);
+        console.log("Can't find order. \nERROR: " + error);
         this.setState({
           //
           cantLoadOrder: true
@@ -133,7 +133,7 @@ class StripePayment extends React.Component {
       }
       // IF FAILED SETTING USER ORDER ID
     } catch (error) {
-      console.log("STRIPE:\n Error getting userId from Order! Error:" + error);
+      console.log("Error getting userId from Order! Error:" + error);
       this.setState({
         cantLoadUserId: true
       });
@@ -165,25 +165,39 @@ class StripePayment extends React.Component {
               last4: this.state.last4
             })
             .then(data => {
-              console.log(
-                "STRIPE: " +
-                "Payment Success!" +
-                "\nData STATUS: " + data.status +
-                "\n\nEmail: " + token.email
-              );
-              /*
-              console.log(
-                "STRIPE:\n" +
-                "Payment Success!!" +
-                "\nData STATUS:" + data.status +
-                "\n\nToken Email: " + token.email +
-                "\n\nToken: " + JSON.stringify(token) +
-                "\n\nData content: " + JSON.stringify(data)
-              );
-              */
+              
+              
+              if (JSON.stringify(data).toString().includes("stripe_charge_request_id")) {
+                
+                console.log(
+                  "STRIPE: " +
+                  "Payment Success!" +
+                  "\nData STATUS: " + data.status +
+                  "\n\nEmail: " + token.email
+                );
 
-              // REDIRECT SUCCESS
-              this.setSuccessRedirect();
+                /* Error testing...
+                console.log("PUT Data length: " + (JSON.stringify(data).length))
+                console.log("PUT Data: " + JSON.stringify(data))   
+                console.log(                                  
+                  "STRIPE:\n" +
+                  "Payment Success!!" +
+                  "\nData STATUS:" + data.status +
+                  "\n\nToken Email: " + token.email +
+                  "\n\nToken: " + JSON.stringify(token) +
+                  "\n\nData content: " + JSON.stringify(data)
+                );
+                */
+
+                // REDIRECT SUCCESS
+                this.setSuccessRedirect();
+
+              } else {
+                console.log("Stripe Payment FAILED!")
+                this.setFailRedirect();
+              }
+
+
             })
             // ERRORS
             .catch(error => {
@@ -197,34 +211,38 @@ class StripePayment extends React.Component {
                 failErrorRequest: JSON.stringify(error.request),
                 failErrorConfig: JSON.stringify(error.config)
               });
-
+              /* ERRORS TO CONSOLE
               console.log(
-                "STRIPE:\n Payment FAILED!" + 
-                "\n Payment Error: " + error + 
+                "STRIPE:\n Payment FAILED!" +
+                "\n Payment Error: " + error +
                 "\n error.response.data: " + JSON.stringify(error.response.data.message) +
-                "\n error.response.status: " + error.response.status + 
-                "\n error.response.headers: " + JSON.stringify(error.response.headers) + 
-                "\n error.request: " + JSON.stringify(error.request) + 
+                "\n error.response.status: " + error.response.status +
+                "\n error.response.headers: " + JSON.stringify(error.response.headers) +
+                "\n error.request: " + JSON.stringify(error.request) +
                 "\n error.message: " + error.message
               );
+              */
+             /* ERRORS TO CONSOLE
               if (error.response) {
-                /* The request was made and the server responded with a status code
-                 * that falls out of the range of 2xx */
-                console.log("STRIPE:\n error: " + error.response.data);
-                console.log("STRIPE:\n error: " + error.response.status);
-                console.log("STRIPE:\n error: " + error.response.headers);
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log("STRIPE error: " + JSON.stringify(error.response.data));
+                console.log("STRIPE error: " + error.response.status);
+                console.log("STRIPE error: " + JSON.stringify(error.response.headers));
               } else if (error.request) {
                 // The request was made but no response was received.
                 // `error.request` is an instance of XMLHttpRequest in the browser
                 // and an instance of http.ClientRequest in node.js
                 console.log("STRIPE:\n error: " + error.request);
               } else {
-                /* Something happened in setting up the request that triggered an Error */
+                // Something happened in setting up the request that triggered an Error
                 console.log("Error", error.message);
               }
               console.log(
                 "STRIPE:\n Error config: " + JSON.stringify(error.config)
               );
+              */
+             console.log("STRIPE:\n Payment FAILED!")
 
               // REDIRECT FAIL
               this.setFailRedirect();
@@ -277,6 +295,8 @@ class StripePayment extends React.Component {
             pathname: "/order/fail",
             // sends these to be used in fail page
             state: {
+              userOrderId: this.state.userOrderId,
+
               failError: this.state.failError,
               failInfo: this.state.failInfo,
               failErrorMessage: this.state.failErrorMessage,

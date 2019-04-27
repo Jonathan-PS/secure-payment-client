@@ -69,7 +69,13 @@ class InputForm extends Component {
           addAddress
         )
         .then(response => {
-          console.log(response);
+          if (response.data === "Address already exists") {
+            console.log(JSON.stringify(response.data));
+            //alert(response.data);
+          } else {
+            console.log(JSON.stringify("New address added!"));
+            //alert("New address added!");
+          }
           this.props.triggerGetAddresses();
         })
         .catch(error => {
