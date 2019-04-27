@@ -200,9 +200,10 @@ class AccordionList extends Component {
           this.setState({
             redirect: true
           });
+          
         })
         .catch(error => {
-          alert("Add Order Products : In catch - " + error);
+          alert("Error adding Order Products. In catch: " + error);
         });
     }
   }
@@ -283,7 +284,7 @@ class AccordionList extends Component {
               <strong> 1 |</strong> Products ( {formattedTotalPrice} NOK )
               &nbsp;
               {this.props.cartProducts.length > 0 ? (
-                <span className="symbol">✓</span>
+                <span className="symbol"> ✓ </span>
               ) : (
                 <span />
               )}
@@ -364,28 +365,18 @@ class AccordionList extends Component {
                   <Container>
                     <Row>
                       <Col sm={12} md={6} lg={6}>
+                      
                         {this.state.anyPhysical ? (
-                          <ul>
-                            <b>Shipping address</b>
-                          </ul>
+                          <ul><h4><b>Shipping address</b></h4></ul>
                         ) : (
-                          <ul>
-                            <b>Delivery address</b>
-                          </ul>
+                          <ul><h4><b>Delivery address</b></h4></ul>
                         )}
                         {streetName || receiptEmail ? (
                           <div>
                             <ul className="list-style: none;">
-                              <li>
-                                {firstName} {lastName}
-                              </li>
-
-                              <li>
-                                {streetName} {streetNumber} {housingCode}
-                              </li>
-                              <li>
-                                {postalCode} {city} {country}
-                              </li>
+                              <li> {firstName} {lastName}</li>
+                              <li> {streetName} {streetNumber} {housingCode}</li>
+                              <li> {postalCode} {city} {country}</li>
                             </ul>
                             <ul>
                               <b>Email</b>
@@ -396,36 +387,29 @@ class AccordionList extends Component {
                         ) : (
                           <div>
                             <ul>
-                              <small>
-                                <i>You need to select delivery method!</i>
-                              </small>
+                              <p className="text-danger"><i>You need to select delivery method!</i></p>
                             </ul>
                           </div>
                         )}
                       </Col>
                       <Col sm={12} md={6} lg={6}>
                         <ul>
-                          <b>Products summary</b>
+                          <h4><b>Products summary</b></h4>
                         </ul>
                         {productList.length > 0 ? (
                           <span>{productList}</span>
                         ) : (
                           <ul>
-                            <small>
-                              <i>You need to select products!</i>
-                            </small>
+                            <p className="text-danger"><i>You need to select products!</i></p>
                           </ul>
                         )}
                       </Col>
                     </Row>
                   </Container>
+
                 </div>
                 <br />
-                <p>
-                  <b>
-                    <i>Total price to pay: {formattedTotalPrice + " NOK"} </i>
-                  </b>
-                </p>
+                <p><b><i>Total price to pay: {formattedTotalPrice + " NOK"} </i></b></p>
                 <Button
                   disabled={
                     !this.state.shippingInformation.valid ||

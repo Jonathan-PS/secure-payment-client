@@ -109,7 +109,7 @@ class DatabaseList extends Component {
         <div className="container" id="generalStyle" />
         {
           (localStorage.getItem("user_id") > 0) ? 
-          <div><Row><h6>&emsp; Select a new address:</h6></Row></div> 
+          <div><Row><h6>&emsp; Select an existing address:</h6></Row></div> 
           : 
           <div></div>
           }
