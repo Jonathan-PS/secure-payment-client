@@ -26,6 +26,8 @@
   height: 160px; /*can be anything*/
   width: 160px; /*can be anything*/
   position: relative;
+  display: block; 
+  margin: 0 auto;
 }
 
 .productNameText {
