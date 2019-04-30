@@ -70,7 +70,7 @@ class OrderSuccessPage extends Component {
     }
 
 
-    /* Use static getDerivedStateFromError() to handle fallback rendering. */
+    /* Use static getDerivedStateFromError() to handle fallback rendering */
     static getDerivedStateFromError(error) {
         // Update state so the next render will show the fallback UI.
         console.log("Error: " + error)
