@@ -48,8 +48,13 @@ class OrderHistory extends Component {
 
     return (
       <div id="generalStyle">
-        <div className="row" id="margins">
-          {cards}
+        <div className="row">
+        {
+          (cards.length === 0) ?
+          <p><small><i>You have no orders yet. Purchase items in our shop to see your orders!</i></small></p>
+          :
+          cards
+        }
         </div>
       </div>
     );

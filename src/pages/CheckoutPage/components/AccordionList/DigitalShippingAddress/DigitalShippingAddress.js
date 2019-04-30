@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
-import { Popover, OverlayTrigger } from "react-bootstrap";
+//import { Popover, OverlayTrigger } from "react-bootstrap";
 
 class DigitalShippingAddress extends Component {
   constructor(props) {
@@ -67,11 +67,13 @@ class DigitalShippingAddress extends Component {
   render() {
 
     // BUTTON POPOVER
+    /*
     const popover = (
       <Popover id="popover-basic" title="Thank you!">
         Email added
       </Popover>
     );
+    */
 
     return (
       <div id="generalStyle">
@@ -106,11 +108,11 @@ class DigitalShippingAddress extends Component {
                     (this.state.email) ?
                       <div>
                         {/* BUTTON POPOVER (OverLayTrigger) */}
-                        <OverlayTrigger trigger="click" placement="right" overlay={popover} >
+                        {/*<OverlayTrigger trigger="click" placement="right" overlay={popover} > */}
                           <Button block type="submit" variant="dark">
                             Choose
                           </Button>
-                        </OverlayTrigger>
+                         {/*</OverlayTrigger>*/}
                       </div>
                       :
                       <div>

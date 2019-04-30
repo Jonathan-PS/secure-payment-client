@@ -57,7 +57,12 @@ class Address extends Component {
       
       <div id="generalStyle">
         <div className="row" id="margins"> {/* key={this.state.addresses.addressId} */}
-          {cards}
+        {
+          (cards.length === 0) ?
+          <p><small><i>&emsp;You have no existing addresses yet. Add one in the form!</i></small></p>
+          :
+          cards
+        }
         </div>
       </div>
     );

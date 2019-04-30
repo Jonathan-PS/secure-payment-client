@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ProgressBar } from "react-bootstrap";
 import "./SignUpForm.css";
 import axios from "axios";
 
@@ -11,7 +11,9 @@ class SignUpForm extends Component {
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+
+        livePassword: "" // use for password strength meter
       }
     };
     this.onChange = this.onChange.bind(this);
@@ -23,6 +25,12 @@ class SignUpForm extends Component {
     const user = this.state.registerUser;
     user[e.target.name] = e.target.value;
     this.setState({ registerUser: user });
+  }
+
+  // Used a separate for password to use Password Strength Meter
+  onPasswordChange = e => {
+    this.setState({ livePassword: e.target.value });
+    this.onChange(e)
   }
 
   async onSubmit(e) {
@@ -72,7 +80,42 @@ class SignUpForm extends Component {
     }
   }
 
+  
+
+  
+
+  // PASSWORD STRENGTH FEEDBACK
+  passwordStrength(pw) {
+    if (pw < 0 || pw === 0) {
+      return " "
+    } else if (pw > 0 && pw <= 5) {
+      return <div>
+        <small>Password strength: <b>Poor</b></small>
+        <ProgressBar variant="danger" now={30} />
+      </div>
+    } else if (pw >= 6 && pw <= 10) {
+      return <div>
+        <small>Password strength: <b>OK</b></small>
+        <ProgressBar variant="warning" now={60} />
+      </div>
+    } else {
+      return <div>
+      <small>Password strength: <b>Strong</b></small>
+      <ProgressBar variant="success" now={100} />
+    </div>
+    }
+  }
+
+
   render() {
+
+    let { livePassword } = this.state;
+
+    // before onChange is called, it's set to undefined. Setting to empty.
+    if (String(livePassword) === "undefined") {
+      livePassword = ""
+    }
+
     return (
       <div className="Login" id="generalStyle">
         <form onSubmit={this.onSubmit}>
@@ -90,7 +133,7 @@ class SignUpForm extends Component {
           <FormGroup controlId="lastName">
             Last Name
             <FormControl
-              autoFocus
+              //autoFocus
               name="lastName"
               type="lastName"
               onChange={this.onChange}
@@ -101,7 +144,7 @@ class SignUpForm extends Component {
           <FormGroup controlId="email">
             Email
             <FormControl
-              autoFocus
+              //autoFocus
               name="email"
               type="email"
               onChange={this.onChange}
@@ -112,14 +155,24 @@ class SignUpForm extends Component {
           <FormGroup controlId="password">
             Password
             <FormControl
-              autoFocus
+              //autoFocus
               name="password"
               type="password"
-              onChange={this.onChange}
+              //onChange={e => this.setState({ livePassword: e.target.value })} // Update "livePassword"
+              //onChange={this.onChange}
+              //onChange={this.onPasswordChange}
+              onChange={this.onPasswordChange}
               defaultValue={this.state.registerUser.password}
               required="required"
             />
           </FormGroup>
+          { // Present Password Strength (if at least one letter/number is written in)
+            (String(livePassword).length > 0) ?
+              <div>{this.passwordStrength(String(livePassword).length)}<br /></div> 
+              : <p><br /></p>
+          }
+
+
 
           <Button
             block
