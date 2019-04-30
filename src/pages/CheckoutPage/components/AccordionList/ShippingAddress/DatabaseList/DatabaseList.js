@@ -21,10 +21,10 @@ class DatabaseList extends Component {
   // Adds a product to the cart
   getAddresses = event => {
     axios
-    .get(
-      "https://secure-payment-api.herokuapp.com/addresses/users/" +
+      .get(
+        "https://secure-payment-api.herokuapp.com/addresses/users/" +
         localStorage.getItem("user_id")
-    )
+      )
       //.then(resp => resp.json())
       .then(response => {
         //console.log(response);
@@ -33,15 +33,15 @@ class DatabaseList extends Component {
           allAddresses: response.data
         });
       })
-      .catch(err => {});
+      .catch(err => { });
   };
 
   getUserInfo() {
     axios
-    .get(
-      "https://secure-payment-api.herokuapp.com/users/" +
+      .get(
+        "https://secure-payment-api.herokuapp.com/users/" +
         localStorage.getItem("user_id")
-    )
+      )
       .then(response => {
         //console.log(data);
 
@@ -51,7 +51,7 @@ class DatabaseList extends Component {
           receiptEmail: response.data.email
         });
       })
-      .catch(err => {});
+      .catch(err => { });
   }
 
   componentDidMount() {
@@ -107,15 +107,22 @@ class DatabaseList extends Component {
     return (
       <div align="right">
         <div className="container" id="generalStyle" />
-        {
-          (localStorage.getItem("user_id") > 0) ? 
-          <div><Row><h6>&emsp; Select an existing address:</h6></Row></div> 
-          : 
-          <div></div>
-          }
+        { // IF LOGGED IN
+          (localStorage.getItem("user_id") > 0) ?
+            <div>
+              <Row><h6>&emsp; Select an existing address:</h6></Row>
+              { // IF LIST IS EMPTY
+                (listItems.length === 0) ?
+                <Row><small><i> &emsp; You have no existing addresses yet. Add one in the form!</i></small></Row>
+                :<small></small>}
+            </div>
+            : 
+            <div></div> 
+        } 
 
         <Row>{listItems}</Row>
-        <br/><br/>
+
+        <br /><br />
       </div>
     );
   }

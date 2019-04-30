@@ -136,7 +136,11 @@ class OrderPage extends Component {
                 <dl className="row">
                   <dt className="col-sm-5">Shipping to:</dt>
                   <dd className="col-sm-10">
-                    {shippingName} <br /> {shippingAddress}
+                  { // check if there's a shipping name (or else it's just email)
+                    (shippingName.length > 0) ?
+                    <span>{shippingName} <br/> {shippingAddress}</span>
+                    :<span>{shippingAddress}</span>
+                  }
                   </dd>
                   <dt className="col-sm-5 text-truncate">Email:</dt>
                   <dd className="col-sm-10">{orderEmail}</dd>

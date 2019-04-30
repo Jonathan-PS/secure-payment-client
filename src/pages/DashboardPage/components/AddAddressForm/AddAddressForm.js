@@ -93,7 +93,7 @@ class AddressForm extends Component {
             <FormGroup controlId="streetNumber">
               Street Number *
               <FormControl
-                autoFocus
+                //autoFocus
                 name="streetNumber"
                 type="streetNumber"
                 placeholder="Street number (e.g. 666)"
@@ -105,7 +105,7 @@ class AddressForm extends Component {
             <FormGroup controlId="housingCode">
               Housing Code
               <FormControl
-                autoFocus
+                //autoFocus
                 name="housingCode"
                 type="housingCode"
                 placeholder="Housing Code (e.g. H0301)"
@@ -116,7 +116,7 @@ class AddressForm extends Component {
             <FormGroup controlId="postalCode">
               Postal Code *
               <FormControl
-                autoFocus
+                //autoFocus
                 name="postalCode"
                 type="postalCode"
                 placeholder="Postal Code (e.g. 3050)"
@@ -128,7 +128,7 @@ class AddressForm extends Component {
             <FormGroup controlId="city">
               City *
               <FormControl
-                autoFocus
+                //autoFocus
                 name="city"
                 type="city"
                 placeholder="City (e.g. Melbourne)"
@@ -140,7 +140,7 @@ class AddressForm extends Component {
             <FormGroup controlId="country">
               Country *
               <FormControl
-                autoFocus
+                //autoFocus
                 name="country"
                 type="country"
                 placeholder="Country (e.g. The Domican Republic)"

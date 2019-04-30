@@ -165,8 +165,7 @@ class StripePayment extends React.Component {
               last4: this.state.last4
             })
             .then(data => {
-              
-              
+                    
               if (JSON.stringify(data).toString().includes("stripe_charge_request_id")) {
                 
                 console.log(
@@ -176,19 +175,6 @@ class StripePayment extends React.Component {
                   "\n\nEmail: " + token.email
                 );
 
-                /* Error testing...
-                console.log("PUT Data length: " + (JSON.stringify(data).length))
-                console.log("PUT Data: " + JSON.stringify(data))   
-                console.log(                                  
-                  "STRIPE:\n" +
-                  "Payment Success!!" +
-                  "\nData STATUS:" + data.status +
-                  "\n\nToken Email: " + token.email +
-                  "\n\nToken: " + JSON.stringify(token) +
-                  "\n\nData content: " + JSON.stringify(data)
-                );
-                */
-
                 // REDIRECT SUCCESS
                 this.setSuccessRedirect();
 
@@ -196,7 +182,6 @@ class StripePayment extends React.Component {
                 console.log("Stripe Payment FAILED!")
                 this.setFailRedirect();
               }
-
 
             })
             // ERRORS
@@ -211,37 +196,6 @@ class StripePayment extends React.Component {
                 failErrorRequest: JSON.stringify(error.request),
                 failErrorConfig: JSON.stringify(error.config)
               });
-              /* ERRORS TO CONSOLE
-              console.log(
-                "STRIPE:\n Payment FAILED!" +
-                "\n Payment Error: " + error +
-                "\n error.response.data: " + JSON.stringify(error.response.data.message) +
-                "\n error.response.status: " + error.response.status +
-                "\n error.response.headers: " + JSON.stringify(error.response.headers) +
-                "\n error.request: " + JSON.stringify(error.request) +
-                "\n error.message: " + error.message
-              );
-              */
-             /* ERRORS TO CONSOLE
-              if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log("STRIPE error: " + JSON.stringify(error.response.data));
-                console.log("STRIPE error: " + error.response.status);
-                console.log("STRIPE error: " + JSON.stringify(error.response.headers));
-              } else if (error.request) {
-                // The request was made but no response was received.
-                // `error.request` is an instance of XMLHttpRequest in the browser
-                // and an instance of http.ClientRequest in node.js
-                console.log("STRIPE:\n error: " + error.request);
-              } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log("Error", error.message);
-              }
-              console.log(
-                "STRIPE:\n Error config: " + JSON.stringify(error.config)
-              );
-              */
              console.log("STRIPE:\n Payment FAILED!")
 
               // REDIRECT FAIL
@@ -342,15 +296,6 @@ class StripePayment extends React.Component {
     }
   }
 
-  /* Don't delete yet! (Might use for "panelLabel" in this.stripeHandler.open() )
-    toPayText() {
-        const stringAmount = String(this.state.amount);
-        const prettyAmount = stringAmount.slice(0, stringAmount.length - 2) + "." + stringAmount.slice(3);
-        const prettyCurrency = String(this.state.currency).toUpperCase()
-        return "Pay " + prettyAmount + " " + prettyCurrency
-    }
-    */
-
   onStripeUpdate(e) {
     this.stripeHandler.open({
       name: "Pay with Stripe",
@@ -358,7 +303,7 @@ class StripePayment extends React.Component {
       email: this.state.orderEmail,
       amount: this.state.amount,
       currency: this.state.currency,
-      panelLabel: "", // If custom, uncomment toPayText() and write this: this.toPayText()
+      panelLabel: "", 
       allowRememberMe: true,
       image: "https://stripe.com/img/v3/home/twitter.png" //Pop-in header image
     });
@@ -412,16 +357,6 @@ class StripePayment extends React.Component {
       if (totalPrice && amount && currency && orderEmail && userOrderId) {
         console.log("Got all information needed for order payment!");
       }
-      /*
-      console.log(
-        "STRIPE: Got variables..." +
-        "\n totalPrice: " + totalPrice +
-        "\n amount: " + amount +
-        "\n currency: " + currency +
-        "\n orderEmail: " + orderEmail +
-        "\n userOrderId: " + userOrderId
-      );
-      */
 
       return (
         <div>
